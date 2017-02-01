@@ -7,16 +7,17 @@ categories: SWIFT
 ---
 
 Navigation과 modality는 ios의 인터페이스 가이드 라인이다.
+
 ### Navigation
 
 * Hierarchical navigation<br/><br/>
 <img src = "/post_img/201702/01/nav1.png" />
 	* 하나의 선택 → 다른 뷰로 이동, 주로 세팅이나 메일에서 이런 스타일을 갖는다.
-
+<br/><br/>
 * Flat navigation<br/><br/>
 <img src = "/post_img/201702/01/nav2.png" />
 	* 카테고리로 왔다 갔다 하는 스타일, 주로 앱스토어나 음악 앱에서 이런 스타일을 갖는다.
-
+<br/><br/>
 * Content-driven or experience-driven navigation<br/><br/>
 <img src = "/post_img/201702/01/nav3.png" />
 	* 자유롭게 이동이 가능, 일반적인 앱들이 이런 패턴을 갖는다.
