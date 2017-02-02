@@ -23,6 +23,7 @@ categories: CSS
 ```
 
 * translate : 현재위치에서 X축 혹은 Y축으로 이동시키는 것
+
 ```css
 .translate:active{
 	/*X축 Y축으로 얼만큼 이동 시킬 것인지*/
@@ -33,14 +34,18 @@ categories: CSS
 	transform:translateY(32px);
 }
 ```
+
 * rotate : 현재위치에서 회전시킨다(deg, turn 단위로 나타낼 수 있음)
+
 ```css
 .rotate:active{
 	transform:rotate(150deg);
 	transform:rotate(0.5turn);
 }
 ```
+
 * scale : 현재 크기에서 몇 배의 크기로 변경 시킬지
+
 ```css
 .scale:active{
 	/*X, Y 축으로 몇 배 확장 시킬 것인지*/
@@ -51,7 +56,9 @@ categories: CSS
 	transform:scaleY(2);
 }
 ```
+
 * skew(not standard) : 비튼 형태 ⇒ 비표준형태, 개발을 멈춘 상태, 앞으로 어떻게 될 지 모르므로 사용은 하지 않기로 하는게 좋다.
+
 ```css
 .skew:active{
 	/*X축을 기준으로 30도 비튼 형태*/

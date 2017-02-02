@@ -17,28 +17,36 @@ categories: CSS
 	display: -webkit-flex; /* Safari */
 }
 ```
+
 * flex-direction : main-axis 를 정해주는 역할, 디폴트는 row이다.
+
 ```css
 .container {
 	-webkit-flex-direction: row | row-reverse | column | column-reverse | initial | inherit; /* Safari 6.1+ */
 	flex-direction:row | row-reverse | column | column-reverse | initial | inherit;
 }
 ```
+
 * flex-wrap : container의 content들이 넘칠 때 어떻게 개행 시킬 것인지, 디폴트는 wrap이다.
+
 ```css
 .container {
 	-webkit-flex-wrap:wrap | wrap-reverse | nowrap;
 	flex-wrap:wrap | wrap-reverse | nowrap;
 }
 ```
+
 * justify-content: content들의 axis에서 align을 지정해 주는 역할을 한다. 디폴트는 flex-start이다.
+
 ```css
 .container{
 	-webkit-justify-content:flex-start | flex-end | center | space-around | space-between | initial | inherit; /* Safari 6.1+ */
 	justify-content:flex-start | flex-end | center | space-around | space-between | initial | inherit;
 }
 ```
+
 * align-items: content들의 cross axis에서 align을 지정해 주는 역할을 한다. 디폴트는 flex-start이다.
+
 ```css
 .container {
     -webkit-align-items: flex-start | flex-end | center | baseline | stretch; /* Safari 6.1+ */
@@ -50,13 +58,16 @@ categories: CSS
 
 * flex-grow : item들이 상대적으로 얼마나 늘어 날 수 있는지 정해주는 속성입니다. 디폴트는 0 입니다.
 * 만약 한 아이템이 1 이고 다른 아이템의 값이 2 일경우 1보다 2배 넓은 너비를 두번째 아이템이 갖게 될 것입니다.
+
 ```css
 .item {
     -webkit-flex-grow:<number>; /*safari 6.1+*/
     flex-grow: <number>; /* default 0 */
 }
 ```
+
 * flex-shrink : item들이 상대적으로 줄어 드는 비율을 정해주는 속성입니다. 디폴트는 1 입니다.
+
 ```css
 .item {
     -webkit-flex-shrink:<number>; /*safari 6.1+*/
@@ -70,6 +81,7 @@ categories: CSS
     align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
 ```
+
 * flex로 Holy Grail Layout 구조 만들기
 (https://opentutorials.org/course/2418/13526)<br/>
 
