@@ -22,10 +22,12 @@ categories: JSP
 * 미리 컴파일이 되기 때문에 쿼리의 수행속도가 빠릅니다.
 * 동일한 질의문을 여러번 바꾸어서 여러번 사용할 때, 많은 데이터를 다룰 때, 인수가 많을때 사용하기 좋습니다.
 * Statement는 쿼리 실행시 작은따옴표(‘)가 있을 경우 작은따옴표를 두개로 표시해야합니다.(‘’), 그러나 PreparedStatement는 자동으로 처리해주기 때문에 편리
+
 ```java
 ps = conn.prepareStatement("insert into ReviewRequestSupportLink set "+"review_request=?,support=?");
 ps.setString(1, id);
 ps.setString(2, additional_support[i]);
 ps.execute();
 ```
+
 * 이런식으로 첫번째 두번째 들어갈 인자들을 결정
