@@ -39,7 +39,7 @@ if !Val{
 }
 ```
 
-* OR(||), AND(&&)는 C와 사용법이 같다.
+* OR("||"), AND("&&")는 C와 사용법이 같다.
 
 ```Objective-C
 if val1 || val2{
