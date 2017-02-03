@@ -13,6 +13,7 @@ categories: HTML
 * LocalStorage와 SessionStroage. LocalStorage는 브라우저가 꺼져도 데이터가 소멸되지 않음. 세션은 사라짐
 * 쿠키는 4kb의 저장공간. 웹스토리지는 브라우저마다 다르지만 5MB정도를 지원한다.
 * 다른 도메인끼리 공유는 불가능하다.
+* 만료시간은 따로 설정 할 수 없다.
 
 #### 간단한 예제
 
