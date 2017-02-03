@@ -74,7 +74,9 @@ categories: CSS
     flex-shrink: <number>; /* default 1 */
 }
 ```
+
 * align-self : 각 item들의 align을 설정할 수 있게 하는 속성입니다.
+
 ```css
 .item {
     -webkit-align-self: auto | flex-start | flex-end | center | baseline | stretch; /*safari 6.1+*/
