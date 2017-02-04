@@ -3,7 +3,8 @@ layout: page
 title: TechBlog
 ---
 
-### 블로그
+### 보고있는 블로그
+<br/>
 
 #### 지인
 * [Hibbah, ,http://hibbah.github.io/](http://hibbah.github.io/) : JAVA, Android
