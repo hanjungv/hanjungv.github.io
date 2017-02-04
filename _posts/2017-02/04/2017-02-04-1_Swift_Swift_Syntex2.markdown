@@ -19,23 +19,23 @@ categories: SWIFT
         * 메서드가 아무 값도 리턴을 안할 때 (init method 같은것 Ex> Int(), String())
         * object가 생성될 때 initialize를 할 수 없는 경우(Ex> 버튼생성 때 같은 경우)
     * 일반적으로 optional binding을 할 때는 할당되는 상수와 이름을 같게 함, Xcode에서는 헷갈리지 않게 하기위해 색을 다르게 표기함
-
-    ```Objective-C
-    if let zee = zee {
-        zee * 2
-    } else {
-        "No value"
-    }
-    ```
     * optional chaining의 리턴값은 optional type이다. optional type으로 쓰기를 원하지 않을 때 binding과 같이 사용한다.
+    
+```Objective-C
+if let zee = zee {
+    zee * 2
+} else {
+    "No value"
+}
+```
 
-    ```Objective-C
-    if let imageSize = anotherImageView.image?.size {
-        print("Here's the image size: \(imageSize)")
-    } else {
-        print("This image hasn't been set.")
-    }
-    ```
+```Objective-C
+if let imageSize = anotherImageView.image?.size {
+    print("Here's the image size: \(imageSize)")
+} else {
+    print("This image hasn't been set.")
+}
+```
 
 #### Collections
 * Array : 배열이다. 순서가 있다.
