@@ -20,8 +20,8 @@ categories: SWIFT
         * object가 생성될 때 initialize를 할 수 없는 경우(Ex> 버튼생성 때 같은 경우)
     * 일반적으로 optional binding을 할 때는 할당되는 상수와 이름을 같게 함, Xcode에서는 헷갈리지 않게 하기위해 색을 다르게 표기함
     * optional chaining의 리턴값은 optional type이다. optional type으로 쓰기를 원하지 않을 때 binding과 같이 사용한다.
-    
-```Objective-C
+
+```javascript
 if let zee = zee {
     zee * 2
 } else {
@@ -29,7 +29,7 @@ if let zee = zee {
 }
 ```
 
-```Objective-C
+```javascript
 if let imageSize = anotherImageView.image?.size {
     print("Here's the image size: \(imageSize)")
 } else {
@@ -44,7 +44,7 @@ if let imageSize = anotherImageView.image?.size {
 
 > array
 
-```Objective-C
+```javascript
 // 선언법. 둘 다 똑같다.
 var numbers = Array<Double>()
 var moreNumbers = [Double]()
@@ -59,7 +59,7 @@ roadTripMusic.count
 
 > Dictionary
 
-```Objective-C
+```javascript
 //선언법
 var groupsDict = [String:String]()
 //이런식으로도 쓸 수 있다.
@@ -78,7 +78,7 @@ if let groupOfWhales = animalGroupsDict["whales"] {
 
 > Sets
 
-```Objective-C
+```javascript
 //선언법
 var utensils = Set<String>()
 var trees = Set<Character>()
