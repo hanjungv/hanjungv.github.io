@@ -19,7 +19,7 @@ categories: SWIFT
 ### Operator
 * if - else : else를 if 중괄호 닫은 다음에 쓰는것이 올바른 swift 표기법이라 함
 
-```Objective-C
+```javascript
 if Val == true{
     // ~ true 일 때
 } else {
@@ -41,7 +41,7 @@ if !Val{
 
 * OR, AND는 C와 사용법이 같다.
 
-```Objective-C
+```javascript
 if val1 || val2{
     // or 해당될 떄
 } else {
@@ -59,7 +59,7 @@ if val1 && val2{
 * 형을 강제하지 않는다면 이전에 사용하던 스위프트는 Objective-C에서 나온 NSString class와 자유자제로 넘나들 수 있다.
 * 그 말은 수많은 편리한 메서드드 사용할 수 있다.
 
-```Objective-C
+```javascript
 //e를 3으로 바꿔라
 let newPassword = password.replacingOccurrences(of: "e", with: "3")
 //for문 이용하기
