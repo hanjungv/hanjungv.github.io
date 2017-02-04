@@ -47,3 +47,5 @@ categories: SWIFT
 	var number:Int!
 	print(number) //error 발생!
 ```
+
+<br/><br/>

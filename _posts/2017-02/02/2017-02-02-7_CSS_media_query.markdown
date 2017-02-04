@@ -56,3 +56,5 @@ categories: CSS
 <!-- 안드로이드 -->
 <link rel="stylesheet" media="only screen and (-webkit-min-device-pixel-ratio: 1.5)" type="text/css" href="android.css">
 ```
+
+<br/><br/>

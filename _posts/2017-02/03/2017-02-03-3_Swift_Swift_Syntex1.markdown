@@ -75,3 +75,5 @@ for cha in str1.characters{
 ### Constant & Variable
 * let은 상수, var는 변수
 * 스위프트에서는 예민하다. let값을 변경할 경우 에러메세지를 띄움
+
+<br/><br/>

@@ -32,3 +32,4 @@ class YourClassName{
 ```
 
 * 일반적으로 많이 쓰는 구현방법. init에 private이 걸려있어 직접 선언 안됨. 동시 호출도 안됨
+<br/><br/>

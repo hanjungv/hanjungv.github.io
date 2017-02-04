@@ -38,3 +38,5 @@ localStorage.setItem("foo",JSON.stringify(bar)); // 스트링 형태로 저장�
 var bar = localStorage.getItem("foo");
 JSON.parse(bar); // 파싱
 ```
+
+<br/><br/>
