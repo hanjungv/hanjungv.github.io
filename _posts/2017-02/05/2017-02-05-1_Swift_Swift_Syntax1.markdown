@@ -3,6 +3,7 @@
 layout: post
 title: "(SWIFT) Swift Syntax[4]"
 category: SWIFT
+tags: swift, syntax, ios
 
 ---
 
