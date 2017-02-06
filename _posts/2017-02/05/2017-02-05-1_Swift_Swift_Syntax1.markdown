@@ -3,7 +3,6 @@
 layout: post
 title: "(SWIFT) Swift Syntax[4]"
 category: SWIFT
-tags: swift, syntax, ios
 
 ---
 
@@ -66,8 +65,62 @@ Type | Struct | enum | class
 
 #### Protocol
 
+* 최소한으로 가져야 할 속성이나 메서드를 정의, 구현은 하지 않는다. 클래스, 구조체 모두에 속성을 줄 수 있다.
+
+```javascript
+//protocol 정의
+protocol Souschef {
+    func chop(vegetable: String) -> String
+    func rinse(vegetable: String) -> String
+}
+//protocol의 정의는 여기서!
+class Roommate: Souschef, Equatable {
+    var hungry = true
+    var name: String
+
+    init(hungry: Bool, name: String) {
+        self.hungry = hungry
+        self.name = name
+    }
+    //여기서 해당 protocol을 구현해서 사용함
+    func chop(vegetable: String) -> String {
+        return "She's choppin' \(vegetable)!"
+    }
+
+    func rinse(vegetable: String) -> String {
+        return "The \(vegetable) is so fresh and so clean"
+    }
+}
+```
+
+#### extension : 이미 정의된 속성을 확장 시켜서 사용할 수 있음
+
+
 #### closure
+* 함수와 다르게 정의가 따로 있지 않음. 파라미터를 ()로 클로저를 {}로 정의
+
+```javascript
+//일반적인 클로저 타입
+{ (parameters) -> return type in
+     statements to execute
+}
+//sort내에 이런식으로 클로저를 정의할 수도
+var youngestToOldest = birthYears.sorted(by: { (year1: Int, year2: Int) -> Bool in
+    return year1 > year2
+})
+//예시
+func helloGenerator(message: String) -> (String, String) -> String {
+  return { (firstName: String, lastName: String) -> String in
+    return lastName + firstName + message
+  }
+}
+let hello = helloGenerator(message: "님 안녕하세요!")
+hello("정", "한")
+//둘은 같은 함수이다. 매우 간결해 진 것을 볼 수 있다.
+let hello: (String, String) -> String = { $1 + $0 + "님 안녕하세요!" }
+hello("정", "한")
+```
 
 
-
+* 참조 : https://devxoul.gitbooks.io/ios-with-swift-in-40-hours/content/Chapter-3/functions-and-closures.html
  <br/><br/>
