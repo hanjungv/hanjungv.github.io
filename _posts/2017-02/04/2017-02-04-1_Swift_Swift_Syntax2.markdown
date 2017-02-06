@@ -2,7 +2,7 @@
 
 layout: post
 title: "(SWIFT) Swift Syntax[2]"
-categories: SWIFT
+category: SWIFT
 
 ---
 

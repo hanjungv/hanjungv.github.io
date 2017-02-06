@@ -2,7 +2,7 @@
 
 layout: post
 title: "지킬 BLOG 만드는 방법"
-categories: etc
+category: etc
 
 ---
 

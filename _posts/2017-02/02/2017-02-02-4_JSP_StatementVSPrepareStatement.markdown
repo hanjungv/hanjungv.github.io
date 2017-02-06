@@ -2,7 +2,7 @@
 
 layout: post
 title: "(JSP) Statement vs PrepareStatement"
-categories: JSP
+category: JSP
 
 ---
 

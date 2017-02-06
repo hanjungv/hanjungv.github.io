@@ -2,7 +2,7 @@
 
 layout: post
 title: "지킬 블로그에 Disqus 추가하기"
-categories: etc
+category: etc
 
 ---
 

@@ -2,7 +2,7 @@
 
 layout: post
 title: "(Swift) temp와 Library와 document"
-categories: SWIFT
+category: SWIFT
 
 ---
 

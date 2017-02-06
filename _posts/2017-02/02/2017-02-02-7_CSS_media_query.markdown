@@ -2,7 +2,7 @@
 
 layout: post
 title: "(CSS) Media query"
-categories: CSS
+category: CSS
 
 ---
 

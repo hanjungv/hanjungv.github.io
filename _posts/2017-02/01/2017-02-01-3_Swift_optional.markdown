@@ -2,7 +2,7 @@
 
 layout: post
 title: "(Swift) Optional이란?"
-categories: SWIFT
+category: SWIFT
 
 ---
 

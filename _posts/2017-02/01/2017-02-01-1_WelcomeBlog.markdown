@@ -1,7 +1,7 @@
 ---
 
 layout: post
-categories: etc
+category: etc
 title: "블로그 이전했습니다!"
 
 ---

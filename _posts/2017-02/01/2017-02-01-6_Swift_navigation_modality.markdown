@@ -2,7 +2,7 @@
 
 layout: post
 title: "(Swift) Navigation과 Modality"
-categories: SWIFT
+category: SWIFT
 
 ---
 

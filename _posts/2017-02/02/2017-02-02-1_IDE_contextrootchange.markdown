@@ -2,7 +2,7 @@
 
 layout: post
 title: "(IDE) 이클립스에서 context root 변경 '/'"
-categories: IDE
+category: IDE
 
 ---
 

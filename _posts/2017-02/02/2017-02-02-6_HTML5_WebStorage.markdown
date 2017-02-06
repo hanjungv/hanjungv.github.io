@@ -2,7 +2,7 @@
 
 layout: post
 title: "(HTML5) WebStorage"
-categories: HTML
+category: HTML
 
 ---
 

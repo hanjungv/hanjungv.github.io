@@ -1,7 +1,7 @@
 ---
 
 layout: post
-categories: HTML
+category: HTML
 title: "(HTML5) html5 특징"
 
 ---

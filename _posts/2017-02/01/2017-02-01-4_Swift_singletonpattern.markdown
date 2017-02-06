@@ -2,7 +2,7 @@
 
 layout: post
 title: "(Swift) 싱글톤 패턴이란?"
-categories: SWIFT
+category: SWIFT
 
 ---
 

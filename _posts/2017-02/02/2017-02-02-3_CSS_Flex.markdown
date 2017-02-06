@@ -2,7 +2,7 @@
 
 layout: post
 title: "(CSS) Flexible box[flex]"
-categories: CSS
+category: CSS
 
 ---
 

@@ -2,7 +2,7 @@
 
 layout: post
 title: "(CSS) transform"
-categories: CSS
+category: CSS
 
 ---
 
