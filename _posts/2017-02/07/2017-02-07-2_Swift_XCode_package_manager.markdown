@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(Swift) XCode 8.0 이상 package manager이용하기"
+title: "(Swift) package manager 이용하기"
 category: SWIFT
 
 ---
