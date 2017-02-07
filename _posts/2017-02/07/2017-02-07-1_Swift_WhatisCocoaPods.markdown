@@ -8,6 +8,7 @@ category: SWIFT
 
 ### CocoaPods 이란?
 > CocoaPods is a dependency manager for Swift and Objective-C Cocoa projects.
+
 * CocoaPods는 Cocoa project의 의존성 매니저, 라이브러리들을 쉽게 관리할 수 있게 된다.
 * 노드의 package를 관리하는 json 파일과 비슷한 느낌
 
