@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(SWIFT) CocoaPods란?"
+title: "(Swift) CocoaPods란?"
 category: SWIFT
 
 ---

@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(SWIFT) Swift Syntax[1/4]"
+title: "(Swift) Swift Syntax[1/4]"
 category: SWIFT
 
 ---
