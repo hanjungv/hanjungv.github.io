@@ -99,9 +99,9 @@ class RealmController: NSObject{
 }
 ```
 
-### 스토리 보드 / 디렉토리 화면
-<img src = '/post_img/201702/08/storyboard.png' width='400'/><br/>
-<img src = '/post_img/201702/08/dir.png' width='200'/><br/>
+### 스토리 보드 / 디렉토리
+<img src = '/post_img/201702/08/storyboard.png' height ='400'/>
+<img src = '/post_img/201702/08/dir.png' height ='400'/><br/>
 
 ### 결과 화면
 <img src = '/post_img/201702/08/11.png' width='400'/><br/>
