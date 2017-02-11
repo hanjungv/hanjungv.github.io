@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(Swift) Realm 이용해서 Todo App 만들기[2]"
+title: "(Swift) Realm 이용해서 Todo App 만들기[3]"
 category: SWIFT
 
 ---
@@ -226,6 +226,27 @@ class EditViewController: UIViewController {
 ~~~
 
 ### 검색하기
+* tableView에 textField를 넣고 이에 해당되는 값들을 즉시 불러오겠습니다.
+* 검색값이 있을 땐 query문을 검색하여 결과를 띄우고 아닐 때는 다시 원래대로 값을 불러오는 형태로 구현했습니다.
+* 이런식으로 구현할 때 부담이 없게 하기 위해선 여러 기법이 필요할 것 같습니다.
+
+~~~
+// TaskTableViewController.swift
+@IBOutlet weak var SearchTextField: UITextField!
+func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1 ){
+        if (self.SearchTextField.text?.characters.count)! > 0 {
+            let pridicate = NSPredicate(format: "name CONTAINS [c] %@", textField.text!)
+            TaskController.getQueryResult(query: pridicate)
+            self.tableView.reloadData()
+        } else{
+            TaskController.resetTotalTask()
+            self.tableView.reloadData()
+        }
+    }
+    return true
+}
+~~~
 
 
 ### 스토리 보드 / 디렉토리
