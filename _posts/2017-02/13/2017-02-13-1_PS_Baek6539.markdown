@@ -1,0 +1,104 @@
+---
+
+layout: post
+title: "(PS) 백준, 6539.상범빌딩"
+category: PS
+
+---
+
+> 7달만에 PS를 했습니다. C++도 7달 만이군요. 하나도 기억이 나지 않아 큰일입니다..
+<br/>그래서 1일 1문제 코딩을 하려고 합니다. 쉬운것이든 어려운 것이든 ㅠㅠ 지켜지길
+
+### 문제소개
+* 3차원 BFS, 종점까지 최단거리 찾기
+* 배열의 크기는 30x30x30, 크지 않다.
+* 6방향으로 움직일 수 있는 나. 움직일 때마다 1분이 지나간다.
+* S -> E 까지 도달하는 시간 출력, 못가면 트랩!
+
+```cpp
+#include <iostream>
+#include <string>
+#include <cstdio>
+#include <cstring>
+#include <queue>
+using namespace std;
+
+int dx[6] = {-1,0,1,0,0,0};
+int dy[6] = {0,-1,0,1,0,0};
+int dz[6] = {0,0,0,0,1,-1};
+
+bool visited[35][35][35];
+char arr[35][35][35];
+
+int main(){
+    int x, y, z;
+    while(cin>>z>>y>>x){
+        memset(visited,false, sizeof(visited));
+        memset(arr,0, sizeof(arr));
+        queue<pair<int, pair<int, int>>> qu;
+        string InputText;
+        if (x + y + z == 0){
+            break;
+        }
+        for(int i = 0 ; i < z; i++){
+            for(int j = 0; j < y; j++){
+                cin>>InputText;
+                for(int k =0; k < x; k++){
+                    arr[i][j][k] = InputText[k];
+                    if (InputText[k] == 'S'){
+                        qu.push({i,{j,k}});
+                        visited[i][j][k] = true;
+                    }
+                }
+            }
+        }
+        bool isArrive = false;
+        int step = 0;
+        while(!qu.empty()){
+            int quSize = qu.size();
+            for(int i =0; i < quSize; i++){
+                int curX = qu.front().second.second;
+                int curY = qu.front().second.first;
+                int curZ = qu.front().first;
+                qu.pop();
+                for(int j = 0; j < 6; j++){
+                        int nextX = curX + dx[j];
+                        int nextY = curY + dy[j];
+                        int nextZ = curZ + dz[j];
+                        if(nextX >= 0 && nextX < x && nextY >= 0 && nextY < y && nextZ >= 0 && nextZ < z){
+                            if(!visited[nextZ][nextY][nextX]){
+                                if(arr[nextZ][nextY][nextX] == '.'){
+                                    qu.push({nextZ,{nextY,nextX}});
+                                    visited[nextZ][nextY][nextX] = true;
+                                }
+                                else if (arr[nextZ][nextY][nextX] == 'E'){
+                                    isArrive = true;
+                                    step ++;
+                                    break;
+                                }
+                            }
+                        }
+                }
+                if(isArrive) break;
+            }
+            if(isArrive) break;
+            step++;
+        }
+        if(isArrive){
+            printf("Escaped in %d minute(s).\n",step);
+        } else{
+            puts("Trapped!");
+        }
+    }
+    return 0;
+}
+```
+
+
+#### 틀렸던 이유
+* 시작이 무조건 첫 지점일 것이라 착각하고 visited를 체크했던 것
+
+#### 느낀점
+* 큰일났다.. 처음부터 다시 차근차근 공부할 필요가 있다.
+
+ <br/><br/>
