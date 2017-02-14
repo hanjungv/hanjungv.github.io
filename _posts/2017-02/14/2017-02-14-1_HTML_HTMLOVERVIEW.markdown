@@ -14,7 +14,7 @@ category: HTML
 * 굉장히 쉽다. 시작을 하기에 좋은 언어!
 
 ### HTML문서 구조
-    - 머리와 몸, 사람과 같이 생각해보자
+* 머리와 몸, 사람과 같이 생각해보자
 
 ```HTML
 //HTML4
@@ -36,10 +36,8 @@ category: HTML
         </div>
         <div id ="footer">
         </div>
-    </body>
-</html>
-    //HTML5 body 내용만
-    <body>
+
+        //HTML5
         <header></header>
         <nav></nav>
         <article>
@@ -49,6 +47,7 @@ category: HTML
         <sidebar></sidebar>
         <footer></footer>
     </body>
+</html>
 ```
 
 ### DOCTYPE이 뭘까?
