@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(HTML) HTML overview[1/2]"
+title: "(HTML) HTML overview[1/3]"
 category: HTML
 
 ---
@@ -37,7 +37,7 @@ category: HTML
         <div id ="footer">
         </div>
 
-        //HTML5
+        //HTML5의 의미론적 태그
         <header></header>
         <nav></nav>
         <article>
