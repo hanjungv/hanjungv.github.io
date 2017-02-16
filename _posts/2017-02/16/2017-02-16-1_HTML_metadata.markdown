@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(HTML) <meta> Tag란?"
+title: "(HTML) meta Tag란?"
 category: HTML
 
 ---
