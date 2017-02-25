@@ -8,7 +8,7 @@ category: ROR
 
 ##### 레일즈 가이드를 참조했습니다. 5.0.1 기준입니다.[링크](http://guides.rubyonrails.org/active_record_basics.html)
 
-#### validation
+### validation
 1. Controller : 유지가 힘들다. 컨트롤러는 간결하게 유지를 해야한다는 컨셉을 지키자!
 2. DB : 테스트 및 관리가 힘들다. 하지만 그 DB를 다른곳에서 사용한다면 좋은 방법이다.
 3. 클라이언트 : 자바스크립트 단으로 관리를 한다. 만약 자바스크립트에 문제가 생기면? 그대로 통과해 버릴 수 있게 된다. <br/>사용자에게 바로 결과를 보여줄 때 사용가능
@@ -16,7 +16,7 @@ category: ROR
 
 > validation은 create, save, update 할 때 수행하게 된다. .new를 한 시점이 아니라 .save를 할 때
 
-##### 에러확인하기
+#### 에러확인하기
 validation을 걸었을 때 error가 발생한다면 errors에 내용이 담기게 된다. 에러가 없다면 [] 빈 상태일 것이다.
 
 ~~~ruby
@@ -28,7 +28,7 @@ end
 #=> {name: ["can't be blank"]}
 ~~~
 
-##### validation helper
+#### validation helper
 ~~~ruby
 # acceptance : 약관 동의
 validates :are_you_sure, acceptance: true   #사용자 동의를 받을 수 있다
@@ -58,8 +58,11 @@ validates :registration_number, length: { is: 6 }
 # numericality : 숫자만 받아
 validates :games_played, numericality: { only_integer: true } # 여기서는 수 중에 정수만 받게
 # presence
+validates :name, :login, :email, presence: true #반드시 채워지게
 # absence
+validates :name, :login, :email, absence: true # 비워있어야 하는 것
 # uniqueness : 중복확인
+validates :email, uniqueness: true # 유니크 한지
 # validates_with
 # validates_each
 ~~~
