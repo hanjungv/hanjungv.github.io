@@ -12,8 +12,8 @@ category: ROR
 ### Association
 > 주로 단 방향 형태이다. 종류를 살펴보자<br/>
 
-* belongs_to ( ~에 의존하고 있다하는 것을 표현 )<br/>
-<img src = '/post_img/201702/26/1.png' width=500/><br/>
+* belongs_to ( ~에 의존하고 있다하는 것을 표현 )<br/><br/>
+<img src = '/post_img/201702/21/1.png' width='400'/><br/>
 
 * has_one ( 종속적이지만 하나만 가져야하는 경우! belongs_to와 반대 )<br/>
 <img src = '/post_img/201702/26/2.png' width=500/><br/>
