@@ -90,6 +90,7 @@ namespace :admin do
   resources :posts, :comments
 end
 ~~~
+
 HTTP 메서드	|경로|	컨트롤러#액션|	네임 스페이스 헬퍼
 :---:|:---:|:---:|:---:
 GET|	/admin/posts	|admin/posts#index	|admin_posts_path
