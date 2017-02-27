@@ -11,12 +11,12 @@ category: ROR
 
 ### Association
 * 주로 단 방향 형태이다. 종류를 살펴보자
-    * belongs_to ( ~에 의존하고 있다하는 것을 표현 )
-    <br/><img src = '/post_img/201702/26/1.png' width=500/><br/>
-    * has_one ( 종속적이지만 하나만 가져야하는 경우! belongs_to와 반대 )
-    <br/><img src = '/post_img/201702/26/2.png' width=500/><br/>
-    * has_many ( 종속적인데 여러개를 가질 수 있는 경우! belongs_to와 반대 )
-    <br/><img src = '/post_img/201702/26/3.png' width=500/><br/>
+    * belongs_to ( ~에 의존하고 있다하는 것을 표현 )<br/><br/>
+<img src = '/post_img/201702/26/1.png' width=500/><br/>
+    * has_one ( 종속적이지만 하나만 가져야하는 경우! belongs_to와 반대 )<br/>
+<img src = '/post_img/201702/26/2.png' width=500/><br/>
+    * has_many ( 종속적인데 여러개를 가질 수 있는 경우! belongs_to와 반대 )<br/>
+<img src = '/post_img/201702/26/3.png' width=500/><br/>
     * has_many :through ( M:N관계를 나타낼 때 사용, 중간테이블을 놓고 바인딩 시킴 )
     <br/><img src = '/post_img/201702/26/4.png' width=500/><br/>
     * has_one :through (거~의안씀)
