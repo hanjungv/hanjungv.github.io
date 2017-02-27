@@ -31,25 +31,25 @@ category: ROR
     * 단일 객체 가지고 오기
 
     ~~~ruby
-    > find
+    # find
     client = Client.find(10) # id가 10인 client를 찾아서 반환
     client = Client.find([1, 10]) # id가 1이나 10인 client를 찾아서 반환
-    > take : 어떤 데이터를 가져올 지 정하지 않고 가지고 옴
+    # take : 어떤 데이터를 가져올 지 정하지 않고 가지고 옴
     client = Client.take(2) # 아무거나 두개 가지고 와
-    > first / last : 첫번째, 마지막. order시킨 후 가지고 올 수 있다.
+    # first / last : 첫번째, 마지막. order시킨 후 가지고 올 수 있다.
     client = Client.first
     client = Client.last
-    > find_by : 주어진 조건에 맞는 첫번째 레코드를 반환
+    # find_by : 주어진 조건에 맞는 첫번째 레코드를 반환
     Client.find_by first_name: 'Lifo' # first_name이 Lifo인 친구를 반환
     ~~~
     * 여러개의 객체를 가지고 오기
 
     ~~~ruby
-    > 만약 여러사람들에게 모두 동일한 행동을 할 때 이런식으로 하면 매우 느릴 것. 추후에는 메모리가 부족하게 될 것
+    # 만약 여러사람들에게 모두 동일한 행동을 할 때 이런식으로 하면 매우 느릴 것. 추후에는 메모리가 부족하게 될 것
     User.all.each do |user|
       NewsMailer.weekly(user).deliver_now
     end
-    > find_each : find_each는 각 레코드를 하나의 객체로 만들어 호출하게 됩니다. default는 1000개 입니다.
+    # find_each : find_each는 각 레코드를 하나의 객체로 만들어 호출하게 됩니다. default는 1000개 입니다.
     User.find_each(batch_size: 5000) do |user| # 여기서 batch_size: 는 몇개를 하나의 객체로 만들어 호출할 지를 나타내게 됩니다.
       NewsMailer.weekly(user).deliver_now
     end
@@ -61,7 +61,7 @@ category: ROR
 * 조건문
 
 ~~~ruby
-> where을 통해 넘겨받은 여러개의 조건에 맞는 Client를 배열로 반환합니다.
+# where을 통해 넘겨받은 여러개의 조건에 맞는 Client를 배열로 반환합니다.
 Client.where("orders_count = ? AND locked = ?", params[:orders], false)
 # 이런식의 입력보다는
 Client.where("orders_count = #{params[:orders]}")
@@ -83,15 +83,8 @@ Client.order(orders_count: :asc, created_at: :desc)
 Client.order("orders_count ASC, created_at DESC")
 ~~~
 
-* 특정 필드만 가지고 오기
 
-~~~ruby
-> select를 이용한다.
-Client.select("viewable_by, locked") # viewable_by와 locked 칼럼만 가지고 오겠다.
-> limit / offset
-Client.limit(5).offset(30) # 5개의 client를 31번째부터 가지고 오게됩니다.
-~~~
-
-* scope
+* scoping
 * none
+* merge
 <br/><br/>
