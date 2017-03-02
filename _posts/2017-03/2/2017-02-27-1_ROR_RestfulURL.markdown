@@ -17,7 +17,7 @@ category: ROR
 
 ### 만들어보기
 
-#### 먼저 환경설정
+#### 1. 먼저 환경설정
 
 ~~~
 # 먼저 mysql에서 사용할 디비를 만들고
@@ -39,7 +39,7 @@ $ bundle exec rake db:migrate
 ~~~
 그리고 route설정을 해주고 bootstrap도 사용하겠습니다.
 
-#### 컨트롤러 보기
+#### 2. 컨트롤러 보기
 
 ~~~ ruby
 class HomeController < ApplicationController
@@ -65,7 +65,7 @@ end
 * search는 where문으로 검색해서 json 형태로 전달하게 된다.
 * add는 내용물 추가하기
 
-#### 뷰 보기. style과 script가 한 곳에 있는 점 양해해주세요..
+#### 3. 뷰 보기. style과 script가 한 곳에 있는 점 양해해주세요..
 
 ~~~ html
 <style>
