@@ -28,7 +28,7 @@ category: ROR
 <img src = '/post_img/201702/26/5.png' width='400'/><br/>
 
 * has_and_belongs_to_many ( 중간 테이블의 존재를 없애버려 이렇게 사용하게 됨 )<br/>
-<img src = '/post_img/201702/26/6.png' width='400'/><br/>
+<img src = '/post_img/201702/26/6 .png' width='400'/><br/>
 
 * self-join
 ...기본적인 내용은 여기까지
