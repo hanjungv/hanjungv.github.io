@@ -18,10 +18,9 @@ category: ROR
 * 레일즈 프로젝트를 만들게 되면 ```application.js / application.css``` 파일들을 디폴트로 만들어주게 된다. 이를 manifest파일이라한다.
 * directives를 통해 포함할 에셋들을 사용할 수 있게 된다.
 
-### 사용할 때
+#### 사용할 때
 * 사용하는 것은 매우 쉽다. 사용하고 싶은 asset들을 모두 asset경로로
 두기만 하면 된다.
-
 * 이미지를 불러올 때
 
 ```css
@@ -30,7 +29,7 @@ background-image: url('/app/assets/images/5.png') // 이건 아님
 ```
 * helper method 를 사용할 때
 
-```Ruby
+```ruby
 audio_path("horse.wav")   # => /audios/horse.wav
 audio_tag("sound")        # => <audio src="/audios/sound" />
 font_path("font.ttf")     # => /fonts/font.ttf
