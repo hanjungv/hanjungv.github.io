@@ -62,14 +62,14 @@ category: CAPSTONE
         * 만약 물건을 사거나 동영상을 봤을 경우 비슷한(like) 상품을 소팅하여 사지않은(보지않은) 것을 유저에게 보여준다.
 
 ### 9.3 Collaborative Filtering
-#### 9.3.1 Measuring Simility
+#### 9.3.1 Measuring Similarity
 
 <img src = '/post_img/201703/15/1.png' width ='500'/>
 * Jaccard Distance
     * matrix의 value를 무시하고 아이템의 집합에만 집중을 한다.
     * value가 없이 구매력만 판단하는 utility라면 좋을 것
-    * 1 - Jaccard Simility(둘의 교집합 / 둘의 합집합)
-        * ex> 만약 A와 B의 교집합이 1이고 합집합이 5이면 Jaccard Simility는 1/5
+    * 1 - Jaccard Similarity(둘의 교집합 / 둘의 합집합)
+        * ex> 만약 A와 B의 교집합이 1이고 합집합이 5이면 Jaccard Similarity 1/5
         <br/>그리고 Distance는 4/5. 만약 A와 C의 Distance가 1/2라면 A와 C의 유사도가 더 높은 것.
 * Cosine Distance
     * 이 역시 이미지를 참고해보자
@@ -84,9 +84,25 @@ category: CAPSTONE
     * 그리고 jaccard distance를 계산하여 판단한다. A와 B는 3/4 A와 C는 1이다.
     * Cosine Distance와 동일한 결과가 나오는 것을 볼 수 있다.
 * Normalizing Ratings
-    * 정규화를 어떻게 했더라..
+    * 각 rating값에 user의 평균값을 빼준다. Normalizing을 하게 되면
+    <img src = '/post_img/201703/15/6.png' width ='400'/>
+    * ex> A와 C를 Cosine Distance를 구하게 되면
+    <img src = '/post_img/201703/15/7.png' width ='470'/>
+    * A와 B를 하면
+    <img src = '/post_img/201703/15/8.png' width ='470'/>
+    * 이렇게 되면 A와 B가 더 Similarity 높은것이 된다.
 
-    * 내용추가 중..
+
+#### 9.3.2 The Duality of Similarity
+* 우린 user와 item을 utility matrix를 통해 비슷한 아이템을 찾아 비슷한 유저를 찾았다.
+* 하지만 Symmetry가 깨지는 두가지 방법이 있다.(그 Similarity가 양방향성을 가지진 않는다?)
+    * 자신과 유사한 성향을 가진(Similarity를 가진) 사람을 찾았다. 그러나 그곳에는 Symmetry가없다. 새로운 아이템을 추천하려면 추가적인 과정이 필요하다
+    * item같은 경우는 대부분 classifiable하지만 user는 분류가 힘들다.
+
+
+
+
+
 
 ## Content-based는 추후에(캡스톤과 직접적 관련이 없다 생각하여 잠시 생략)
 ### 9.2 Content-based Recommendations
