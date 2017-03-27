@@ -99,8 +99,23 @@ category: CAPSTONE
     * 자신과 유사한 성향을 가진(Similarity를 가진) 사람을 찾았다. 그러나 그곳에는 Symmetry가없다. 새로운 아이템을 추천하려면 추가적인 과정이 필요하다
     * item같은 경우는 대부분 classifiable하지만 user는 분류가 힘들다.
 
+#### 9.3.3 Clustering Users and Items
+* Clustering 이전의 상황
+    * user - item 간의 utility matrix의 정보가 너무 적으면 유사성을 측정하기가 너무 힘들다
+    * 또 두 유저가 같은 장르를 좋아한다고 해도 같은 item을 가지고 있지 않을 수도 있다.
+* User와 Item을 Clustering하여 유사도를 측정하자
+    * 예시입니다. 위 표에서 HP 시리즈, TW 시리즈, SW 시리즈를 평균을 내서 Clustering하였다.<br/>
+    <img src = '/post_img/201703/15/9.png' width ='200'/>
+    * 어떻게 Clustering 할 것인가
+        1. User의 절반정도 되게 Item을 Clustering해 봅니다.
+        2. 이 과정에서 User또한 Clustering이 되겠죠? 반복적인 Clustering과정이 될 것입니다.
+        3. 만약 Cluster와 Cluster matrix에 빈칸이 아니라면 -> 이 value로 원래 matrix값 예측
+        4. 만약 Cluster와 Cluster matrix에 빈칸이라면 -> 비슷한 Cluster를 찾아 채움. 이전과 같다.
 
+#### 9.3.4 Exercises for Section 9.3
+문제풀이는 다음에
 
+### 9.4 Dimensionality Reduction
 
 
 
