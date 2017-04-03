@@ -68,7 +68,6 @@ category: PYTHON
     >>> Hello[0:4] + Hello[4:]
     'Hello! My name is hanjung! Nice to meet you!'
     ~~~
-
     * 포매팅 : c와 비슷
     ~~~PYTHON
     >>> "hello world %s" % "hanjungv"
@@ -80,7 +79,6 @@ category: PYTHON
     # 두개 이상 넣을 때는
     >>> "two argument %s, %d" % ("Hanjungv",40)
     'two argument Hanjungv, 40'
-
     # format메서드를 사용하면 쉽게 넣을 수 있다.
     >>> "Hello {0} world {1}".format("!","!!!")
     'Hello ! world !!!'
@@ -149,10 +147,7 @@ category: PYTHON
     >>> list1
     [1, 2, 4, 5]
     ~~~
-    * 관련 메서드
-    ~~~PYTHON
-
-    ~~~
+    
 * control flows
 * Functions
 * Scope
