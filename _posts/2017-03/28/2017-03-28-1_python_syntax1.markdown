@@ -68,65 +68,66 @@ category: PYTHON
     >>> Hello[0:4] + Hello[4:]
     'Hello! My name is hanjung! Nice to meet you!'
     ~~~
-        * 포매팅 : c와 비슷
-        ~~~PYTHON
-        >>> "hello world %s" % "hanjungv"
-        'hello world hanjungv'
-        >>> "hello world %d" % 3
-        'hello world 3'
-        >>> "hello world %f" % 3.4
-        'hello world 3.400000'
-        # 두개 이상 넣을 때는
-        >>> "two argument %s, %d" % ("Hanjungv",40)
-        'two argument Hanjungv, 40'
 
-        # format메서드를 사용하면 쉽게 넣을 수 있다.
-        >>> "Hello {0} world {1}".format("!","!!!")
-        'Hello ! world !!!'
-        >>> "Hello {a} world {b}".format(a="!",b="!!")
-        'Hello ! world !!'
-        ~~~
-        * 관련 메서드 들
-        ~~~PYTHON
-        >>> a = "brown"
-        # b의 갯수를 반환
-        >>> a.count('b')
-        1
-        # Index 위치 반환
-        >>> a.find('r')
-        1
-        >>> a.index('w')
-        3
-        # a 중간중간 'x'를 넣는다.
-        >>> b = 'x'
-        >>> b.join(a)
-        'bxrxoxwxn'
-        # 공백 자르기
-        >>> a = '    br     '
-        >>> a
-        '    br     '
-        >>> a.lstrip()
-        'br     '
-        >>> a.rstrip()
-        '    br'
-        >>> a.strip()
-        'br'
-        # 대체하기
-        >>> b = "Hello tmdghks Hello jung"
-        >>> b.replace("Hello", "Bye")
-        'Bye tmdghks Bye jung'
-        # split 하기
-        >>> cr = "Hello:brbr:brbr"
-        >>> cr.split()
-        ['Hello:brbr:brbr']
-        >>> cr.split(':')
-        ['Hello', 'brbr', 'brbr']
-        >>> dr = "Hello world"
-        >>> dr.split()
-        ['Hello', 'world']
-        >>> dr.split(":")
-        ['Hello world']
-        ~~~
+    * 포매팅 : c와 비슷
+    ~~~PYTHON
+    >>> "hello world %s" % "hanjungv"
+    'hello world hanjungv'
+    >>> "hello world %d" % 3
+    'hello world 3'
+    >>> "hello world %f" % 3.4
+    'hello world 3.400000'
+    # 두개 이상 넣을 때는
+    >>> "two argument %s, %d" % ("Hanjungv",40)
+    'two argument Hanjungv, 40'
+
+    # format메서드를 사용하면 쉽게 넣을 수 있다.
+    >>> "Hello {0} world {1}".format("!","!!!")
+    'Hello ! world !!!'
+    >>> "Hello {a} world {b}".format(a="!",b="!!")
+    'Hello ! world !!'
+    ~~~
+    * 관련 메서드 들
+    ~~~PYTHON
+    >>> a = "brown"
+    # b의 갯수를 반환
+    >>> a.count('b')
+    1
+    # Index 위치 반환
+    >>> a.find('r')
+    1
+    >>> a.index('w')
+    3
+    # a 중간중간 'x'를 넣는다.
+    >>> b = 'x'
+    >>> b.join(a)
+    'bxrxoxwxn'
+    # 공백 자르기
+    >>> a = '    br     '
+    >>> a
+    '    br     '
+    >>> a.lstrip()
+    'br     '
+    >>> a.rstrip()
+    '    br'
+    >>> a.strip()
+    'br'
+    # 대체하기
+    >>> b = "Hello tmdghks Hello jung"
+    >>> b.replace("Hello", "Bye")
+    'Bye tmdghks Bye jung'
+    # split 하기
+    >>> cr = "Hello:brbr:brbr"
+    >>> cr.split()
+    ['Hello:brbr:brbr']
+    >>> cr.split(':')
+    ['Hello', 'brbr', 'brbr']
+    >>> dr = "Hello world"
+    >>> dr.split()
+    ['Hello', 'world']
+    >>> dr.split(":")
+    ['Hello world']
+    ~~~
     * list
     ~~~PYTHON
     # 이런 느낌으로 사용이 가능하다
@@ -148,10 +149,10 @@ category: PYTHON
     >>> list1
     [1, 2, 4, 5]
     ~~~
-        * 관련 메서드
-        ~~~PYTHON
+    * 관련 메서드
+    ~~~PYTHON
 
-        ~~~
+    ~~~
 * control flows
 * Functions
 * Scope
