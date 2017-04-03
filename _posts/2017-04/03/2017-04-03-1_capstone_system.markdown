@@ -35,6 +35,7 @@ category: PYTHON
 #### import한 내용 python에서 쓸 수 있게 연결
 * [커넥터 설치 참조 유튜브, https://www.youtube.com/watch?v=1ji8lqiBJe0](https://www.youtube.com/watch?v=1ji8lqiBJe0)
 * Pycharm에서 예제로 Hello.py를 만들고 연결을 해보겠다.
+
 ~~~PYTHON
 import mysql.connector
 from mysql.connector import errorcode
@@ -68,12 +69,14 @@ cnn.commit()
 cursor.close()
 cnn.close()
 ~~~
+
 * 출력을 해보니 안에 들어있는 수많은 값들이 tuple 형태로 넘어오는 것을 확인
 <img src = '/post_img/201704/03/6.png' width ='700'/>
 
 
 #### 몽고디비 연결, Collections 만들기
 `$ python3 -m pip install pymongo` 먼저 설치 하고
+
 ~~~PYTHON
 import mysql.connector
 import pymongo
