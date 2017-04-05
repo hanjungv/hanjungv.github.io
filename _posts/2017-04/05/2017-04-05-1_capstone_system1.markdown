@@ -13,7 +13,9 @@ category: PYTHON
 3. 알고리즘 고민
 
 #### 현재의 상태
+
 <img src = '/post_img/201704/05/1.png/'>
+
 * "subject"라는 키에 값들이 dictionary 형태로 들어가게 된다.
 
 #### 현재 맨하탄 함수의 구성
@@ -62,7 +64,9 @@ print(aa)
 print(bb)
 print(manhattan(aa,bb))
 ```
+
 <img src = '/post_img/201704/05/2.png/'>
+
 * 겹치는 키들과 맨하탄 거리가 출력된다(물론 0이 나오겠지..)
 * 일단 잘 작동이 되는 것을 확인했다.
 
