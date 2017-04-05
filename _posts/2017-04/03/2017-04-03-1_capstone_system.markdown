@@ -23,11 +23,11 @@ category: PYTHON
 * Workbench에서 쉽게 하였다.
 1. 로컬에서 작업을 할 것이기 때문에 선택
 <img src = '/post_img/201704/03/1.png' width ='500'/>
-2. Data Import 선택
+2. Data Import 선택<br/>
 <img src = '/post_img/201704/03/2.png' width ='300'/>
 3. Import 파일을 폴더에서 선택하고(...에서 선택하세요)
 <img src = '/post_img/201704/03/3.png' width ='700'/>
-4. databases를 선택한 뒤 Import하게 되면
+4. databases를 선택한 뒤 Import하게 되면<br/>
 <img src = '/post_img/201704/03/4.png' width ='300'/>
 5. 쿼리 몇개를 넣어서 확인해보자. 잘 Import가 된 것을 볼 수 있다.`select * from selections;`
 <img src = '/post_img/201704/03/5.png' width ='600'/>
@@ -36,7 +36,7 @@ category: PYTHON
 * [커넥터 설치 참조 유튜브, https://www.youtube.com/watch?v=1ji8lqiBJe0](https://www.youtube.com/watch?v=1ji8lqiBJe0)
 * Pycharm에서 예제로 Hello.py를 만들고 연결을 해보겠다.
 
-~~~PYTHON
+```python
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -68,7 +68,7 @@ for i in rows:
 cnn.commit()
 cursor.close()
 cnn.close()
-~~~
+```
 
 * 출력을 해보니 안에 들어있는 수많은 값들이 tuple 형태로 넘어오는 것을 확인
 <img src = '/post_img/201704/03/6.png' width ='700'/>
@@ -77,7 +77,7 @@ cnn.close()
 #### 몽고디비 연결, Collections 만들기
 `$ python3 -m pip install pymongo` 먼저 설치 하고
 
-~~~PYTHON
+```python
 import mysql.connector
 import pymongo
 from mysql.connector import errorcode
@@ -126,7 +126,7 @@ for a in co:
 cnn.commit()
 cursor.close()
 cnn.close()
-~~~
+```
 
 * 결과화면
 <img src = '/post_img/201704/03/7.png' width ='700'/>
@@ -152,7 +152,7 @@ selections = {"schedule_id" :
 <img src = '/post_img/201704/03/9.png' width ='700'/>
 그래서 upsert 설정을 주니 값이 없어 element를 생성하게 된다.
 
-~~~PYTHON
+```python
 def getDataFromMysql():
     rows = cursor.fetchall()
     for i in rows:
@@ -161,7 +161,7 @@ def getDataFromMysql():
         collection.update({"_id": sch_id},{"$push": {cou_id: 1.0}}, upsert=True)
 
 getDataFromMysql()
-~~~
+```
 * 함수를 하나 만들어서 호출 시켜 보겠습니다. 출력을 해보면 값이 들어갔네
 <img src = '/post_img/201704/03/10.png' width ='700'/>
 

@@ -22,7 +22,7 @@ category: PYTHON
 
 #### 기존 함수가 일단 잘 출력이 되는가 확인..
 
-~~~PYTHON
+```python
 # push를 하니 Array값이 들어가 set으로 바꿈!
 # subject에 value를 가짐
 def getDataFromMysql():
@@ -61,7 +61,7 @@ bb = user2[0]["subject"]
 print(aa)
 print(bb)
 print(manhattan(aa,bb))
-~~~
+```
 <img src = '/post_img/201704/05/2.png/'>
 * 겹치는 키들과 맨하탄 거리가 출력된다(물론 0이 나오겠지..)
 * 일단 잘 작동이 되는 것을 확인했다.
@@ -71,7 +71,7 @@ print(manhattan(aa,bb))
 * List인지 Dict인지 Set인지 각각 value를 뽑는데 어려움이 있었다.
 * 일단 참조한 [stackoverflow](http://stackoverflow.com/questions/2225038/determine-the-type-of-an-object)를 보면
 
-~~~PYTHON
+```python
 >>> type([]) is list
 True
 >>> type({}) is dict
@@ -84,11 +84,11 @@ True
 <type 'dict'>
 >>> type([])
 <type 'list'>
-~~~
+```
 
 * dictionary value, key, 쌍 뽑기
 
-~~~PYTHON
+```python
 print(aa.keys())
 print(aa.values())
 print(aa.items())
@@ -96,7 +96,7 @@ print(aa.items())
 # dict_keys(['3594', '4254', '4026', '2695', '3439'])
 # dict_values([1.0, 1.0, 1.0, 1.0, 1.0])
 # dict_items([('3594', 1.0), ('4254', 1.0), ('4026', 1.0), ('2695', 1.0), ('3439', 1.0)])
-~~~
+```
 
 #### 가장 유사한 학생 찾아보기
 * 방식은 단순하다. 1:1로 manhattan 계산을 한 뒤 list를 반환한다.
@@ -104,7 +104,7 @@ print(aa.items())
     * 지금 데이터를 가지고 할 수 있는 최선의 방법이 뭘까..
 * 일단은 distance를 계산하여 리턴해 주는 함수를 만들었다.
 
-~~~PYTHON
+```python
 def computeNearestNeighbor(compUser, users):
     distances = []
     compUser_numb = compUser[0].get('_id')
@@ -115,7 +115,7 @@ def computeNearestNeighbor(compUser, users):
             distances.append((distance, user["_id"]))
     distances.sort()
     return distances
-~~~
+```
 * 개선필요 : distance 순으로 줄을 세웠다. 이후에는 갯수 제한을 둬 제일 작은것과 비교하는 방법이 좀 더 좋을것 같다.
 * 일단 결과 화면은 적절하게 나온다. 이제 맨하탄 계산법을 수정해야한다.
 
