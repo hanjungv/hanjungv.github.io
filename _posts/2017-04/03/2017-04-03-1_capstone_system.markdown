@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(캡스톤) 캡스톤 뭐했는지 정리"
+title: "(캡스톤) 캡스톤[3.30, 4.3]"
 category: PYTHON
 
 ---
@@ -137,8 +137,34 @@ cnn.close()
 2. 계산해서 데이터 보기
 3. 컴퓨터공학과만 계산결과 뽑아서 어떻게 계산 결과 나오는지 보기
 
+#### 맨하탄거리 구해보기
+* 먼저 몽고디비 모델링, 어떻게 넣을 것인가. 원하는 콜렉션의 모양은 이러하다.
+~~~JSON
+selections = {"schedule_id" :
+    {"course_id1": 1, "course_id2":1, "course_id3": 1}}
+~~~
+고로 먼저 schedule_id를 가진 element가 있으면 만들어주고 없으면 찾아서 넣어주고
+되는지 확인해보자!
 
+* 그냥 업데이트를 했을 때
+<img src = '/post_img/201704/03/8.png' width ='700'/>
+결과를 보면 매칭되는 것이 없다고 나온다(당연함, 만든게 없으니..)
+<img src = '/post_img/201704/03/9.png' width ='700'/>
+그래서 upsert 설정을 주니 값이 없어 element를 생성하게 된다.
 
+~~~PYTHON
+def getDataFromMysql():
+    rows = cursor.fetchall()
+    for i in rows:
+        sch_id = i[0]
+        cou_id = str(i[1]) #documents must have only string keys 라고 해서..
+        collection.update({"_id": sch_id},{"$push": {cou_id: 1.0}}, upsert=True)
 
+getDataFromMysql()
+~~~
+* 함수를 하나 만들어서 호출 시켜 보겠습니다. 출력을 해보면 값이 들어갔네
+<img src = '/post_img/201704/03/10.png' width ='700'/>
+
+* 내부 값을 올바르게 만들기위해 노력하다 잠이들었다..
 
 <br/><br/>
