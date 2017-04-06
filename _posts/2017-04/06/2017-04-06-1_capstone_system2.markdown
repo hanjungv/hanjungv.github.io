@@ -22,20 +22,20 @@ category: PYTHON
 2. **Euclidean Distance**
     * pythagorean Theorem : 구하는 법은 전부 알 것이다.
 3. N-dimmensional에서 구하는 예제, 한번 쓱 보면 알 수 있다.
-<img src = '/post_img/201704/06/1.png/'>
+<img src = '/post_img/201704/06/1.png'>
 
 * 위 내용은 이미 python으로 예제를 만들어 보았었다. 앞선 포스트에 있다.
     * [포스트 1](https://hanjungv.github.io/2017-04-03-1_capstone_system/)
     * [포스트 2](https://hanjungv.github.io/2017-04-05-1_capstone_system1/)
 4. Manhattan Distance와 Euclidean Distance는 missing value가 없을 때 좋다고 한다. 지금 우리의 sparse한 데이터 분석에 적절하진 않은 것 같다. 이부분은 뒤에서 좀 더 이야기 해보자.
 5. **Pearson Correlation Coefficient**
-<img src = '/post_img/201704/06/2.png/'>
+<img src = '/post_img/201704/06/2.png'>
     * 이런 경우가 있다고 생각해 보자. 여기서 4점은 같은 의미의 4점이 아니다.
-    <img src = '/post_img/201704/06/3.png/'>
+    <img src = '/post_img/201704/06/3.png'>
     * 그래프를 그려보면 이런 형태로 그래프가 그려질 것이다. straight line이 그려진다면 'perfect Agreement'상태를 나타낸다.
-    <img src = '/post_img/201704/06/4.png/'>
+    <img src = '/post_img/201704/06/4.png'>
     * 다른 그래프를 보면 'Pretty Good Agreement', 'Not so Good Agreement'를 알 수 있다. 수식으로 어떻게 구할 수 있을 까?
-    <img src = '/post_img/201704/06/5.png/'>
+    <img src = '/post_img/201704/06/5.png'>
     * 이 수식은 Pearson의 근사값 계산을 쉽게 해주는 공식이다. 코딩 또한 쉽다.
 
 ```python
