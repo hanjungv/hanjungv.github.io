@@ -70,15 +70,15 @@ def pearson(rating1, rating2):
 ```
 6. **Cosine Similarity**
     * 가장 많이 사용하는 방식! Collaborative filtering에 많이 쓰인다.
-    <img src = '/post_img/201704/06/6.png/'>
+    <img src = '/post_img/201704/06/6.png'>
     * 계산법이다. 1에 가까우면 Similarity가 높은것이고 -1에 가까우면 반대에 가까운것이다.
     * 예를 한번 살펴보자
-    <img src = '/post_img/201704/06/7.png/'>
+    <img src = '/post_img/201704/06/7.png'>
     * 이러한 표를 가지고 있다면
-    <img src = '/post_img/201704/06/8.png/'>
-    <img src = '/post_img/201704/06/9.png/'>
+    <img src = '/post_img/201704/06/8.png'>
+    <img src = '/post_img/201704/06/9.png'>
     * 즉 결과는 0.935, 매우 친밀한 상태이다.
-    <img src = '/post_img/201704/06/10.png/'>
+    <img src = '/post_img/201704/06/10.png'>
 7. 어떤 Similarity를 선택할 것인가?
     * Manhattan / Euclidean 은 **dense** 한 데이터에 적합하다.
     * Pearson은 **grade-inflation** 이 있는 곳에 적합하다.
