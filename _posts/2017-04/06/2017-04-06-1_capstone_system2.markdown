@@ -18,7 +18,7 @@ category: PYTHON
 > 다 읽고 보니 이 자료는 궁금했던 부분을 많이 해결해줬다. 초심자에게 매우 좋은 자료인것같다.
 
 ##### 내용정리
-1. **Manhattan Distance** : | x1 - x2| + | y1 - y2 |
+1. **Manhattan Distance**
 2. **Euclidean Distance**
     * pythagorean Theorem : 구하는 법은 전부 알 것이다.
 3. N-dimmensional에서 구하는 예제, 한번 쓱 보면 알 수 있다.
@@ -32,9 +32,9 @@ category: PYTHON
 <img src = '/post_img/201704/06/2.png'>
     * 이런 경우가 있다고 생각해 보자. 여기서 4점은 같은 의미의 4점이 아니다.
     <img src = '/post_img/201704/06/3.png'>
-    * 그래프를 그려보면 이런 형태로 그래프가 그려질 것이다. straight line이 그려진다면 'perfect Agreement'상태를 나타낸다.
+    * 그래프를 그려보면 이런 형태로 그래프가 그려질 것이다. straight line이 그려진다면 'perfect Agreement'상태를 나타낸다.<br/>
     <img src = '/post_img/201704/06/4.png'>
-    * 다른 그래프를 보면 'Pretty Good Agreement', 'Not so Good Agreement'를 알 수 있다. 수식으로 어떻게 구할 수 있을 까?
+    * 다른 그래프를 보면 'Pretty Good Agreement', 'Not so Good Agreement'를 알 수 있다. 수식으로 어떻게 구할 수 있을 까?<br/>
     <img src = '/post_img/201704/06/5.png'>
     * 이 수식은 Pearson의 근사값 계산을 쉽게 해주는 공식이다. 코딩 또한 쉽다.
 
@@ -74,10 +74,10 @@ def pearson(rating1, rating2):
     * 계산법이다. 1에 가까우면 Similarity가 높은것이고 -1에 가까우면 반대에 가까운것이다.
     * 예를 한번 살펴보자
     <img src = '/post_img/201704/06/7.png'>
-    * 이러한 표를 가지고 있다면
+    * 이러한 표를 가지고 있다면<br/>
     <img src = '/post_img/201704/06/8.png'>
     <img src = '/post_img/201704/06/9.png'>
-    * 즉 결과는 0.935, 매우 친밀한 상태이다.
+    * 즉 결과는 0.935, 매우 친밀한 상태이다.<br/>
     <img src = '/post_img/201704/06/10.png'>
 7. 어떤 Similarity를 선택할 것인가?
     * Manhattan / Euclidean 은 **dense** 한 데이터에 적합하다.
