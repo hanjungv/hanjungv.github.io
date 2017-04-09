@@ -13,7 +13,7 @@ category: PYTHON
 
 ### Cosine Similarity
 
-```PYTHON
+```python
 import mysql.connector
 import pymongo
 from mysql.connector import errorcode
