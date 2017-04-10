@@ -1,0 +1,147 @@
+---
+
+layout: post
+title: "(OS) OS 시험공부 1장[1]"
+category: OS
+
+---
+
+# Chap1
+> 말 그대로 chapter1은 뭘 배울지에 대한 정리를 하는 챕터이다. 자세한 내용은 나오지 않지만 그럼에도 몇가지 개념이 등장하게 되어 정리를 하려 한다.
+
+## OS가 뭘까?
+* 정의
+> **OS는 H/W(CPU, Memory, I/O devices, Storage)를 관리해주고 프로그램의 수행을 제어하는 Program이다.**
+
+* OS의 역할
+    1. H/W management
+        * I/O devices 접근
+        * Storage 접근
+        * Accounting
+        * Error Detection
+    2. Program execute
+        * scheduling
+        * Error reporting
+* OS의 목적
+    1. resource allocator
+        * 여러 프로그램을 적절하게 정책대로 사용한다.
+    2. control program
+        * 프로그램실행을 통제하여 에러 발생을 방지한다.
+
+## DMA(Direct Memory Access)
+* 정의
+> CPU의 간섭없이 I/O transaction을 할 수 있게 한다.
+
+<img src = '/post_img/201704/10/1.png' width='700'/><br/>
+* 과정(I/O transaction)
+    1. CPU에서 Controller에게 명령을 한다.(해당되는 것 메모리에 올려놔)
+        * CPU와 직접 연결가능한 인터페이스는 메모리 뿐, 메모리에 로드를 한 후 수행해야 함
+    2. Controller에서 Device에 명령을 내려 `Local buffer`에 옮기게 된다.
+        * Local buffer는 각 controller 마다 존재한다.
+    3. 이 데이터를 Memory로 옮기게 된다. (DMA operation)
+        * 이 과정에서 CPU는 다른 연산을 할 수 있게된다.
+    4. 만약 전부 옮길경우 CPU에 `interrupt`를 보내 알려주게 된다.
+* 장점
+    * CPU의 이용률이 올라간다. I/O transaction중에 다른 일을 할 수 있게 되니까
+
+## Interrupt
+* 정의
+> CPU가 실행되고 있을 때 여러 예외 상황을 처리할 수 있게 하기 위해 사용하는 것
+
+* Interrupt handler
+    * interrupt가 발생하면 수행되어야 하는 소스(handler)를 미리 코드로 만들어 놓고 넘버링 해놓는다.
+    * 이를 ISR(Interrupt Service Routine)이라 한다.
+    * handler 코드는 반드시 간결하게 작성되어야 한다.
+    * 코드가 길어질 경우 Top: 간결 -> Bottom: 길게 수행되어야 할 일들 의 순서로 배치한다.
+* Interrupt Vector
+    * 모든 interrupt의 주소를 담고 있는 table이다.
+    * 넘버링 한 숫자와 ISR의 주소가 매칭되어 저장되어 있다.
+* 과정
+    1. Interrupt가 발생했다!
+    2. 하던 일을 무조건 멈추고(돌아와야 하니 중단 지점을 기억한다.) interrupt vector를 본다.
+    3. 해당되는 handler를 수행하고 다시 돌아와 중단 된 코드를 수행한다.
+* Interrupt와 Trap
+    * Interrupt : H/W, 외부 프로세서에서 발생하는 것을 많이 의미한다.
+        * ctrl + c 키보드 누르기 같은 것
+        * 언제 발생할 지 예측이 힘들어 Asynchronous한 편이다.
+    * Trap : S/W 내부의 이벤트 결과로 발생하게 된다.
+        * system call, segmentation fault, exception 등등
+        * 예측이 되는 편이며 Synchronous한 편
+
+## Storage
+* Main memory : CPU가 오직 접근할 수 있는 공간(DRAM). 하지만 volatile
+* Secondary storage : Non volatile. HDD, SSD 같은것..
+
+<img src = '/post_img/201704/10/2.png' width='700'/><br/>
+* Storage 계층 기준
+    * Speed
+    * cost
+    * Volatility
+
+## Caching
+* 캐시 메모리를 사용하게 되면 RAM에서 데이터를 읽을 때 먼저 캐시를 체크하기 때문에 이 부분에 데이터가 존재하게 된다면 매우 빠르게 데이터를 가져와 사용할 수 있습니다.
+* 하지만 RAM보다 용량이 매우 작고 가격이 매우 비쌉니다.
+* 그러므로 캐싱은 중요하다......(9장, 12장에 자세히 나온다)
+
+## Multiprocessor
+* 정의
+> 한 컴퓨터 시스템 내에서 두개 혹은 그 이상의 CPU를 사용하는 것
+
+* 장점
+    * Increased throughput : 수행시간이 당연히 줄어 들 것이다.
+    * Economy of scale : processor들이 storage, memory, magnetic tape 등을 공유하여 사용할 수 있을 것이다.
+    * Increased reliability : 하나가 고장나더라도 다른 CPU에서 수행을 할 수 있으니..신뢰성이 올라간다.
+
+<img src = '/post_img/201704/10/3.png' width='500'/><br/>
+* Multiprocessor system의 형태
+    * Asymmetric multiprocessing(ASMP)
+        * Master-slave 관계를 가지게 된다.
+            * slave는 master의 명령을 받아 수행하게 된다.
+            * 아키텍쳐 상 processor들은 private memory를 갖게 되는데 이는 common memory와 별개의 메모리이다.
+            *
+    * Symmetric multiprocessing(SMP)
+        * memory를 공유하며 사용하게 된다.
+    * 둘 다 캐시와 레지스터는 고유하게 갖게 된다.
+* Multiprocessor memory model
+    * Uniform memory access(UMA)
+        * CPU에서 아무 RAM으로 접근하는 시간이 같다.
+    * Non-uniform memory access(NUMA)
+        * 접근 시간이 memory나 processor위치에 따라 달라진다.
+        * 각각 메모리와 processor가 한 짝을 이뤄서 bus에 연결되는 형태
+        * 확장성이 뛰어나다
+
+## Multicore system
+* 하나의 칩에 여러개의 코어<br/>
+<img src = '/post_img/201704/10/4.png' width='400'/>
+
+## Clustered system
+* 컴퓨터 시스템을 연결해서 cluster화. <br/>
+<img src = '/post_img/201704/10/5.png' width='400'/>
+
+## Multitasking과 Multiprogramming
+* Multiprogramming : I/O 요청 같은 wait상태로 들어가는 상태에 자원의 낭비를 막기위해 다른 일을 수행하는 것이다.
+* Multitasking : task가 운영체제의 스케줄링에 따라 번갈아 가면서 수행됨. 동시에 수행되는 것처럼 느껴지게 된다.
+* 요즘 시대에 구분은 크게 의미가 있는 것 같진 않다.
+
+## 앞으로 나올 용어 정리
+* **CPU scheduling** : job이 동시에 ready상태가 되었다면 어떤 job을 선택할 것인가
+* **Job scheduling** : 여러 job이 동시에 memory에 올라갈 준비가 되었다면, 하지만 메모리에 공간이 없다면 어떤 job을 선택할 것인가
+* **swapping** : Disk와 메모리의 일을 바꿔주는 것을 의미
+* **Virtual memory** : CPU가 보는 주소공간. 메모리는 한정적! 프로그램이 모두 메모리에 있을 필요 없이 위치만 알려주게 된다. 이 버츄얼 address를 Pysical한 address로 변환하여 사용한다면 메모리를 크게 쓸 수 있을 것이다.
+* **Process** : 실행 되고 있는 프로그램
+
+## OS operation
+* 요즘 OS들은 대부분 Interrupt-Driven
+* 그리고 대부분 Dual-mode operation을 지원한다.
+    * **Dual-mode operation**
+        * User mode(1) 와 kernel mode(0)가 존재. mode bit를 통해 두 모드를 엄격하게 구분한다.
+        * 목적 : previleged instruction을 user가 수행할 때 발생하는 문제를 방지
+            * I/O 접근이라든지, user mode로 switch 하는 것, interrupt instruction
+
+## 그리고 앞으로 배울 챕터 정리
+* CHAP 3~7 : Process management. 아마 중간고사 범위
+* CHAP 8~9 : memory management
+* CHAP 10~11, 12 : Storage, File management
+
+
+<br/><br/>
