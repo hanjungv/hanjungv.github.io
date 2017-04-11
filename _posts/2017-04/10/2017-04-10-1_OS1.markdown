@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(OS) OS 시험공부 1장[1]"
+title: "(OS) OS 시험공부 1장[1/6]"
 category: OS
 
 ---
@@ -10,7 +10,6 @@ category: OS
 > 말 그대로 chapter1은 뭘 배울지에 대한 정리를 하는 챕터이다. 자세한 내용은 나오지 않지만 그럼에도 몇가지 개념이 등장하게 되어 정리를 하려 한다.
 
 ## OS가 뭘까?
-* 정의
 > **OS는 H/W(CPU, Memory, I/O devices, Storage)를 관리해주고 프로그램의 수행을 제어하는 Program이다.**
 
 * OS의 역할
@@ -29,7 +28,6 @@ category: OS
         * 프로그램실행을 통제하여 에러 발생을 방지한다.
 
 ## DMA(Direct Memory Access)
-* 정의
 > CPU의 간섭없이 I/O transaction을 할 수 있게 한다.
 
 <img src = '/post_img/201704/10/1.png' width='700'/><br/>
@@ -45,7 +43,6 @@ category: OS
     * CPU의 이용률이 올라간다. I/O transaction중에 다른 일을 할 수 있게 되니까
 
 ## Interrupt
-* 정의
 > CPU가 실행되고 있을 때 여러 예외 상황을 처리할 수 있게 하기 위해 사용하는 것
 
 * Interrupt handler
@@ -84,7 +81,6 @@ category: OS
 * 그러므로 캐싱은 중요하다......(9장, 12장에 자세히 나온다)
 
 ## Multiprocessor
-* 정의
 > 한 컴퓨터 시스템 내에서 두개 혹은 그 이상의 CPU를 사용하는 것
 
 * 장점
