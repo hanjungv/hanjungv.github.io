@@ -1,0 +1,179 @@
+---
+
+layout: post
+title: "(OS) OS 시험공부 3장[3/6]"
+category: OS
+
+---
+
+# Chap3
+> 본격적인 내용이 나오게 된다. Process Concept,PCB, process scheduling, fork(), IPC등이 나오게 된다.
+
+## Process
+> 프로세스란 실행이 되고있는 Program을 의미하게 된다. job, task 등으로 불리게 된다.
+
+* Process != Program
+    * **process는 프로그램이 가지고 있는 text, data에 Heap + Stack + PCB를 포함하게 된다. Program이 정적인 entity라면 Process는 동적인 entity이다.**
+    * Heap : 프로세스가 실행되는 동안 동적으로 할당되는 메모리
+    * Stack : 일시적인 함수나 변수
+    * PCB : **Process Control Block**. 좀 더 자세히 다룰 필요가 있다.
+
+### PCB(Process Control Block)
+> Process가 실행되는 데 있어 모든 정보를 담고 있는 구조체를 의미한다.
+
+<img src = '/post_img/201704/12/1.png' width="200"/>
+* State : Process의 상태에는 일반적으로 이렇게 존재한다.(리눅스는 좀 다름)
+    * **new** : process가 만들어 졌을 때
+    * **ready**(CPU가 보고있음) : process가 메모리로 올라갔을 때. 수행은 가능하나 아직 CPU의 선택을 받지 못함
+    * **running**(CPU가 보고있음) : 실행 되고 있는 상태
+    * **waiting** : 실행 되는 과정에서 I/O 연산이 요청되거나 sleep함수 처럼 인위적이게 wait으로 들어가게 된 상태
+    * **terminated** : 종료된 상태<br/>
+    <img src = '/post_img/201704/12/2.png' width="500"/><br/>
+        * 만약 I/O를 요청했을 경우 process 수행을 멈추고 I/O를 수행하게 됩니다. waiting상태로 들어가게 됨.
+        * I/O 연산이 끝나고 Interrupt를 통해 알려주게 되면 ready 상태로 들어가게 된다.
+* Program Counter : 다음 수행 위치를 알려주게 된다. 만약 context switch가 일어나게 되면 돌아와 이어서 수행해야 하므로
+* registers : context switch가 일어날 경우 돌아와서 이어서 수행해줘야함. 정보들을 registers에 저장해서 가지고 있는다.
+* Accounting : 통계
+* Scheduling Information : 프로세스 우선 순위 <br/>
+<img src = '/post_img/201704/12/3.png' width="500"/><br/>
+    * 위 그림에서 process가 context switch 되었을 때 PCB에 정보가 담기고 이어서 실행되는 것을 볼 수 있다.
+
+### Process Scheduling
+* Queue
+    * Job Queue : 메모리에 올라갈 수 있을 지를 체크.
+    * Ready Queue : 메모리에 올라가서 실행 되는 순서를 기다리는 큐(ready 상태)
+    * Device queues : 특정 디바이스로 부터 연산이 처리되길 기다리는 곳. I/O가 몰릴 때
+* **I/O-bound process** 와 **CPU-bound process**
+    * I/O-bound process는 연산 횟수가 많고 짧은 CPU burst를 갖는다.
+    * CPU-bound process는 드물게 일어나고 긴 CPU burst를 갖는다.
+    * 시간이 짧게 걸리는 I/O-bound process를 먼저 처리 하자 라는 것이 기본적인 스케줄링 법
+* 주기에 따른 구분
+    * Long-term scheduler
+        * 만약 process를 실행한다면 메모리를 확인하고 메모리에 여유가 있다면 ready queue로 올리게 된다.
+        * 안정성이 보장된다. 하지만 요즘에는 굳이 실행을 막지 않는다.
+        * 자주 일어나지 않고 거의 쓰이지 않는다.
+    * short-term scheduler
+        * CPU에 할당 할 일을 선택해 준다. 자주 일어나게 되고 ready queue를 참조하게 된다.
+    * medium-term scheduler
+        * 메모리가 부족할 때 누굴 swapping 할 지 결정하게 된다.
+        * process 단위가 아닌 page 단위로 수행하게 된다.
+        * ex> I/O 연산이 끝나야 종료되는 프로세스가 하나 있다. 이 프로세스가 메모리를 많이 차지하고 있을 때 스케줄러는 secondary memory로 이 프로세스를 옮겨 다른 프로세스가 실행 될 수 있는 환경을 만들어 준다.
+
+### Context switch
+> CPU가 다른 프로세스를 수행할 때 시스템은 이전 프로세스의 정보를 PCB에 담고 새로운 프로세스의 정보를 불러일으킨다. 이 과정을 Context switch라 한다.
+
+* BIG OVERHEAD : 시스템이 메모리에 접근을 해야하기 때문에 시간이 오래걸린다. 밑 두 방법은 횟수를 줄이기 보단 시간을 줄이는 방법이다.
+    * SUN UltraSPARC  : 레지스트이 셋을 여러개 제공해서 메모리에 담을 필요가 없게 함
+    * ARM : 대부분 모바일에서 사용하는 형태
+        * load, save를 할 때 여러 메모리에 있는 내용을 한번에 register에 올려 사용하게 됨
+
+### Operation on processes
+* Process creation
+    * **fork()** 라이브러리를 통해 System Call 호출. Process를 생성한다.
+    * 보통 Parent process에서 children process들을 만들게 되고 이 구조는 트리 형태를 이루게 된다. 보통 리눅스는 init(pid=1) 프로세스 밑에 생기게 된다. 이 프로세스는 부팅할 때 생기게 된다.
+    * fork()할 때 Parent와 children의 이슈
+        1. Resource sharing
+            * Parent와 children은 file은 공유해서 쓴다.
+            * 그러나 CPU time이나 메모리는 공유하지 않는다.
+        2. Execution
+            * Concurrently하게 실행됨
+        3. Address space
+            * 처음에는 같은 local 변수, user stack, heap, program을 가짐(Duplicate)
+            * Address space는 분리해서 가짐
+        4. Call once, return twice
+            * Fork를 Parent에서 수행하게 되면 parent에는 pid>0 이 리턴되고 pid가 0인것은 children
+    * fork()후 과정을 보면
+        1. parent에서 fork()호출
+        2. child process는 parent의 address space를 복사해서 가지게 됨
+        3. child process에서 exec()(이 과정에서 힙 / 스택 초기화) 수행. 새로운 함수 overwrite(Copy on write 방식을 요즘엔 좀 더 많이 씀)
+        4. parent process는 child process가 종료 되길 기다림
+            * wait()을 안하고 부모 프로세스가 먼저 종료될 경우 자식 프로세스는 좀비 프로세스가 됨
+        5. child process 종료 -> parent process 종료
+* Process termination
+    * **exit()** 라이브러리 함수를 통해 System Call 호출. 프로세스를 제거한다. resources들은 OS를 통해 할당된 것들이 해제된다.
+    * **abort()** 라이브러리 함수를 통해 children process를 종료시킴.(자식이 리소스를 너무 많이 쓰거나 필요없어질 때..)
+        * 만약 부모 프로세스가 종료 되었을 경우 자식 프로세스들은 어떻게 될까?
+            * cascading termination : 밑에 자식 프로세스도 다 죽음
+            * Orphan process를 init process의 자식으로 맺어줌
+
+## IPC(Inter-process Communications)
+* Process는 Independent process(다른 프로세스와 교류 없음)와 Cooperating process(교류가 있는)가 있다.
+* Cooperating process가 대부분 이다.
+    * Information sharing
+    * 모듈화 가능
+    * computing speed up
+    * Convenience
+
+### Producer-Consumer problem
+> Cooperating process에서 생산만 하는 producer와 소비만 하는 consumer 사이에서 sync문제가 발생할 때 어떻게 해결할 지에 대한 얘기이다.
+
+* 환경 : 버퍼의 크기는 정해져있고, 메모리는 공유를 하게 됩니다.
+* spin lock 기법을 사용해서 프로듀서가 생산 할 때까지 기다리게 하고 생산이 되면 spin lock 상태를 벗어나 버퍼에 있는 item을 소비하게 됩니다.
+* 인덱스를 모듈러로 옮겨주면서 계속해서 사용될 수 있게 문제를 해결합니다.
+
+```c
+//producer
+while (true) {
+    while (((in + 1) % BUFFER SIZE) == out);
+    buffer[in] = item;
+    in = (in + 1) % BUFFER SIZE;
+}
+//consumer
+while (true) {
+    while (in == out);
+    item = buffer[out];
+    out = (out + 1) % BUFFER SIZE;
+    return item;
+}
+```
+
+### shared memory
+<img src = '/post_img/201704/12/4.png' width="250"/><br/>
+* 과정
+    1. process B가 shared memory 영역을 결정해 요청을 보낸다. kernel에서 생성(`$shmget`)
+    2. A가 B가 공유한 메모리에 attach(`$shmat`)
+    3. 이제 A와 B는 메모리를 공유하여 쓴다.
+* 특징
+    * 처음에만 시스템콜을 요청해 주기 때문에 속도가 매우 빠르다.
+    * sync와 Protection에 관한 이슈가 있다.
+    * Physical 메모리 공유 방법에 속한다.
+
+### message passing
+<img src = '/post_img/201704/12/5.png' width="250"/><br/>
+* 공유되는 부분이 없이 `send`와 `receive`를 통해 공유하게 된다.
+* 구현 이슈
+    * link를 몇개 만들 것인가?
+    * 두개 이상의 프로세스간에 관계를 어떻게 맺을 것인가
+    * link의 capacity는 어떻게 둘 것인가?
+    * message의 크기를 fixed할 것인가 variable하게 할 것인가
+    * 링크를 directional하게 할지 bi-directional하게 할지
+* Establishing link
+    * Direct하게 통신 : process의 이름을 항상 넣어줘야 함. target id가 바뀔 수도 있고 여러가지 문제가 생길 수 있다.
+        * 링크를 자동으로 만들어 준다
+        * 주로 하나의 링크를 쓴다. bi-directional인 경우가 많다
+    * Indirect하게 통신 : mailbox(unique한 id를 가진)를 만들어서 메일박스에 넣어주면 OS를 통해 알아서 가져가줌
+        * 가장 보편적인 방식
+        * 메일 박스에 링크를 만들어서 공유하게 된다.
+        * 메일 박스에는 여러 프로세스에 복수적으로 연결이 되어있다.
+* Mailbox synchronization
+    * Synchronous
+        * Blocking send : receiver가 받을 때 까지 sender가 waiting
+        * Blocking receive : mailbox가 비어있을 경우 올때까지 멈춰있음
+    * Synchronous
+        * Non-blocking send : 보내고 다음 코드 진행
+        * Non-blocking receive : 오면 받고 아니면 말고
+* Message box 큐 사이즈를 구현하는 세가지 방법
+    * No buffering
+        * Zero capacity : 간단하게 신호 보내는 수단. 호출 여부에만 알려줄 경우
+    * Automatic buffering(대부분 이걸 사용)
+        * Bounded capacity : 메세지의 길이가 정해져 있다.
+        * Unbounded capacity :  메세지의 길이가 정해져 있지 않아 sender는 기다릴 일이 없다!
+* 특징
+    * Logical 메모리 공유 방법에 속한다.
+    * 작은 양의 Data를 공유하는데 적절한 방법이다.
+    * 매번 시스템 콜을 호출하기에 시간이 오래걸릴 수 있다.
+    * 프로그래밍이 쉽다.
+    * 컴퓨터 간 communication에 적합하다.
+
+
+<br/><br/>
