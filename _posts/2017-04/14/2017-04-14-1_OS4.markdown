@@ -76,7 +76,7 @@ category: OS
             * Parallelism하게 사용할 수 있다.
             * 하나의 쓰레드가 blocked 되면 다른 커널쓰레드가 스케줄링 되서 사용될 수 있다.
             * 유저 쓰레드를 많이 만들 수 있다.
-    * Two-level model
+    * Two-level model<br/>
     <img src = '/post_img/201704/14/8.png'/><br/>
 
 ### Thread libraries
@@ -147,7 +147,7 @@ ex> 브라우저의 여러 창을 띄우고 서핑중에 하나의 페이지가 
     <img src = '/post_img/201704/14/9.png'/><br/>
     * I/O 연산이 있다면
     * Upcall로 이 커널 쓰레드를 사용할 수 없다고 알려줄 것입니다.
-    * B 쓰레드는 그 옆 LWP로 매핑되어 일을 수행하게 되고
+    * B 쓰레드는 그 옆 LWP로 매핑되어 일을 수행하게 되고<br/>
     <img src = '/post_img/201704/14/10.png'/><br/>
     * Block이 풀리면 A thread는 다시 매핑되어 일을 수행
 
