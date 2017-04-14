@@ -1,0 +1,160 @@
+---
+
+layout: post
+title: "(OS) OS 시험공부 4장[4/6]"
+category: OS
+
+---
+
+# chap4
+> Thread에 관한 내용이 나옵니다. thread가 왜 등장했는지, 장점이 무엇인지 등에 대해 얘기 합니다.
+
+## Thread
+* Motivation
+    * fork()가 있는데 thread를 왜 쓸까?
+    * fork()를 하여 프로세스를 만들게 되면 리소스나 시간이 많이 들게 된다.
+        * PID, PCB도 만들어 줘야한다.
+        * address도 복사해줘야한다.
+        * 필요하면 IPC 체계도 만들어줘야한다.
+        * **OVERHEAD!**
+    * 대다수의 프로세스들은 serialized가 필요가 없다.
+
+공유할 수 있는것은 공유하자. 그래서 OVERHEAD를 줄여보자!
+
+* Concepts
+    1. A set of threads : process 내에서 선택할 수 있는 동적 object들. 쓰레드의 집합.
+    2. A collection of resources : 공유하는 자원들. binary code, data, files, Heap 등등
+* Benefit
+    1. Responsiveness : 멀티 쓰레딩은 한 스레드가 blocked되어도 다른 스레드가 일을 계속해서 할 수 있다.
+    2. Resource Sharing : binary code, data, file등은 같이 쓰고 register나 stack은 따로쓰고! 효율적이게 사용할 수 있게 된다.
+    3. Economy : fork를 하여 process를 새로 생성하는 것보다 자원이나 속도, context-switch 면에서 월등히 앞서게 된다. (솔라리스 같은 경우 생성이 thread가 30배 정도 빠르고 context-switch가 thread가 5배정도 빠르다고 합니다.)
+    4. Multi-processor 아키텍쳐에 이용 : CPU나 코어가 여러개 있을 때 쓰레드를 각각 할당하여 사용할 수 있게 된다.
+* Concurrent와 Parallelism
+    * Concurrent on single-core<br/>
+    <img src = '/post_img/201704/14/1.png'/><br/>
+    * Parallelism on multi-core<br/>
+    <img src = '/post_img/201704/14/2.png'/><br/>
+        * Data Parallelism : 같은 operation을 여러 cpu(core)에서
+        * Task Parallelism : 다른 operation을 여러 cpu(core)에서
+    * Multi-thread를 사용하면 멀티코어에서 Parallelism을 제공할 수 있게 된다.
+
+### Multicore programming
+* Multi-Threading Model
+    * Kernel thread
+        * kernel에 의해서 생성되고 제거됩니다. OS가 직접관리합니다.
+        * process와 직접적으로 연관이 되어있지 않습니다.
+    * User thread
+        * thread library를 통해 관리를 하게 됩니다.
+        * 커널에 직접적으로 포함되지 않습니다.
+
+<img src = '/post_img/201704/14/3.png'/><br/>
+* UA, UB, UC, UD, UE는 User thread. ka, kb는 kernel thread를 의미합니다.
+* UA, UB, UC는 LWP를 통해 ka에 매핑, UD, UE는 kb에 매핑됩니다.
+    * ka가 blocked되면 UA, UB, UC는 똑같이 blocked 됩니다.
+    * **processor는 user thread의 존재를 알지 못합니다.**
+    * UA가 ka를 통해 실행이 되고 있다면 UB, UC는 blocked 됩니다.
+* User thread 와 Kernel thread의 연결관계
+    * Many-to-one Model<br/>
+    <img src = '/post_img/201704/14/4.png'/><br/>
+        * 매우 빠르고 overhead가 적습니다. system call 호출이 적기에
+        * Parallelism이 지원하지 않습니다. 만약 하나를 사용한다면 다른 쓰레드들은 사용이 안됩니다.
+    * One-to-one Model<br/>
+    <img src = '/post_img/201704/14/5.png'/><br/>
+        * 하나의 user 쓰레드와 하나의 kernel 쓰레드를 매핑합니다.
+        * Parallelism 하게 사용할 수 있습니다.
+        * kernel내에서 system call을 호출하여 kernel-thread를 만드는 것이기 때문에 자원에 한계가 있습니다.
+        * 리눅스와 windows는 이 모델을 사용합니다.<br/>
+        <img src = '/post_img/201704/14/6.png'/><br/>
+            * 리눅스 모델은 기존과 약간 다릅니다.
+            * kernel-thread는 user-thread와 매핑되서 사용되지 않습니다. 대신 PCB가 생성되어 user-thread와 매핑되어 사용됩니다.
+            * kernel-thread는 실제로 커널과 관련된 일을 수행하는 스레드 입니다.
+            * 이 또한 Parallelism하게 수행할 수 있는 모델입니다.
+    * Many-to-Many Model<br/>
+    <img src = '/post_img/201704/14/7.png'/><br/>
+        * Multiplexing이 필요합니다. 많은 user-thread와 상대적으로 같거나 적은 kernel-thread를 이용하여 매칭이 됩니다.
+        * 장점
+            * Parallelism하게 사용할 수 있다.
+            * 하나의 쓰레드가 blocked 되면 다른 커널쓰레드가 스케줄링 되서 사용될 수 있다.
+            * 유저 쓰레드를 많이 만들 수 있다.
+    * Two-level model
+    <img src = '/post_img/201704/14/8.png'/><br/>
+
+### Thread libraries
+* 프로그래머들은 쓰레드를 만들 때 두가지 방법이 있다.
+    * 직접적으로 커널에서 만들어주거나(System call)
+    * 라이브러리를 호출해서 사용하거나
+* 주 라이브러리
+    * POSIX Pthreads : user-level
+    * Win32 thread : kernel-level
+    * Java threads : OS에 의존적으로 결정됨
+* 사용법
+
+```c
+#include <pthread.h>
+int pthread_create(pthread_t  *  thread, pthread_attr_t *attr, void * (*start_routine)(void *), void * arg);
+//threadid, attr, func, argument가 순서대로 들어감
+
+pthread_exit((void *)val);
+//종료 시점에 반환 값 val
+
+pthread_join(thread_t, (void **)&status);
+// func의 반환값을 기다림. status에 넣는다.
+```
+
+### fork()를 했을 때 thread Duplicate issue
+만약 자식 process에서
+* exec() 호출 -> 엎어 쓸 가능성 높음! thread전부 복사 안하는게 좋다.
+* exec() 호출을 안한다면 -> 전체 thread 복사 하는 것이 좋다
+
+### 만약 쓰레드가 수행되다 종료 되었을 경우?
+<img src = '/post_img/201704/14/11.png' width ='400'/><br/>
+ex> 브라우저의 여러 창을 띄우고 서핑중에 하나의 페이지가 멈췄습니다. 이 때 모든 창을 종료시키는게 맞을까요? 한 창만 끝내는게 좋을까요?
+* 남은 쓰레드(Traget thread)를 어떻게 처리할 것인가
+    * Asynchronous cancellation
+        * 전부 죽여
+    * Deferred cancellation
+        * 죽여야 될 필요가 있는지 체크 후 살릴건 살린다.
+        * 좀더 안전한 방법
+
+### Signal handling
+유닉스 시스템에서는 프로세스에 어떤 이벤트가 발생했을 때 signal을 통해 알려주게 됩니다. 시그널이 발생했을 때 핸들러는 생성된 것을 그대로 쓸 수도 유저가 만들어 쓸 수 도 있습니다.
+* Synchronous signal : illegal memory access, divide by zero
+* Asynchronous signal : ctrl+c
+* 그럼 이 시그널을 어느 쓰레드 까지 보내줄 것인가에 대한 이슈가 있다.
+    * 이 부분은 좀 더 정리후 업데이트
+        * 0으로 나눌 때는 해당되는 쓰레드에만
+        * ctrl+c 할 경우 모든 쓰레드에
+
+### Thread pools
+* 쓰레드 풀을 만들어서 미리 쓰레드를 만들어 놓습니다.
+* 풀에 사용할 수 있는 쓰레드가 있다면 사용하고 아니면 풀에 쓰레드가 생길 때 까지 기다립니다.
+* 매번 새로 만드는 것보다 빠릅니다.
+
+### Thread-specific data
+* 쓰레드마다 자신의 데이터를 가질 수 있는 공간이 있습니다.
+* 대부분 쓰레드 라이브러리에서 제공합니다.
+
+### LWP(Lightweight process) : scheduler activation
+* kernel와 user-thread를 매핑해줍니다.
+* 커널 쓰레드를 기반으로 한 High-level abstraction
+* Each LWP is attached to a kernel thread
+* CPU-bound와 I/O intensive
+    * CPU-bound는 LWP가 하나로 충분
+    * I/O intensive는 LWP가 여러개인게 좋다.
+* LWP는 kernel-thread와 user-thread 사이에서 커뮤니케이션을 하게 된다.(커널 정보를 알려줘야 쓰레드 라이브러리에서 유저 쓰레드를 결정하니깐!)
+* **upcall** : kernel-thread의 정보를 thread library에 전달 하는 커뮤니케이션을 의미
+* 예제<br/>
+    <img src = '/post_img/201704/14/9.png'/><br/>
+    * I/O 연산이 있다면
+    * Upcall로 이 커널 쓰레드를 사용할 수 없다고 알려줄 것입니다.
+    * B 쓰레드는 그 옆 LWP로 매핑되어 일을 수행하게 되고
+    <img src = '/post_img/201704/14/10.png'/><br/>
+    * Block이 풀리면 A thread는 다시 매핑되어 일을 수행
+
+
+
+
+
+
+
+<br/><br/>
