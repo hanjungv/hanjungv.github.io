@@ -1,0 +1,170 @@
+---
+
+layout: post
+title: "(OS) OS 시험공부 5장[5/6]"
+category: OS
+
+---
+
+# chap5
+> Process스케줄링에 관한 내용입니다. 어떤 task를 선택할 지 어느 cpu, core에 전달하게 될 지 공부하게 됩니다.
+
+### Property of Processes
+* I/O Burst와 CPU burst 전환 사용의 연속이다. 그러면 어떤 일을 먼저 할 것인가?<br/>
+<img src = '/post_img/201704/15/1.png'/>
+    * LWP 부분에서도 나온적이 있지만 I/O bound job은 잦고 시간이 짧게 걸린다. 반면에 CPU bound job은 가끔 일어나고 burst duration도 길게 된다.
+    * 스케줄러는 I/O bound job을 선호하게 된다.
+
+### 스케줄러가 결정을 하게 되는 시점
+* Nonpreemptive(cooperative)
+    * I/O 연산, 동기화가 일어날 때
+    * process의 상태가 running -> waiting / Terminates
+* Preemptive
+    * 상단의 일을 포함하여
+    * process의 상태가 running -> ready / waiting -> ready
+    * Timer Interrupt
+    * 이 때는 공유 데이터를 어떻게 할 지에 대해 고민해 봐야한다.
+* System Call && Interrupt
+    * Interrupt
+        * 인터럽트는 무조건 Nonpreemptive
+    * System Call : kernel의 지원 여부에 따라서.
+        * Preemptive-kernel : real-time computing에 적합.
+        * Nonpreemptive-kernel : 대부분 유닉스 버전은 이에 해당한다. context-switch가 일어나기 전에 일을 마무리 한 후에 변경된다.
+* Dispatcher   
+    * Dispatcher module은 CPU에 short-term scheduler에 의해 선택된 프로세스를 제어한다.
+    * 3가지 일을 Dispatcher에서 해주게 되는데
+        * Switching context
+        * Switching to user mode
+        * user 프로그램의 적절한 위치로 돌아가 프로그램을 재시작하게 된다.
+    * **Dispatch latency** : 하나의 프로세스를 멈추고 새로 running으로 만들어 줄 때 걸리는 시간. context-switch가 일어나 매우 큰 편이다.
+
+### 스케줄러 Criteria
+* 시스템 전체적으로 산출 되는 지수
+    1. CPU utilization(CPU 이용률) : 실제 일한시간 / 전체 시간
+    2. Throughput : 특정 시간내에 완료한 process의 수
+* 개발 프로세스의 성능인자
+    3. Turnaround time : 프로세스 끝낸시간 - Waiting이 시작 된 시간
+    4. Waiting time : ready queue에서 기다린 시간
+    5. Response time : 첫번째 응답이 온 시간
+* 좋은 스케줄러 라면
+    1. CPU utilization을 높이고
+    2. Throughput도 높이고
+    3. Turnaround time을 낮추고
+    4. Waiting time 또한 낮춰야 합니다.
+    5. Response time 또한 최소화 해야 합니다.
+    * 대부분 스케줄링 알고리즘에서는 Average waiting time을 최소화 시키는데 목적을 둡니다.
+
+### 스케줄링 알고리즘
+
+#### FCFS(First-come, First-Served)
+> 먼저 들어온 일을 먼저 수행합니다.
+
+* **Convoy Effect** : 만약 수행시간이 긴 task가 먼저 들어온다면 뒤의 task들은 오랫동안 기다리는 상황이 발생 할 수 있다.
+    * I/O bound vs CPU bound 에서 우선순위를 I/O bound에 두는 것은 Convoy Effect가 일어나는 것을 방지하기 위해)
+
+#### SJF(Short-Job First)
+> CPU burst가 짧은 일 먼저 수행하게 됩니다. 이때 사용될 수 있는 방법이 두가지 있는데
+
+1. Nonpreemptive : 일단 process가 실행이 되면 완료 될 때 까지 멈추지 않는다.<br/>
+<img src = '/post_img/201704/15/3.png' width="400"/>
+2. Preemptive : 새로운 프로세스가 들어오면 진행되는 프로세스의 남아있는 시간과 비교하여 CPU burst가 짧은 것을 우선적으로 실행합니다. 이를 **SRTF(Short Remaining Time First)** 라고 합니다.<br/>
+<img src = '/post_img/201704/15/4.png' width="400"/>
+* SJF는 Average waiting time이 적은 최적화 방법입니다!
+    * 왜 옵티멀인지 간단하게 증명 해보면<br/>
+    <img src = '/post_img/201704/15/2.png'/>
+* *하지만 이건 불가능한 방법입니다. 왜? 어떻게 CPU burst 시간을 정확하게 예측할 수 있을 까요*
+* 그래서 예측하여 사용하게 됩니다.
+* **Exponential Averaging** : 최신의 과거에 가중치를 두어 계산합니다.<br/>
+    <img src = '/post_img/201704/15/5.png' width="250"/><br/>
+    <img src = '/post_img/201704/15/6.png' width="450"/><br/>
+    * 알파 값이 1이면 지난 실제 CPU burst값만 사용, 0이면 history는 이용하지 않겠다.
+    * 알파 값이 커질수록 최근 값에 가중을 두겠다는 의미겠죠
+
+#### Priority
+> 정수로 된 Priority number가 각 process에 지정 되어있다. 일반적으로 적은 숫자가 높은 우선순위를 나타내게 된다.
+
+1. Preemptive : 높은 우선순위의 Process가 들어오면 바로 실행. real-time
+2. Nonpreemptive : 일단 실행하고 있는 process는 끝내자
+* SJF같은 스케줄링 기법도 CPU burst time을 기준으로 하는 Priority 스케줄링 기법이라 볼 수 있다.
+* 우선순위를 두다보면 **Starvation** 이란 문제가 생긴다.
+    * 낮은 우선순위를 가진 프로세스는 계속해서 실행이 안되는 문제
+    * **Aging** 기법을 이용해서 오래된 프로세스의 우선순위를 점진적으로 증가 시켜준다.
+* 우선순위가 변할 수 있나?
+    * Static : 일반적인 기법.
+    * Dynamic : Aging이나 SJF같은 방식은 우선순위가 동적으로 변한다.
+
+#### RR(Round-Robin)
+* **time quantum** 을 기준으로(일반적으로 10-100ms) response time을 보장해 주는 방식
+* 공평한 편, 하지만 context-switch가 자주 일어나 overhead가 있을 수 있다. 적절한 time quantum을 만들어 주는 것이 이 스케줄링 방법의 이슈이다.
+* n번째 프로세스가 time quantum이 q인 곳에서 waiting time을 계산해보면 (n-1)q이다.<br/>
+<img src = '/post_img/201704/15/7.png' width="450"/><br/>
+
+### Multi-level Queue
+> Ready queue가 분리 되어있는 형태이다. 각 큐는 각각의 스케줄링 기법을 가지고 있다.
+또한 큐 간의 스케줄링 기법을 가지고 있다. 시간을 나눠 기법을 변화 시키기도 하고 그대로 사용하는 경우도 있다. 주로 큐 간의 역할이 정해 져 있다. 구현시 고려 할 점은
+
+1. 큐의 갯수
+2. 각 큐내에서 어떤 스케줄링 기법을 쓸지
+3. 큐 간 어떤 스케줄링 기법을 쓸지
+
+### Multi-level Feedback queue
+> Multi-level Queue와 비슷하지만 큐간의 migration을 허용한다는 점에서 다르다. 기존 멀티레벨 큐를 구현하는데 있어 고려하는 점에서 두가지가 추가된다. 즉 언제 이동할지에 대한 문제
+
++ 해당 process를 언제 upgrade 할지
++ 해당 process를 언제 downgrade 할지
+
+### Multi-processor 에서 스케줄링을 어떻게 할 것인가?
+* 멀티 프로세서는 SMP / ASMP의 형태가 있다.(1장에서 등장했던 개념이다.)
+* Issue
+    1. Process affinity : migration시 캐시를 무효화하고 다시 채우는 등의 비용이 크다. 그래서 현재 실행되는 processor에서 계속해서 실행을 하려합니다. 이런 현상을 process affinity라 합니다.
+        * Soft affinity
+            * affinity가 있는 processor에 계속해서 있으려 한다. 하지만 migration을 막을 방법이 OS상으로 존재하지 않는다
+        * Hard affinity
+            * OS가 시스템 콜로 제공하여 무조건 특정 CPU에 강제 할 수 있습니다. 이때는 migration을 강제적으로 막을 수 있습니다.(`sched_setaffinity`)
+    2. Load balancing : CPU utilization을 체크 해서 높은곳에서 낮은 곳으로 일을 분배시킨다.
+        * Push migration
+            * 로드를 체크하는 process가 존재한다. 이 곳에서 utilization을 측정하여 utilization이 높은 프로세스가 일을 낮은쪽으로 밀어낸다.
+        * Pull migration
+            * 각 프로세서(코어)에서 utilization을 측정합니다. (`load_balance()`, `find_busiest_queue`)
+            * 몇 % 이상의 utilization을 가진 cpu를 리턴하게 되고 낮은 쪽 프로세서(코어)에서 일을 가지고 옾니다(`move_task`)
+            * 리눅스에서는 이 방식을 씁니다.
+
+### Thread Scheduling
+* kernel-thread : SCS(System-contention scope), OS에서 스케줄링
+* user-thread : PCS(process-Contention scope), thread library에서 해준다.
+
+### Linux에서 스케줄링을 어떻게 할까
+* 스케줄링 클래스 기반으로 이뤄집니다
+    * 0~99 : real-time class, **Priority**, Priority가 같을 경우 FIFO, RR
+        * SCHED_FIFO
+        * SCHED_RR
+    * 100~139 : conventional class, **CFS(Completely Fair Sharing)**
+        * SCHED_NORMAL
+* Multi-level Queue를 사용합니다.
+
+#### CFS(Completely Fair Sharing)
+>  각 프로세스에 할당되는 비율에 따라 할당하는 것을 목적으로 합니다. 하지만 이는 불가능 하기에..
+Virtual time mechanism을 이용합니다. 그래서 여러 vruntime(PCB안에 있음)중 가장 가장 작은 process를 선택합니다.
+
+* 만약 A와 B의 proportion이 2:1이라면 이런식으로 계산이 됩니다.
+<img src = '/post_img/201704/15/8.png' width="500"/><br/>
+* Nice_0_LOAD는 상수입니다(여기선 1024)
+* se->load.weight는 각각 2/1입니다.
+* delta_exec는 실행된 시간입니다.
+* 만약 두 값이 같은 경우 어전에 수행이 안된 프로세스가 실행됩니다.(queue구조로 되어있습니다.)
+
+### Algorithm Evaluation
+1. Deterministic modeling : Gantt chart
+2. Queueing models
+    * Little's fomula
+3. Simulation
+4. Implementation
+
+
+
+
+
+
+
+
+<br/><br/>
