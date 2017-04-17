@@ -1,0 +1,282 @@
+---
+
+layout: post
+title: "(OS) OS 시험공부 6장[6/6]"
+category: OS
+
+---
+
+# chap6
+> Process Synchronization에 관하여 여러 솔루션을 살펴봅니다.
+
+## Background
+* **Race Condition**
+    * 여러 프로세스가 동시에 공유하는 데이터에 접근할 수 있게 되어 결과값이 다르게 나올 수 있는 상태
+    * 이때는 Data consistency가 필요하게 된다.
+    * 쓰레드나 kernel programming은 동시 접근이 될 수 있으니 항상 염두 해야 한다.
+    * Nonpreemptive하다면 race Condition이 발생 x, Preemptive하면 가능성 o
+
+### Producer Consumer Problem
+
+* 기존에 우리가 알고있던 Producer Consumer 관계
+    ```c
+    //producer
+    while (true) {
+        while (count == BUFFER_SIZE); // do nothing
+        buffer [in] = nextProduced;
+        in = (in + 1) % BUFFER_SIZE;
+        count++;
+    }
+    //Consumer
+    while (true) {
+        while (count == 0); // do nothing
+        nextConsumed = buffer[out];
+        out = (out + 1) % BUFFER_SIZE;
+        count--;
+    }
+    ```
+    * 두 코드는 buffer와 count라는 변수를 공유하여 사용하게 됩니다.
+    * count 부분 코드를 이렇게 나타 낼 수 있다.
+    ```c
+    //producer
+    register1 = count;
+    register1 = register1 + 1;
+    count = register1;
+    //consumer
+    register2 = count;
+    register2 = register2 - 1;
+    count = register2;
+    ```
+    * 만약! 이러한 상황이 발생했다면?
+        1. producer에서 register1에 값을 넣고 증가 시켜줌
+        2. 이 시점에 Consumer로 context-switch.
+        3. consumer는 register2에 count값을 넣고 register2를 뺴준다.
+        4. 이 시점에 또 context-switch.
+        5. count는 6으로
+        6. 이시점에 또 context-switch.
+        7. count는 4로.(최종적으로 한번 더하고 한번 뺐는데 감소된 값이 나오게 된다.)
+* **Critical Section** Problem
+    * **Critical Section** : 각 프로세스의 코드 부분 중 공유 데이터에 접근하는 부분을 Critical Section이라 한다.
+    * 이 부분에 다른 프로세스가 동시에 접근할 때 Critical Section Problem이 생기게 된다.
+    * Solutions
+        1. Mutual-exclusion : 만약 하나의 프로세스가 Critical section에 진입 했을 때 다른 프로세스의 진입을 block 시켜버립니다.
+        2. Progress : 실행되는 프로세스가 없다면 존재하는 프로세스 중 Critical Section이 존재하는 하나의 프로세스는 Critical Section에 진입하여 일을 해야 한다.
+        3. Bounded Waiting : 다른 프로세스가 Critical Section에 진입하는 횟수를 정해 놔 자신의 실행을 보장시킵니다.
+
+## 동기화 해결법
+* 모든 해결법에 기본은 Critical section에 두 프로세스가 동시에 접근을 못하게 막는다는 것이다.
+### Peterson's Solution
+
+```c
+//processA
+do {
+    flag[i] = TRUE;
+    turn = j;
+    while ( flag[j] && turn == j);
+    critical section
+    flag[i] = FALSE;
+    remainder section
+} while (1);
+//processB
+do {
+    flag[j] = TRUE;
+    turn = i;
+    while ( flag[i] && turn == i);
+    critical section
+    flag[j] = FALSE;
+    remainder section
+} while (1);
+```
+* flag로 critical section을 사용하고 싶음을 알림, 계속해서 체크.
+* 둘 다 동시에 critical section에 진입을 하려면 flag[i], flag[j]가 모두 TRUE여야 하고 turn이 i이자 j여야 한다.(그런 경우는 없겠지)
+* 단점
+    * Busy waiting(spin lock)
+    * Implementation difficulty
+
+### Synchronization Hardware
+* Uniprocessors : Interrupt를 disable 시켜버림. Preemption 금지. 그러나 매우 비효율적..
+* 요즘에는 거의 atomic H/W instruction을 제공한다.
+    * Atomic == non-interruptable
+    * Test and set 과 swap방식
+        1. Test and set : Atomic한 하나의 operation을 만들어 사용한다. H/W 상으로 항상 Atomic하게 제공해야 한다.
+        ```c
+        boolean TestAndSet (boolean *target)
+        {
+            boolean rv = *target;
+            *target = TRUE;
+            return rv:
+        }
+        do {
+            while (TestAndSet(&lock)) ;
+            critical section
+            lock = FALSE;
+            remainder section
+        } while(1);
+        **
+        ```
+        2. swap
+        ```c
+        void swap (boolean *a, boolean *b)
+        {
+            boolean temp = *a;
+            *a = *b;
+            *b = temp:
+        }
+        while (true) {
+            key = TRUE;
+            while ( key == TRUE)
+                Swap (&lock, &key);
+            // critical section
+            lock = FALSE;
+            // remainder section
+        }
+        ```
+* 이전에 솔루션들은 Bounded waiting을 제공하지 않았다.
+    * waiting array를 만들어서 따로 운용해서 보장해줘야..
+
+### Semaphore
+* Semaphore는 하나의 정수형 변수이다.
+* 여기서 **wait()** 함수와 **signal()** 이 제공된다.
+    * 네덜란드어 try / increment를 의미하는 Proberen / Verhogen의 앞자를 따서 **P()** / **V()** 로 부르기도 한다.
+    * 이 함수들은 **atomic** 하게 작동하게 된다
+```c
+wait (S) {
+    while(S <= 0); // no-op
+    S--;
+}
+signal (S) {
+    S++;
+}
+```
+* 사용할 때
+    * Counting Semaphore : 초기 Semaphore 값이 정해지는 갯수대로 critical section에 동시 접근이 가능해 질 것.
+    * Binary Semaphore : 초기 Semaphore 값이 1일 때
+        * mutex lock과 같은 말. critical section에 오직 하나
+* 위 코드의 장점
+    * 덜 복잡하다.
+    * context-switch가 없다. 짧은 시간 대기 하는 일을 할 때 효율적이다.
+* 위 코드의 단점
+    * Busy waiting
+    * 오래 기다려야 하는 경우 비효율적이다.
+* Busy waiting없는 Semaphore
+    * Semaphore는 waiting queue를 갖는데 이 큐의 엔트리는 value와 다음 레코드를 가리키는 포인터가 있습니다.
+
+    ```c
+    typedef struct {
+        int value;  // semaphore value
+        struct process *list;
+    } semaphore;
+    ```
+    * 여기서 block과 wakeup이 제공됩니다.
+        * block() : 적당한 waiting queue에 올려줍니다.
+        * wakeup() : waiting queue에서 ready queue로 위치하게 해줍니다.
+    * 코드를 살펴보면
+
+    ```c
+    wait (semaphore *S){
+        S->value--;
+        if (S->value < 0) {
+            add this process to S->list;
+            block();
+        }
+    }
+    signal (semaphore *S){
+        S->value++;
+        if (S->value <= 0) {
+            remove a process p from S->list;
+            wakeup(P);
+        }
+    }
+    ```
+    * 단점
+        * state를 바꿔주기 때문에 context-switch가 있고 overhead가 크다.
+
+## Classic Problems of Synchronization
+1. Bounded buffer Problems : N개의 버퍼가 있을 때
+    * Binary Semaphore는 **mutex** 값을 1로
+    * Counting Semeaphore는 **full** 값을 0으로 **empty** 값을 N으로
+    ```c
+    //producer
+    while (true) {
+        // produce an item
+        wait (empty);   // N -> N-1
+        wait (mutex);   // 1 -> 0
+        // add the item to the buffer
+        signal (mutex); // 0 -> 1
+        signal (full);  // 0 -> 1
+    }
+    //consumer
+    while (true) {
+        wait (full);    // 0 -> waiting -> 1
+        wait (mutex);   // 1 -> 0
+        // remove an item from buffer
+        signal (mutex); // 0 -> 1
+        signal (empty); // N-1 -> N
+        // consume the removed item
+    }
+    ```
+
+2. Dining-Philosophers Problem<br/>
+<img src = '/post_img/201704/16/1.png'/><br/>
+* 5명의 인원과 5개의 젓가락이 있고 2개의 젓가락을 사용해야 밥을 먹을 수 있습니다
+```c
+while (true) {
+    wait ( chopstick[i] );
+    // 만약 여기서 context switch가 일어난다면 모두 각각 하나씩 갖게 되는
+    // Deadlock 현상이 발생할 수 있다.
+    wait ( chopStick[ (i + 1) % 5] );
+    // eat
+    signal ( chopstick[i] );
+    signal ( chopstick[ (i + 1) % 5] );
+    // think
+}
+```
+* Deadlock을 어떻게 해결할 수 있을까?
+    * 최대 4명의 철학자가 동시에 앉을 수 있도록 허용한다.
+    * 위 wait함수를 atomic하게 수행시켜준다.
+    * 홀수는 왼쪽 짝수번은 오른쪽 젓가락을 먼저 집게 한다.
+
+### Monitors
+* Semaphore의 단점
+    * 코딩이 어렵다.
+    * 정당성을 증명하기가 어렵다.
+    * 하나라도 잘못 쓰게 되면 시스템 전체에 영향이 가게 된다.
+    -> 모니터의 등장
+* Monitors
+    * High-level abstractions, 좀 더 사용자에 친숙하게
+    * 프로세스 동기화에 효율적인 쉬운 메카니즘. 잘못 쓸 확률이 줄어든다.
+    * 한번에 한 프로세스만 하나의 모니터를 활성화 한다.
+    * x.wait() 과 x.signal()함수가 제공된다.
+        * x.wait() : process를 잠시 지연시킨다.
+        * x.signal() : wait하고 있는 함수를 재시작시킨다.
+    * 이런식으로 코딩이 가능하다.
+```c
+monitor DP
+{
+    enum { THINKING; HUNGRY, EATING) state [5] ;
+    condition self [5];
+    void pickup (int i) {
+        state[i] = HUNGRY;
+        test(i);
+        if (state[i] != EATING) self [i].wait;
+    }
+    void putdown (int i) {
+        state[i] = THINKING;
+        // test left and right neighbors
+        test((i + 4) % 5);
+        test((i + 1) % 5);
+    }
+    void test (int i) {
+        if ( (state[(i + 4) % 5] != EATING) && (state[i] == HUNGRY) && (state[(i + 1) % 5] != EATING) ) {
+            state[i] = EATING ;
+            self[i].signal () ;
+        }
+    }
+    nitialization_code() {
+        for (int i = 0; i < 5; i++)
+            state[i] = THINKING;
+    }
+}
+```
+
+<br/><br/>
