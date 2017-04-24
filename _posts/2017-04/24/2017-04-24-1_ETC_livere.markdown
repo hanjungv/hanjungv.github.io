@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "지킬 BLOG 에 LIVERE 장착하기 / favicon 장착 등 이것저것 바꾸기"
+title: "지킬에 LIVERE 달기 + favicon"
 category: etc
 
 ---
@@ -11,6 +11,7 @@ category: etc
 
 ### 간단한 파비콘 장착
 * favicon을 쓸 이미지를 정하고 includes/head.html내에 html코드를 추가 시켜줬다.
+
 ```html
 <link rel="icon" type="image/png" href="/post_img/201704/24/faviconcon.png">
 ```
@@ -37,6 +38,7 @@ category: etc
 5. 그러면 어떤 자바스크립트 코드들이 나올텐데 그 코드들을 일단 두고 지킬을 킨다.
 6. 이미 disqus를 사용하고 있었기 때문에 disqus를 사용하기 전 상태로 만들어주고(생략)
 7. /_layouts/post.html 에 가서 이 부분에 코드를 복사 붙여넣기 한다. 그러면 끝!
+
 ```html
 {% if page.comments %}
   <!-- 라이브리 시티 설치 코드 -->
@@ -46,7 +48,12 @@ category: etc
 ```
 
 #### 결과물
+* 강아지가 파비콘으로 들어갔고<br/>
+<img src = '/post_img/201704/24/res2.png' width = "600"/>
+* 라이브리가 지킬에 달린 것을 볼 수 있었다<br/>
+<img src = '/post_img/201704/24/res1.png' width = "600"/>
 
-
+### 후기
+* 써봐야 알 것 같다.
 
 <br/><br/>
