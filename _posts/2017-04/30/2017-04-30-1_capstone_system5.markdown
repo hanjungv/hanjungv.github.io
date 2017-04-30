@@ -1,12 +1,12 @@
 ---
 
 layout: post
-title: "(캡스톤) 캡스톤[4.28]"
+title: "(캡스톤) 캡스톤[4.30]"
 category: PYTHON
 
 ---
 
-### 오늘 할일(4월 28일)
+### 오늘 할일(4월 30일)
 > 오늘의 목표다.
 *  나에게 있는 수많은 테이블을 채울 시간이다 ㅠㅠ
 
@@ -20,7 +20,7 @@ category: PYTHON
 <img src = '/post_img/201704/30/3.png' width = "200"/><br/>
 * 학기<br/>
 <img src = '/post_img/201704/30/4.png' width = "200"/><br/>
-* 추천 해줄 과목들이 들어간다. 과목코드 + 교수님으로 유니크를 판단한다.
+* 추천 해줄 과목들이 들어간다. 과목코드 + 교수님으로 유니크를 판단한다.<br/>
 <img src = '/post_img/201704/30/5.png' width = "200"/><br/>
 
 ### 파이썬 코드 짜기
@@ -251,6 +251,9 @@ def fill_course_and_recommendable_table():
 <img src = '/post_img/201704/30/13.png'/><br/>
 <img src = '/post_img/201704/30/14.png'/><br/>
 
+* 잘 들어가는 것을 확인 할 수 있다.
+* 내일은 user가 가지고 있는 data의 seed를 만들고 MongoDB collection을 어떻게 관리하는 것이 좋은지 알아볼 예정이다.
+* 주말이니까 이제그만..ㅠㅠ
 
 
 
