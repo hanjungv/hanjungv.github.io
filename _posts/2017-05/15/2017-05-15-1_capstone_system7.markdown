@@ -17,10 +17,10 @@ category: PYTHON
 * FIFO를 사용해야 하는데 Asia(Seoul)은 지원을 하지 않아 US West(Oregon)으로 여행을 떠나려 한다.
 
 1. 이름을 입력하고(fifo를 사용할 때는 .fifo를 붙여야한다)<br/>
-<img src = '/post_img/201705/11/1.png'/><br/>
+<img src = '/post_img/201705/15/1.png'/><br/>
 
 2. 테스트 여서 따로 설정을 하지 않고 Quick Create로 만들었다<br/>
-<img src = '/post_img/201705/11/2.png'/><br/>
+<img src = '/post_img/201705/15/2.png'/><br/>
 
 ### 구현
 * message내에 attribute로(이런느낌) userId를 받아 추천을 진행하려 한다.<br/>
