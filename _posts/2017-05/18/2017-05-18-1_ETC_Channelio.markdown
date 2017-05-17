@@ -30,6 +30,10 @@ category: etc
 <img src = '/post_img/201705/18/5.png' height = '400'/><br/>
 5. 그리고 footer_script.html에 가서 이 한줄을 추가해주면 일단 끝!<br/>
 <img src = '/post_img/201705/18/6.png' height = '60'/><br/>
+6. 추가가 된 모습을 확인 할 수 있다.<br/>
+<img src = '/post_img/201705/18/7.png' height = '200'/><br/>
+
+* 이후에 수정하는 것은 다음 포스트로..졸려서..
 
 
 <br/><br/>
