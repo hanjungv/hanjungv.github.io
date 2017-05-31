@@ -1,0 +1,20 @@
+---
+
+layout: post
+title: "(JS) fabric.js 사용해보기"
+category: JS
+
+---
+
+### 개요
+내일(2017.05.25)부터 내일모레까지(2017.05.26) 네이버에서 주최하는 HACKDAY에 참가하게 되었다!<br/> 맡은 주제를 살펴보니 생각보다 쉽지 않은 주제인 것 같다 ㅠㅠ<br/>이런 비슷한 주제를 우아한 형제들 기술 블로그에서 찾을 수 있었는데 조은님이 작성해주신 [배민 신춘문예 개발기](http://woowabros.github.io/woowabros/2017/03/20/spring.html)였다.<br/>fabric.js를 통해 이미지 저장 및 수정을 이루셨다 하여 fabric.js를 공부해보려 한다.
+
+#### Tutorial 해보기
+* 일단 사용해보자! 링크에 들어가서 다운을 한다.(https://github.com/kangax/fabric.js/releases/tag/v1.7.11)
+* 이것저것 많은데 나는 /dist/fabric.min.js 만을 복사해서 써보겠다.
+* 유튜브에 튜토리얼 강의로 좋은 것이 있어서 한번 받아와 봄(https://www.youtube.com/playlist?list=PLbu98QxRH81LlbbwYHMqOFjHwY3D48tEC)
+
+.. 잘 끝났음, 이후 업데이트 필요
+
+
+<br/><br/>

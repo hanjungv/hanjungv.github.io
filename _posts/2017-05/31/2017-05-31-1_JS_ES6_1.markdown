@@ -1,0 +1,170 @@
+---
+
+layout: post
+title: "(JS) ES6를 공부해보자"
+category: JS
+
+---
+
+### 개요
+> 사실 Front-End를 공부 할 것인가 스프링과 자바를 시작해서 새로운 프레임워크를 고민할 지 우선순위에 대해 고민을 많이 했었다. 지금 상황에서 인턴이 될 것 같지 않고...(ㅠㅠ) 스프링 공부는 방학때로 미뤄도 될 것 같아서 가장 부족한 JS실력을 좀 키우려 한다. 최근 언어나 새로운 프레임워크를 접할 때 너무 대충 공부하는 경향이 있어 깊게 하려합니다. 
+
+#### 목표과정!
+* ES6 -> React기본 -> FLUX/REDUX 
+* 포폴완성~
+
+#### 시작하려는 강좌
+유다시티 강좌로 간략하게 정리하자, [링크 : https://classroom.udacity.com/courses/ud356](https://classroom.udacity.com/courses/ud356)
+* 총 4개의 과정으로 되어있다. Syntax, Functions, Built-ins, Professional Developer-fu
+* 오늘은 Syntax를 간단하게 봐보자.
+
+#### ES6 Syntax
+1. let과 const
+    * 기존 var와 달리 기존에 할당한 변수를 다시 선언하는 것은 불가합니다!
+    * 둘다 Block-scope
+    * let은 변수, const는 상수. 참조형은 const가 더 적절!
+2. Template Literals
+    * DOM객체를 활용할 때 매우 유용할 것 같다는 생각을 했다.
+    * multi-line string을 
+    * ``(back-tick)을 사용한다. 
+
+    ```javascript
+    console.log("string text line 1\n"+
+    "string text line 2");
+    // 같은의미
+    console.log(`string text line 1
+    string text line 2`);    
+    ```
+    * 또한 달러사인과 중괄호를 이용하여 embed할 수 있다
+
+    ```javascript
+    console.log("Fifteen is " + (a + b) + " and\nnot " + (2 * a + b) + ".");
+    // 같은 의미
+    console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);
+    ```
+
+2-1. Tagged template literals
+
+```javascript
+var a = 5;
+var b = 10;
+
+function tag(strings, ...values) {
+  console.log(strings[0]); // "Hello "
+  console.log(strings[1]); // " world "
+  console.log(strings[2]); // ""
+  console.log(values[0]);  // 15
+  console.log(values[1]);  // 50
+
+  return "Bazinga!";
+}
+
+tag`Hello ${ a + b } world ${ a * b }`;
+
+//Hello
+// world
+//
+//15
+//50
+//"Bazinga!"
+```
+
+3. Destructuring
+    * 이렇게 꺼내 쓸 수 있다. 사실 편리한지 잘 모르겠다.(개인적인 생각입니다)
+
+```javascript
+const point = [10, 25, -34];
+const [x, y, z] = point;
+console.log(x, y, z);
+// 또한
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  karat: 21.29
+};
+const {type, color, karat} = gemstone;
+console.log(type, color, karat);
+```
+
+4. Object literal
+    * 기존에 Object를 선언할 때
+
+    ```javascript
+    let type = 'quartz';
+    let color = 'rose';
+    let carat = 21.29;
+
+    const gemstone = {
+        type: type,
+        color: color,
+        carat: carat
+    };
+    //이렇게 선언 했던 것을
+    const gemstone = { type, color, carat};
+    //으로 선언 할 수 있게 되었다. 메소드를 쓸 때는
+    const gemstone ={
+        type,
+        color,
+        carat,
+        calculateWorth(){...}
+    };
+
+    ```
+
+5. iteration
+    * for-in loop
+        * ES5에서 추가된 forEach 메소드는 중간에 break을 할 수 없었다!
+        * for-in loop는 index를 이용하여 순회를 하게 되는데
+        * for-in loop는 치명적인 단점들이 있습니다.
+            1. index가 문자열이다. 
+            2. 루프 구문이 배열 요소만 순회하지 않습니다. 확장속성을 갖고 있다면 확장 속성또한 순회하게 됩니다.
+            3. 어떤 환경에서는 이 루프가 무작위라는 점입니다.
+
+        ```javascript
+        for (var index in myArray) {    
+            console.log(myArray[index]);
+        }
+        ```
+
+    * for-of loop
+        * 간결합니다! for-in loop의 단점을 모두 극복합니다.
+        * break, continue, return을 모두 사용할 수 있게 됩니다.
+        * Array뿐 아니라 map,set에도 사용이 가능합니다.
+
+        ```javascript
+        for (var val of myArray) {    
+            console.log(val);
+        }
+        // map에서 사용할 때
+        for (var [key, value] of phoneBookMap) {
+            console.log(key + "'s phone number is: " + value);
+        }
+        ```
+    * iterable protocol : JS object가 iteration behavior를 define하는 것, 나중에 쓸 때 좀더 공부해보자..
+    * iteration protocol
+
+6.Spread operator : 두개 이상의 argumet나 element, 2개이상의 변수를 할당할때 씁니다.
+
+```javascript
+myFunction(...iterableObj);
+[a, b, ...iterableObj] = [1, 2, 3, 4, 5];
+
+function average(...entry) {
+    let len = entry.length;
+    let avg = 0;
+    for(let ent of entry){
+        avg += ent;
+    }
+    avg /= len;
+    return avg;
+}
+
+console.log(average(2, 6));
+console.log(average(2, 3, 3, 5, 7, 10));
+console.log(average(7, 1432, 12, 13, 100));
+```
+
+* 참조            
+    * http://hacks.mozilla.or.kr/2015/08/es6-in-depth-iterators-and-the-for-of-loop/
+
+<br/><br/>
