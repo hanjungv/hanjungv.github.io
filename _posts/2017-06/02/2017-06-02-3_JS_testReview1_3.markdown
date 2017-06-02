@@ -107,6 +107,7 @@ $(document).ready(function(){
 
 2-1. 그럼 그 값은 input으로 어떻게 받을 것인가?
 그냥 값 받아서 moment(val).format("YYYY-MM-DD, HH:mm:ss").format('X')
+..
 
 ### WebStorage
 
