@@ -67,9 +67,46 @@ $(document).ready(function(){
 * 일단 결과는 잘 나온다. 삭제도 잘되고
 * 이 코드를 [moment.js, http://momentjs.com/](http://momentjs.com/)를 사용해서 만들어보자
 
-1. moment.js를 넣고
+1. moment.js를 넣고 되던 부분을 바꿔보자
 
+```javascript
+let stdTime = [9];
+function eraseClock(id){
+  stdTime[id] = -999;
+}
+$(document).ready(function(){
+    //render Time
+    function startTime() {
+      let date = moment().format('YYYY-MM-DD, HH:mm:ss');
+      for (let i = 0; i < stdTime.length; i++) {
+        let standardTime = Number(stdTime[i]);
+        if (standardTime == -999) {
+          $("#clock" + i).html("");
+          continue;
+        }
+        $("#clock" + i).html(moment().add(standardTime-9, 'hours').format('H:mm:ss') + "<span style = 'font-size:20px;'>(기준: GMT+" + standardTime + ")</span><button id = 'erase" + i + "' class = 'btn btn-default' onClick = 'eraseClock(" + i + ")'>erase</button>");
+      }
+    }
+    setInterval(startTime, 500);
+    let userName = localStorage.getItem("userName");
+    $("#userNameShow").append(userName+"님 반갑습니다!");
+    $("#createClockBtn").click(function(){
+      let gmt = $("#standardTime").val();
+      let len = stdTime.length;
+      $("#clock").append("<div class = 'clock"+len+"' id = 'clock"+len+"'></div>");
+      stdTime.push(gmt);
+    });
+});
+```
 
+* 많~이 짧아진 것은 아니지만 -1시가 되거나 61분등이 되는 validation문제를 라이브러리에서 알아서 해준다. add같은 함수로 매우 직관적이게 시간을 더할 수 있게 되었다.
+
+2. 시간 크기를 비교해야 하는 순간이 온다면 어떻게 비교할 것인가
+* Unix time을 이용하자. [Unix time](https://ko.wikipedia.org/wiki/%EC%9C%A0%EB%8B%89%EC%8A%A4_%EC%8B%9C%EA%B0%84)은 1970년 1월 1일 00:00:00(UTC) 부터 경과시간을 초로 나타낸 것이라 한다.
+* 데이터를 저장할 때 지정 시간을 moment().format('X')를 하게되면 초 단위로 Unix time을 얻을 수 있다. 이 값으로 비교를 하면 된다.
+
+2-1. 그럼 그 값은 input으로 어떻게 받을 것인가?
+그냥 값 받아서 moment(val).format("YYYY-MM-DD, HH:mm:ss").format('X')
 
 ### WebStorage
 
