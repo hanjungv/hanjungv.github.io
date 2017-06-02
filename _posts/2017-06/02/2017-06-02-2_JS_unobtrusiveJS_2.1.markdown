@@ -6,8 +6,10 @@ category: JS
 
 ---
 
+
+http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/
 ### 개요
-['겸손한 자바스크립트의 원리',http://www.clearboth.org/43_the_principles_of__javascript/](http://www.clearboth.org/43_the_principles_of__javascript/)를 읽으면서 나의 허접스럽고 더러웠던 코드와 짧았던 생각을 반성해보려한다.
+['겸손한 자바스크립트의 원리',http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/](http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/)를 읽으면서 나의 허접스럽고 더러웠던 코드와 짧았던 생각을 반성해보려한다.
 
 ### 내용을 읽으면서 들었던 생각, 필요한 내용
 1. 여기서 가장 먼저 고려하는 점은 불확실성이다.
