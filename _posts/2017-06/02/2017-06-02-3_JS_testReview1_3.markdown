@@ -1,0 +1,82 @@
+---
+
+layout: post
+title: "(JS) 2017.06.30에 있었던 어느 한 시험에 대한 복기"
+category: JS
+
+---
+
+### 개요
+* 17년 6월 30일 모 기업 프론트엔드 시험이 있었다.
+* 여실히 나의 실력을 복기할 수 있었던 좋은 기회같았다.
+* 탈락이 예상되지만 복습을 해서 부족한 점을 채워야 다음에 기회가 왔을때 안놓치겠지
+* 부족했다고 생각하는 점을 정리해보면
+    1. WebStorage를 공부했었지만 막상 쓸라하니 넘나 새로웠다!
+    2. JS에서 시계를 출력할 때 어떻게 할 지 넘나 우왕좌왕(하..)
+    3. 게시판 CRUD 생성과 생성 알고리즘에 대해 고민만 하다 구현은 못한점
+    4. JavaScript, jQuery 코드가 깔끔하지 못했다.
+    5. GMT...GMT....
+
+### Moment JS를 사용하기
+시계는 GMT+9로 출력이 되었어야 했고 추가와 삭제가 되었어야 했다. 시험때 사용했던 코드를 살짝 보면..
+
+```javascript
+var stdTime = [9];
+function eraseClock(id){
+  stdTime[id] = -999;
+}
+$(document).ready(function(){
+    //render Time
+    function startTime() {
+      var today = new Date();
+      for(var i = 0; i<stdTime.length; i++){
+        var standardTime = Number(stdTime[i]);
+        if(standardTime == -999) {
+          $("#clock"+i).html("");
+          continue;
+        }
+        var h = (Number(today.getHours()) + standardTime -9)%24;
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        $("#clock"+i).html(h + ":" + m + ":" + s + "<span style = 'font-size:20px;'>(기준: GMT+"+standardTime+")</span><button id = 'erase"+i+"' class = 'btn btn-default' onClick = 'eraseClock("+i+")'>erase</button>");
+      }
+      var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};
+      return i;
+    }
+    startTime();
+    // create button click
+    $("#createClockBtn").click(function(){
+      var gmt = $("#standardTime").val();
+      var len = stdTime.length;
+      $("#clock").append("<div class = 'clock"+len+"' id = 'clock"+len+"'></div>");
+      stdTime.push(gmt);
+    });
+});
+```
+
+* 하.. 아무리 봐도 이쁜 코드는 아니다. 그래도 작동은 잘 되니..
+* 현재시간을 Date로 불러와 시간, 분, 초를 나눈다. 라이브러리를 사용하지 않으니 매우 꽤 노가다성이 짙고 정확도 또한 떨어질 것 같다.
+
+<img src = '/post_img/201706/02/2.png'/>
+<img src = '/post_img/201706/02/3.png'/>
+* 일단 결과는 잘 나온다. 삭제도 잘되고
+* 이 코드를 [moment.js, http://momentjs.com/](http://momentjs.com/)를 사용해서 만들어보자
+
+1. moment.js를 넣고
+
+
+
+### WebStorage
+
+
+
+
+
+
+
+<br/><br/>
