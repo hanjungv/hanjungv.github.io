@@ -143,8 +143,6 @@ Q. 원형 스택 공간 처리문제 <br/>
     ```
 
     * Merge : Quick Sort와 마찬가지로 Devide & Conquer의 전략을 갖는다. 
-
-
     * Heap : 
 * BFS / DFS
 
@@ -249,7 +247,6 @@ Q. 프론트엔드에서 사용했던 디버깅 방법은?
 * UI / UX의 차이는 뭘까?
     * User Interface / User experience, UX가 좀 더 상위 개념. 유저가 경험한 모든 것들이 UX의 범위에 포함된다.
 
-
 ### OS
 Q. 힙 / 스택영역설명<br/>
 Q. IPC방법에 대해 간단히 설명해보세요!<br/>
@@ -325,6 +322,11 @@ Q. 당위성 체크가 어려웠다 했는데 당위성 체크는 어떻게 했�
 Q. 코딩테스트 코드를 보면서 한번 짠 코드를 설명해보자<br/>
 Q. 완성 못했던 부분은 어떻게 할 것인지 생각해보자<br/>
 Q. 코드에 정규식이 나오는데 정규식에 대해 얘기해줄수있는가?<br/>
+Q. Javascript scope chain은?<br/>
+Q. Javascript prototype chaining?<br/>
+Q. Javascript closures?<br/>
+Q. Javascript 함수 호이스팅?
+
 
 * 보내준 코드 설명 Gist[https://gist.github.com/hanjungv/b257752bc2995c2ebbf652cd65b85969](https://gist.github.com/hanjungv/b257752bc2995c2ebbf652cd65b85969)
 
@@ -344,6 +346,9 @@ Q. 코드에 정규식이 나오는데 정규식에 대해 얘기해줄수있는
 * 마지막으로 읽은 책
     * 빅데이터가 만드는 세상
 * 정규식은?
+
+* JavaScript scope chain은?
+
 
 ### 그 외 개인적으로 물어볼만한것
 Q. 편입 왜 했는가?<br/>
