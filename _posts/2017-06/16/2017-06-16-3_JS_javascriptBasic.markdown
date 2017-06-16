@@ -237,7 +237,9 @@ function setupHelp() {
 }
 setupHelp();
 ```
+
 * let을 사용하게 되면 블록범위로 변수를 할당하여 접근이 쉬워지게 된다. 위 코드도 전부 let으로 바꿔 주기만 하면
+
 ```javascript
 let arr = []
 for(let i = 0; i < 5; i++){
@@ -251,8 +253,8 @@ for(let index in arr) {
 for(let i=0; i<5; i++){
     arr[index] = null;  //해제
 }
-
 ```
+
 * 정상작동한다.
 * 참조 : https://opentutorials.org/module/532/6544
 
@@ -261,7 +263,7 @@ for(let i=0; i<5; i++){
 * 객체의 생성 과정에서 모태가 되는 프로토타입과의 연결고리가 이어져 상속관계를 통하여 상위 프로토타입으로 연속해서 이어지는 관계를 프로토타입 체인이라고 한다. 이 연결은 __proto__ 를 따라 올라가게 된다.
 
 ### namespace
-
+* 공부해서 채우자ㅠㅠ
 
 
 
