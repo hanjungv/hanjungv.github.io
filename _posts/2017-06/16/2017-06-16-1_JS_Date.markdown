@@ -1,0 +1,39 @@
+---
+
+layout: post
+title: "(JS) Date에 대해 알아보자"
+category: JS
+
+---
+
+## Date객체
+* 날짜와 시간의 기본적인 저장 및 검색을 가능하게 합니다.
+* 밑 함수 외에 UTC기준으로 값을 변환 하는 등 여러 함수가 있다.
+```javascript
+let newDate = new Date();
+console.log(newDate); //현재 시간이 나옴
+>> Fri Jun 16 2017 09:26:08 GMT+0900 (KST)
+console.log(newDate.getDate());
+>> 16
+console.log(newDate.getDay());
+>> 5 (금요일이어서)
+console.log(newDate.getFullYear());
+>> 2017
+console.log(newDate.getHours());
+>> 9
+console.log(newDate.getMinutes());
+>> 26
+console.log(newDate.getSeconds());
+>> 8
+console.log(newDate.getTime());
+>> 1497572768814 (유닉스타임, 1970/01/01 이후로 지난 초)
+```
+
+* Date.now : 현재 유닉스 타임을 반환
+* Date.parse : 날짜를 포함한 문자열 구문을 분석하여 유닉스 타임으로 반환한다.
+
+* 참조 : https://msdn.microsoft.com/ko-kr/library/cd9w2te4(v=vs.94).aspx
+
+
+
+<br/><br/>
