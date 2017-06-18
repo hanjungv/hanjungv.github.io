@@ -75,6 +75,13 @@ Q. 원형 스택 공간 처리문제 <br/>
 
 * Array vs Linked List
 * Stack / Queue
+* vector vs list
+    * vector는 연속적인 메모리 할당을 한다. 포인터를 포함하지 않는다. 중간 값을 제거하는데 O(n). 미리 할당하여 사용
+    * list는 메모리 할당이 연속적이지는 않다. 다음과 이전을 가리키는 포인터를 포함한다. 중간 값을 제거하는데 O(1). 미리 메모리를 할당하지 않음
+* linked list vs map vs hashmap
+    * linkedlist
+    * map : C++같은 경우 completely binary search tree로 구성(red-black tree). insert, delete가 O(logn)
+    * hashmap : 
 * Sorting
     * Bubble : O(n^2)의 시간복잡도를 갖는다. N크기의 배열을 N번 순회한다. 한번 순회할 때 마다 맨 뒤의 숫자는 제일 큰 값이 된다. 그러므로 ArraySize - i 번 순회한다. 
     ```cpp
@@ -141,8 +148,9 @@ Q. 원형 스택 공간 처리문제 <br/>
         QuickSort(i, hi, a);
     }
     ```
-
     * Merge : Quick Sort와 마찬가지로 Devide & Conquer의 전략을 갖는다. 
+    mearge
+
     * Heap : 
 * BFS / DFS
 
@@ -157,10 +165,15 @@ Q. 100! = 100 * 99 * ... * 2 * 1 = xx…x00..0 = xx…x * 10^n, 이때 n은? <br
 
 ### Network
 Q. OSI7 계층, TCP, UDP 장단점 설명해 보세요!<br/>
+* 물리
+* 데이터링크 : MAC
+* 네트워크 : IP
+* 전송 : TCP/UDP
+    * TCP는 연결형, UDP는 비연결형. UDP는 포트번호만 보고 송수신. 매우 빠르다. 신뢰성은 낮다
+* 세션 : 통신세션구성, 포트번호
+* 표현 : 포맷변환
+* 응용 : 사용자가 네트워크에 접근하게 해주는 계층, HTTP
 Q. TCP 3-way hand shaking이란?<br/>
-Q. rtp와 rtcp 차이점은?<br/>
-Q. HTTP 통신 원리
-
 * 3-way hand shaking : TCP 3 Way Handshake는 TCP/IP프로토콜을 이용해서 통신을 하는 응용프로그램이 데이터를 전송하기 전에 먼저 정확한 전송을 보장하기 위해 상대방 컴퓨터와 사전에 세션을 수립하는 과정을 의미한다.
 * 4-way hand shaking : TCP 연결을 종료하기 위한 절차이다.
     * [STEP 1] 클라이언트가 연결을 종료하겠다는 FIN플래그를 전송한다.
@@ -169,6 +182,10 @@ Q. HTTP 통신 원리
     * [STEP 4] 클라이언트는 확인했다는 메시지를 보낸다.
     * Client에서 세션을 종료시킨 후 뒤늦게 도착하는 패킷이 있다면 이 패킷은 Drop되고 데이터는 유실될 것입니다. 이러한 현상에 대비하여 Client는 Server로부터 FIN을 수신하더라도 일정시간(디폴트 240초) 동안 세션을 남겨놓고 잉여 패킷을 기다리는 과정을 거치게 되는데 이 과정을 "TIME_WAIT" 라고 합니다.
     * 출처: http://mindnet.tistory.com/entry/네트워크-쉽게-이해하기-22편-TCP-3-WayHandshake-4-WayHandshake
+
+Q. rtp와 rtcp 차이점은?<br/>
+Q. HTTP 통신 원리
+* 클라이언트에서 요청(request)를 보내면 서버는 요청을 처리해서 응답(response)한다
 
 
 ### Database
