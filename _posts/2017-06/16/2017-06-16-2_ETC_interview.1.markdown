@@ -149,8 +149,42 @@ Q. 원형 스택 공간 처리문제 <br/>
     }
     ```
     * Merge : Quick Sort와 마찬가지로 Devide & Conquer의 전략을 갖는다. 
-    mearge
 
+    ```cpp
+    #define Len 10
+    void mergeArray(int *arr,int l,int r){
+        int temp[Len] = {0, };
+        int mid = (l+r)/2, i = l, j = mid+1, totalIdx = l;
+        while(i<=mid && j <= r){
+            if(arr[i] <= arr[j]){
+                temp[totalIdx] = arr[i];
+                i++;
+            } else{
+                temp[totalIdx] = arr[j];
+                j++;
+            }
+            totalIdx++;
+        }
+        for(i; i<= mid; i++,totalIdx++){
+            temp[totalIdx] = arr[i];
+
+        }
+        for(j; j<= r; j++,totalIdx++){
+            temp[totalIdx] = arr[j];
+        }
+        for(int a = l; a <= r ; a++){
+            arr[a] = temp[a];
+        }
+    }
+    void devideArray(int *arr, int l, int r) {
+        int mid = (l + r) / 2;
+        if (l < r) {
+            devideArray(arr,l,mid);
+            devideArray(arr,mid+1,r);
+            mergeArray(arr, l, r);
+        }
+    }
+    ```
     * Heap : 
 * BFS / DFS
 
