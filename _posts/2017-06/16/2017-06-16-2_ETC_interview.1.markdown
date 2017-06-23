@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(ETC) 글 쓰는중"
+title: "(ETC) 면접준비[1/2]"
 category: ETC
 
 ---
