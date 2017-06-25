@@ -1,0 +1,110 @@
+---
+
+layout: post
+title: "(JS) dragula.js 사용해보기"
+category: JS
+
+---
+
+## dragula JS
+* 링크 : [https://github.com/bevacqua/dragula](https://github.com/bevacqua/dragula)
+* CDN : [https://cdnjs.com/libraries/dragula](https://cdnjs.com/libraries/dragula)
+* 공식 깃헙에 나와있는 CDN이 404이어서 되는 링크를 가지고 왔다. 여기서 참조를 하면 된다.
+* 트렐로 처럼 드래그&드롭을 하고 싶어서 라이브러리를 찾던 도중 이런게 나왔다.
+
+### CDN으로 설치
+위 링크에 들어가서 CDN을 받아온다. CSS, JS 둘 다 받는 것을 추천한다. CSS를 받지 않을 경우 조금 밋밋한 경험을 할 수 있다.
+
+```html
+<script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css">
+```
+
+
+### 단순한 예제 하나 해보기
+* 트렐로 처럼 작동하는 예제를 하나 만들어보자
+
+```html
+<!DOCTYPE html>
+<html lang = 'ko'>
+<head>
+  <meta charset="utf-8">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css">
+  <title>Hello</title>
+  <style>
+    .wrapper{
+      display:flex;
+      flex-direction: row;
+    }
+    .outer-container{
+      width:30%;
+      border:2px solid #BBBBBB;
+      text-align: center;
+      border-radius: 3%;
+      margin:1px;
+    }
+    .outer-container h3{
+      margin:2px;
+    }
+    .container{
+      min-height:300px;
+    }
+    .container div{
+      border:2px solid #2E2F30;
+      border-radius: 3%;
+      margin:3px;
+      height:40px;
+      text-align: center;
+      font-size: 15px;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <div class = 'outer-container'>
+    <h3>To do</h3>
+    <div id="left-defaults" class="container">
+      <div>AAAAAAAAAAA</div>
+      <div>BBBBBBBBBBB</div>
+      <div>CCCCCCCCCCC</div>
+    </div>
+  </div>
+  <div class = 'outer-container'>
+    <h3>DONE</h3>
+    <div id="right-defaults" class="container">
+      <div>EEEEEEEEEE</div>
+      <div>FFFFFFFFFF</div>
+    </div>
+  </div>
+</div>
+<script>
+function $ (id) {
+  return document.getElementById(id);
+}
+dragula([$('left-defaults'), $('right-defaults')]);
+
+function clickHandler (e) {
+  var target = e.target;
+  if (target === sortable) {
+    return;
+  }
+  target.innerHTML += ' [click!]';
+  setTimeout(function () {
+    target.innerHTML = target.innerHTML.replace(/ \[click!\]/g, '');
+  }, 500);
+}
+</script>
+</body>
+</html>
+```
+
+
+<img src = '/post_img/201706/25/1.gif'/>
+
+* 설명 및 주석은 내일 업데이트..
+
+
+
+<br/><br/>
