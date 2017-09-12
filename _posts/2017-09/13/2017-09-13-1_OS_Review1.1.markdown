@@ -1,0 +1,108 @@
+---
+
+layout: post
+title: "(OS) OS 리뷰"
+category: OS
+
+---
+
+# OS 리뷰
+## 시작하면서
+> 블로그 글 작성이 너무나 오랜만이다. 그동안 블로그 글을 싼 것을 보면서..(쓴 것이라고 표현하기엔 적당하지 않은 것 같다.) 이런 글을 계속해서 올리는게 과연 도움이 될 까 하는 생각이 들었다. 앞으로 조금 태도를 바꿔서 하나하나 신경을 써서 글을 올리되 기존에 썼던 글을 다듬는 시간을 좀 가지려 한다. 우선 이 글은 취준생으로써 학사과정에 배웠던 OS를 리뷰하는 글이다. 시험 준비를 하기 위한 글이니 하나하나 보는 것이 아닌 핵심이라 말씀해주셨던 부분을 중심으로 보려한다.
+
+## 1장(Introduction)
+> 한 학기 개요를 말하는 곳이다.
+
+1. OS가 뭐라고 생각하나?
+    * 단순하게 말해서 "컴퓨터 하드웨어와 실행되는 프로그램 모두를 제어하는 프로그램이다."라고 표현하면 적합 할 것 같다.
+2. I/O 장치와 CPU가 동시에 일을 할 수 있나?
+    * 그렇다. 이유는 "DMA(Direct Memory Access)"때문이다.
+3. 그럼 DMA과정을 간략하게 말해보자
+    1. CPU에서 각 장치에 있는 컨트롤러에 해당되는 일을 CPU에 올리라 명령한다.
+    2. 그리고 CPU의 간섭없이 열심히 job을 메모리에 올린다.
+    3. 전부 올리게 되면 `interrupt`를 통해 CPU에 알려주고 일을 마무리 한다.
+4. Interrupt라고 했는데 interrupt에 대해 설명해 볼 수 있나?
+    * 인터럽트는 장치 내에서 예외상황이 발생하여 처리가 필요할 때 사용하는 것을 말합니다. `interrupt vector`에 그러한 인터럽트 신호가 오게 될 때 처리해야 하는 동작을 가리키는 주소를 적어놔 관리하게 됩니다. 무조건 우선적으로 처리되게 됩니다.
+5. 혹시 Trap 과 Interrupt의 차이를 아는가?
+    * Trap 은 S/W적으로 발생하는 인터럽트를 가리키는 명칭으로 알고있습니다. 예로 System Call, Segmentation fault 같은게 있습니다.
+    * 인터럽트는 컨트롤 씨를 누를때 처럼 H/W에서 발생하는 것을 명칭 하는 것으로 알고 있습니다.
+
+## 2장(System Structure)
+> System Call과 구조에 대해 간략히 설명한다.
+
+1. System Call을 설명해 볼 수 있을까?
+    * System Call은 Application program에서 OS로 서비스를 요청하고 싶을 때 쓰는 메카니즘이다. 주로 바로 커널 명령어를 호출하지 않고 POSIX같은 라이브러리를 사용한다.
+2. 그럼 왜 굳이 라이브러리를 사용할까?
+    * 우리는 여러 OS를 사용한다. 이 모든 OS마다 각각 커널 명령어는 다를 것이다. 고로 API라이브러리를 사용 한다면 Portability가 증가할 것이고 프로그래밍은 쉬워질 것이다. System Call도 결국 라이브러리를 호출 할 것이고 `System Call Interface`라는 table구조를 사용하여 일을 진행한다.
+3. (흠?) 마이크로 커널이 뭔지 간략하게 설명해 볼 수 있을까?
+    * OS중 핵심 기능만 kernel에 두고 나머지는 유저 영역에 두는 오에스 구조입니다.
+    * 확장성이 좋고 porting이 쉽습니다. 하지만 유저 영역에서 수행해야 하는 일이 많아져 일이 많다면 오버헤드가 큽니다.
+
+## 3장(Process Concept)
+> Process에 대해 소개하고 통신법을 소개한다.
+
+1. Process와 Program의 차이가 뭘까?
+    * "실행 되고 있는 프로그램"을 프로세스라고 한다. 실행이 되고 있는 프로그램이기 때문에 Program Code + Heap/Stack 영역+ Data영역 + PCB 등 훨씬 더 많은 것을 가지고 있다.
+2. PCB라고 했는데 PCB에 대해 설명해 볼 수 있나?
+    * `Process Control Block`의 약어이다. 이름에서 나타나는 것처럼 프로세스의 정보를 모두 담고있는 구조체이다. 현재상태, 다음 수행위치, CPU 레지스터 값(인터럽트 후 바로 실행해야 할 때 저장해 놓은 값들), 스케줄링 정보 등등을 담고 있다.
+3. I/O bound Process 와 CPU bound Process를 비교 할 수 있나?
+    * I/O bound Process가 CPU bound Process보다 자주, 짧게 일어나게 된다. 주로 스케줄링을 하여 우선적으로 일하는 것은 전자를 선택한다.
+4. 그럼 Process 스케줄러에 대해 아는 것을 전부 말해보자
+    * Long-term scheduler : 프로그램을 실행한다고 더블클릭을 했다 치면 Long-term 같은 경우에 ready-queue에서 메모리로 어떤 일을 올릴지 고민하게 됩니다. 자주 일어나지 않고 요즘은 사용을 거의 안한다고 할 수 있습니다. 요즘은 그냥 다 올립니다.
+    * Short-term scheduler : 다음 task를 어떤것을 선택할 지 CPU에서 자주 일어나는 스케줄러 입니다.
+    * mid-term scheduler : 모든 task를 메모리에 올릴 수 없으니 어떤 task를 선택하여 swapping 할 지 정하는 것입니다.
+5. Context Switch에 대해 그럼 설명해보자
+    * Context Switch는 CPU에서 process를 switch할 때 발생하는 과정을 의미한다. 이때 이전 프로세스의 상태를 저장해서 종료를 해야하고 새로운 프로세스의 상태를 가지고 와서 로드를 해줘야하는데 이 때 상당한 오버헤드가 발생한다.
+6. (흠?)`fork`를 통해 프로세스를 만든다 치면 이때 자원을 공유하나?
+    * file은 공유하지만 나머지 영역들은 공유를 하지 않는다. 
+    * `Call once return twice`라고 하는데 부모 프로세스에서 한번 호출하지만 pid는 각각 2개가 리턴되게 된다. 자식 process의 id는 0이다.
+    * 내가 코딩했었던 방식은 주로 부모 프로세스에서 fork를 한 뒤 자식 프로세스에서 코드를 수정한 뒤 exec을 통해 새로운 프로그램을 수행한 후 종료되면 자식 프로세스를 거두게 된다.
+    * 만약 `wait` System Call을 통해 자식 프로세스를 거두지 않고 종료하게 된다면 고아프로세스가 된다.
+7. 각 프로세스간 통신은 어떻게 하는지 방식에 대해 설명해보자!
+    * Message Passing : receive, send System Call을 이용하여 메세지를 전달하게 된다. 직접 전달과 간접 전달 방법을 갖게 된다. OS의 간섭이 지속적으로 필요하게 된다. 시간이 오래걸리게 된다.
+    * Shared Memory : 각 프로세스간 공유하는 공간을 만들어 다른 프로세스에서 그곳에 attach 하여 사용하게 된다. 처음 생성과 attach시 System Call을 사용하지만 이후에는 커널 영역에서 작업이 이루어지지 않아 지속적으로 교류가 많을 때 사용하면 유리하다.
+
+## 4장(Multithreaded Programming)
+> thread에 대한 간략한 개념이 나오게 된다.
+
+1. Process와 thread를 비교하여 설명할 수 있는가?
+    * 먼저 한가지 상황을 가정해보면 한 Server에서 같은 일을 수행하는 프로세스를 매번 fork 해서 만든다고 해보자. 이런 상황이 존재한다면 매번 동일한 코드를 복사하여 일을 수행하는 비효율적인 모습을 상상할 수 있다. fork를 하게 되면 PCB, 주소복사 등등 해줄 일이 많다. 그래서 등장한게 쓰레드인데 한 프로세스 내에서 독립적인 일을 수행해준다.
+    * 쓰레드는 레지스터와 스택을 제외하고는 모두 공유하여 사용하게 된다. 이렇게 될 경우 한가지 쓰레드가 I/O를 수행할 때 다른 쓰레드는 다른일을 하는 식으로 일을 좀 더 효율적으로 수행할 수 있게 된다. 그리고 요즘같이 multi-processor 환경을 갖춘 상태에서는 쓰레드로 각 CPU에 일을 할당해서 수행해 줄 수 있게 된다.
+2. (흠?) user thread와 kernel thread를 many-to-many 모델로 구성했다면 스케줄링은 어떻게 할까?
+    * `LWP(LightWeight Process)`라는 것을 통해 커널의 정보를 유저 쓰레드에 전달하고 라이브러리 단에서 다음 일을 결정하여 일을 정해주게 된다. 이를 `upcall`이라 한다.
+
+## 5장(Process Scheduling)
+> 스케줄링 기법에 대해 설명한다.
+
+1. 스케줄러가 결정을 내리는 시점에 있어서 Preemptive 한 것과 Nonpreemptive 한 것의 차이가 뭐냐?
+    * Nonpreemptive한 것은 프로세스가 자발적으로 CPU를 포기 할 때까지 기다리는 것이다. Preemptive 같은 경우 당장 그 시점에서 우선순위가 높은 것을 찾게 된다.
+2. 그럼 interrupt같은 경우는 어떻게 되는 건가?
+    * interrupt로 수행되는 작업은 non-preemptive하게 이뤄져야 한다.
+3. 스케줄링 기법을 정하는 기준에 대해 설명해 볼 수 있을까?
+    * CPU utilization, Throughput, Turnaround time, Waiting time, Response time등이 기준이 된다. 
+    * Turnaround time 같은 경우는 프로세스 끝낸시간 - 시작시간, Wating time는 레디 큐에서 기다리는 시간이다. Response time은 첫번째 응답이 온 시간이다.
+4. 그럼 이 기준에 따라서 알고있는 스케줄링 기법들을 설명해봐라
+    * FCFS(First Come First Served): 온 순서대로 수행한다. 이렇게 수행할 경우 수행시간이 긴 것이 먼저 올 경우 뒤에 task가 수행을 못하는 `convoy effect`가 발생할 수 있다.
+    * SJF(Shortest Job First): burst time이 짧은 것을 우선적으로 수행하게 된다. 이럴 경우 burst time이 긴 일은 계속해서 실행이 안되는 `starvation` 현상이 발생할 수 있다. 물론 지금 수행하는 task가 얼마나 걸릴지 알 수 없다는 문제도 있다.(이런경우 예측을 해서 사용한다.)
+    * Priority: 프로세스에 우선순위를 주어 일을 수행하게 된다. 이 경우에도 우선순위가 낮은 일은 계속해서 실행이 안되는 `starvation` 이 발생할수 있다.
+    * RR(Round-robin) : CPU time의 단위를 정해 그 time 대로 한번씩 일을 번갈아 가면서 수행한다. 이 경우 Response time이 보장되는 장점이 있지만 time quantum이 짧을 경우 context-switch 에 따른 오버헤드가 커진다.
+5. 그럼 Multi-processor 스케줄링에서 영향을 미치는 것에는 어떤게 있냐?
+    * `Process affinity`라는 게 영향을 미치게 된다. 이건 이전에 이 프로세스를 이 CPU에서 실행한 적이 있는가를 의미하게 되는데 이 경우 해당 코드의 일부가 캐시에 담겨져 있을 가능성이 높으니 이전에 실행했던 CPU를 선택하게 된다.
+    * `Load balancing` CPU마다 utilization을 체크해서 바쁜 쪽의 일을 덜 바쁜 쪽으로 가지고 와 수행하게 된다. 
+
+## 6장(Process synchronization)
+> Critical Section에 대한 개념과 Semaphore에 대해 등장하게 된다.
+
+1. Race condition에 대해 설명할 수 있을까?
+    * 같은 데이터에 동시 접근이 가능하게 되어 결과값이 특정 순서에 따라 달라질 수 있게 된 환경을 의미합니다.
+    * 이렇게 공유 변수 접근에 가능한 영역을 Critical section이라 합니다.
+2. 그럼 그런 문제를 어떻게 해결할 수 있을까?
+    * 3가지 조건을 만족하면 됩니다.
+        * Mutual Exclusion: Critical Section에 어떤 프로세스가 일을 하고 있다면 다른 thread는 block 시킵니다.
+        * Progress: CPU가 일을 안하고 있다면 바로 기다리는 일을 진행시켜줍니다.
+        * Bounded waiting: 기다리는 일이 진입할 수 있다는 보장이 있어야 합니다.
+3. Semaphore란 무엇인지 설명할 수 있을까?
+    * 공유 자원 제한 접근을 위해 사용하는 변수입니다. 주로 binary로 사용을 하고 두가지 함수가 있습니다. `signal()`, `wait()` 함수로 변수의 값을 증감 시키고 비교합니다. wait상태에 semaphore 값이 0이거나 0보다 작을 경우 그 자리에서 기다리게 됩니다. 이후 일을 종료하고 나가는 함수가 signal을 하게 되면 세마포어 값이 증가하여 critical section에 진입 할 수 있게 됩니다. 
+    * binary Semaphore === mutex
+
+<br/><br/>
