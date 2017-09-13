@@ -163,5 +163,42 @@ category: OS
     * Slab Allocator: 연속적인 메모리 공간을 미리 할당하여 정확하게 메모리에 맞춰서 일을 할당한다. 
 
 
+## 10장(File System)
+> File System에 대한 설명이 들어간다.
+
+1. File System에서 등장하는 Hard link 와 Soft link에 대해 구분할 수 있는가?
+    * 실제 파일이 존재 하는 곳을 가리키는게 Hard link, 실제 파일을 가리키는 곳을 가리키는 게 Soft link이다. 가리키는 파일을 삭제했을때 Soft link일 경우 Dangling pointer가 발생한다.
+
+## 11장(Implemeting File System)
+
+1. File이 open될 때 어떻게 시스템이 작동하는지 설명해봐라
+    1. 먼저 `System wide open file table`을 찾아봐서 이미 열려있는지 본다. 
+    2. 이미 열려있다면 `per process open file table`을 하나 더 만들고 System wide open file table에서 FCB 정보를 얻어 열게된다.
+    3. 없다면 Directory structure를 찾아 inode 넘버를 찾고 그것을 system wide open file table에 올린뒤 `per process open file table`을 하나 더 만들고 파일을 올리게 된다. 
+2. read or write 할 때는?
+    1. 먼저 per-process open file table을 보고 system wide open file table을 찾아간다.
+    2. 그리고 FCB를 통해 file 의 위치를 찾고 read, write
+3. close할 때는?
+    * per-process open file table을 지우고
+    * system-wide open file table에 연결되어있는 것의 갯수를 보고 없다면 삭제
+
+## 12장(Secondary Storage Structure)
+
+1. (흠?) 디스크 스케줄링 기법들이 뭐가 있을까?
+    * FCFS : 들어온 순서대로 수행
+    * SSTF(Shortest Seek Time First) : 헤드 근처에 있는 순서대로
+    * SCAN : 안쪽 부터 바깥쪽까지 한번 쭈욱
+    * C-SCAN: 한쪽 디렉션으로만 쭈욱
+    * LOOK : queue에 담겨있는 최고 끝 점부터 끝점까지만 쭈욱
+    * C-LOOK: LOOK과 동일하지만 한쪽 방향으로만
+2. RAID 구조에서 문제가 생길 경우 해결하는 방안에 뭐가있을까?
+    * mirroring: 중복해서 저장을 한다. 용량이 두배로 들게 된다.
+    * parity: parity block을 두어 복구. XOR연산을 통해 복구가 가능해진다. 추가적인 메모리가 필요하지만 미러링 기법에 비해 적은 용량이 필요하다. 
+3. parity를 사용할 때 발생할 수 있는 문제는 뭐가 있을까?
+    * 추가적인 메모리가 사용된다는 점
+    * `small write problem`: 작은 양의 write가 계속 될 때 parity를 매번 다시 계산을 해줘야 하므로 오버해드가 커지게 된다.
+
+## 마치며
+더 중요하고 외워야 하는 많은 사항들이 있을 것같다. 또 시대가 지남에 따라 많이 변한 내용또한 있을 것 같다. 이러한 부분을 지적해주시면 좋을 것 같다.
 
 <br/><br/>
