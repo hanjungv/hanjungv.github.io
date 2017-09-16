@@ -13,7 +13,7 @@ category: Network
 ## (흠?)은 뭐지
 * 과연 여기까지 나올까 싶은 것들은 흠? 을 앞에 붙여봤다.. 물론 제 주관이니 아무 의미 없는 것이라고 말할 수 있다. 
 
-## Chapter2(The OSI Model and the TCP/IP protocol suite)
+## Chapter 2(The OSI Model and the TCP/IP protocol suite)
 1. TCP/IP protocol suite에 대해 설명해 보자(5 Layer)
     * 물리(Physical): 기계적 신호로 변환하고 전달하는 곳
     * 데이터링크(L2, Data link): router to router(`hop to hop`)전달이 이뤄짐. 헤더 안 Mac주소(Physical Addr, 제조사가 각 랜카드에 부여하는 번호)를 보고 전달. 
@@ -27,17 +27,17 @@ category: Network
 3. (흠?) IP만 보고서 전달이 되는거 아닌가 그럼? MAC주소는 왜 필요한가?
     * 애초에 네트워크가 처음 설계될 때 IP주소가 먼저 생긴 것이라 MAC주소부터 생겼다고..
 
-## Chapter4(Introduction to Network Layer)
+## Chapter 4(Introduction to Network Layer)
 1. circuit switching, packet sitching 차이점은 뭐일까?
     * circuit switching: 중앙 통제하에 일어난다. 경로 설정을 set up과정 서 미리 해놓은 뒤 사용한다. 그 경로만 사용하며 손실은 적으나 비효율적이고 한 경로가 손상되면 사용할 수 없게된다. 패킷이 분리되지 않고 한번에 전달된다.
     * packet switching: 라우터들끼리 분산된 정보를 주고 받는다. 손실이 있을 수 있지만 유연하고 한 경로에 의존적이지 않게 된다. 패킷을 분리해서 보내고 destination의 transport계층에서 재 조립해서 사용하게 된다. 다음 경로를 담고 있는 table의 값이 바뀔 수 있다.(더 좋은 경로를 찾아)
 
-## Chapter15(Transmission Control Protocol)
+## Chapter 15(Transmission Control Protocol)
 1. (흠?)Acknowledgement 방식에 대해 설명해보자
     * selective 방식: 손실된 Segment때문에 Ack을 다시 보낼 때 이미 받은 segment정보를 같이 보내줌
     * cumulative 방식: 손실된 Segment를 받기 전 여기까지 받았다 라는 것을 number로 알려줌. TCP가 이런 방식.
 
-2. TCP Header에 어떤 정보들이 들어갈까?
+2. (흠?)TCP Header에 어떤 정보들이 들어갈까?
     * Source port addr, Dest Port addr
     * Sequence number: packet 번호
     * Acknowledgement number
@@ -66,12 +66,12 @@ category: Network
     * 첫번째 데이터를 보낸것에 대해 응답이 오기 전까지 window크기가 허락하는만큼 계속해서 데이터를 보내준다. ACK이 오지않아도 계속 보낸다.
     * 이 window의 크기는 수신하는 곳의 버퍼에서 일을 가져가는 속도와 보낼 수 있는 것, 받는 버퍼의 크기 등을 고려해서 정해진 뒤 헤더에 담겨서 오게 된다. 그럼 좀 더 효율적으로 데이터를 보낼 수 있게 되겠지!
 
-6. `Silly Window Syndrome`에 대해 설명해보자
+6. (흠?)`Silly Window Syndrome`에 대해 설명해보자
     * 수신 측에서 데이터를 처리하는 속도가 늦어져 윈도우의 크기가 계속해서 감소되어 송신측으로 보내지게 된다.
     * 그러면 그 윈도우 크기를 보고 송신 측에서는 더 작고 더 자주 패킷을 쪼개 보내게 된다.
     * 이렇게 작은 패킷을 계속해서 보내게 되니 매우 비효율 적이라고 할 수 있다.
 
-7. 그럼 어떻게 해결할까?
+7. (흠?)그럼 어떻게 해결할까?
     * 송신 측에서는 `Nagle Algorithm`이라고 하는데 첫번째 packet은 일단 보내고 응답이 올때 까지 기다리면서 데이터를 모아서  패킷이 꽉차면 전송시킨다. 그리고 첫번째 것의 Ack이 올 때 까지 전송을 멈추게 된다.
     * 수신 측에서는 `Clark` 해결 방법이라고 하는데 윈도우의 크기가 MMS(Maximum Segment Size)나 버퍼의 크기가 반이 될 때까지 받을 수 없다고 ACK을 계속해서 보내게 된다.
 
@@ -80,7 +80,76 @@ category: Network
     * 이렇게 되면 서버쪽에서는 SYN+ACK을 보낸것에 대해 ACK을 기다리면서 연결요청 대기 큐에 쌓이게 되는데 
     * 이렇게 대기큐가 쌓이게 됨으로써 정상적인 사용자들의 일을 제대로 할 수 없게 한다.
 
+9. (흠?)packet loss가 일어나면 어떻게 할까?
+    1. 먼저 일반적으로 데이터를 전송한 것에 대한 응답으로 ACK이 오게 되는데 이 때 받은 ACK에서 다음 데이터를 원하게 된다고 치면
+        * 보내줄 데이터가 아직 버퍼에 차지 않았을 경우 일정한 시간동안 기다렸다가 데이터가 오게 되면 보내준다.
+        * 이 때 중간에 또 다른것도 보내달라는 요청이 오게 될 경우 이에 대한 응답으로 ACK을 보내준다.
+    2. 근데 만약 이에 대한 응답으로 패킷을 전송했는데 먼저 보낸 패킷이 중간에서 전달이 안되고 다음 전송된 데이터가 먼저 도착할 경우 순서가 바뀌게 된 것이므로(out of order)이에 대해 이전 것이 안왔다고 packet loss를 알려주는 ACK을 바로 보내주게 된다. ACK을 받고 일정시간(time out)될 때까지 데이터가 왔다는 ACK이 안 올 경우 다시 재전송을 해준다. 
+    3. 그 ACK을 수신한 측은 다시 데이터를 보내주고 이에대한 ACK을 송신한 쪽에 바로 보내준다. 
+    4. `Fast retransmission`은 위 방법에서 time out이 될 때까지 기다리는 방법 대신 3번의 ACK(`Three duplicated Ack`)을 받게 될 동안 데이터가 안오게 되면 time out이 되지 않더라도 바로 전송해주는 방식이다. 3번을 받게 되는 이유는 한번에 바로 유실되었다고 판단하기에 무리가 있어 3번의 유예를 두는 것이라고 한다.
+    5. 만약 송신이 제대로 되었는데 이것에 대한 ACK이 loss될 경우 일정시간동안 기다리다가 재 전송을 해주게 된다. 이 재전송한 데이터가 이미 온 것일 경우 수신측에서는 바로 ACK을 다시 전송해주고 반영시켜준다.
+
+10. (흠?)congestion을 어떻게 control할까?
+    * 처음에는 윈도우 크기만큼 전송을 했었지만 현재는 `Slow Start`로 exponential increase하여 전송한다. RTT(Rount Trip Time)동안 전송한 윈도우 크기만큼 송신측에서 감당이 된다면 2배씩 증가하면서 전송을 늘리게 된다.
+    * Threshold 지점까지 exponential하게 증가하고 그 지점 이후부터는 하나씩 증가하면서 RTT내에 응답이 오는지 체크하며 증가하게 됩니다. 만약 3 duplcated ACK이 발생하게 되면 congestion이 발생한것으로 하고 threshold를 contestion이 발생한 윈도우 사이즈의 1/2로 줄인 뒤 다시 슬로우 스타트를 하게 됩니다. 
+
+## Chapter 5(IPv4 Addresses)
+
+1. IPv4와 IPv6의 차이점은?
+    * IPv4는 총 32비트가 IP주소로 쓰임. 40억개 정도
+    * IPv6는 총 128비트가 IP주소로 쓰임. 
+
+2. 서브넷(`subnet`)으로 관리하는 이유는?
+    * 만약 classB를 구매하여 하나의 스위치에 한 네트워크 주소로 연결이 되어있다면 이 스위치에는 6만5천개 정도가 한 스위치에 몰려있는 것을 의미한다. 이렇게 될 경우 broadcasting(s:0.0.0.0, d:255.255.255.255) 하게 될 때 매우 bandwidth활용이 낮아지고 관리 또한 힘들어진다. 또 스위치 하나가 고장나게 될 경우 모든 네트워크가 사용을 못하게 되는 문제가 발생한다.
+    * 서브넷으로 관리하여 netid비트를 제외하고 hostid 비트에서 몇자리를 추출하여 앞자리를 netid에 더하여 subnetid로 만들어 관리하게 되면 네트워크 주소가 나눠지게 된다. 만약 뒤 2비트를 추가하여 subnetid를 만들 경우 4개의 서브넷이 만들어진다. 
+    * 서브넷의 서브넷을 만들어 관리 할 수 있고 classless인 주소 체계에서도 서브넷을 만들어 관리 할 수 있다.
+
+## chapter 6(Delevery and Forwarding of IP packets)
+1. `Longest mask matching`이란 개념은?
+    * IP 경로가 매칭되는 곳이 여러개일 경우 network ID가 가장 길게 매칭되는 곳으로 보내버리는것을 의미한다.
+
+## chapter 7(Internet Protocol version4)
+* IP헤더에도 checksum이 존재한다..작동원리는 같다
+
+## chapter 8(Address Resolution Protocol)
+1. ARP의 역할은?
+    * IP주소를 통해 MAC주소를 알아낼 수 있음. Network계층에서 작동된다. Next hop에 대한 정보를 알기 위해 쓰인다.  
+    * broadcast로 리퀘스트를 보내고 reply는 unicast로 온다.
+    * 먼저 캐싱테이블에 있는 MAC주소를 찾아보고 없으면 request를 보낸다.
+
+## chapter 9(Internet Control Message Protocol Version 4)
+1. ICMP의 역할은?
+    * 인터넷은 중앙 통제이기 때문에 모니터링이 힘들다.
+    * 에러가 발생할 경우 리포팅이 필요한데 원래 소스로 에러 코드를 담아 보내주는 역할을 ICMP가 한다. IP와 같은 Network계층에서 작업이 된다.
+
+## 그 외..
+* TCP랑 UDP랑 차이점?
+    * TCP(Transmission Control Protocol) : 연결형 서비스를 지원하는 전송계층 프로토콜, 호스트간 신뢰성 있는 데이터 전달과 흐름제어 및 혼잡제어 등을 제공하는 전송계층
+        - 가상 회선 연결 방식, 연결형 서비스를 제공
+        - 높은 신뢰성(Sequence Number, Ack Number를 통한 신뢰성 보장)
+        - 데이터 흐름 제어(수신자 버퍼 오버플로우 방지) 및 혼잡 제어(네트워크 내 패킷 수가 과도하게 증가하는 현상 방지)
+
+    * UDP(User Datagram Protocol)
+        * 비연결형 서비스를 지원하는 전송계층 프로토콜
+        * 보내는 쪽에서 일방적으로 데이터를 전달하는 통신 프로토콜
+        - 비연결형(port만 확인하여 소켓을 식별하고 송수신)
+        - 비신뢰성
+        - 오류검출(헤더에 오류 검출 필드를 포함하여 무결성 검사)
+        - UDP는 TCP와 달리 데이터의 수신에 대한 책임을 지지 않는다.
+
 ## 부수적인 HTTP 공부
+* HTTP가 뭘까?
+
+* HTTP 헤더에는 어떤 것들이 포함 될 수 있을까?
+
+* HTTP Method에 어떤것들이 있는지 설명해 볼 수 있을까?
+
+* 세션이랑 쿠키랑 차이점이 뭘까?
+
+* 그럼 세션이랑 쿠키랑 어디에 쓰이는가?
+
+
+
 
 ## 마치며
 
