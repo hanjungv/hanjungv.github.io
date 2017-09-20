@@ -1,0 +1,62 @@
+---
+
+layout: post
+title: "(Node.js) Node.js에서 ES6쓰기"
+category: JS
+
+---
+
+# Node.js에서 ES6 쓰기
+
+## 들어가면서
+> 먼저 이 글을 쓰게 된 계기는 멋쟁이 사자처럼 노드 수업을 진행하던 중 익숙했던 ES6 문법이 작동하지 않는 다는 것을 알게 되었고 이를 해결하기 위해 BABEL을 깔면서 알게 된 정보들을 간략하게 써보려고 한다. 전혀 어렵지 않은 내용이고 사실 [https://github.com/babel/example-node-server](https://github.com/babel/example-node-server)만 읽고 따라하면 쉽게 할 수 있다. 거의 그대로 가져온 것과 다름없기 때문에 영어가 편하신 분들은 저걸 보는걸 추천 드린다.
+
+## 시작하기
+1. `babel-cli`설치하기
+```
+$ npm i --save-dev babel-cli
+``` 
+2. 그리고 presets을 깔아준다. 밑에 등장하는 것들을 바벨을 사용하기 위한 기본 디폴트 preset이다.(라고하네요)[http://babeljs.io/docs/plugins/#presets](http://babeljs.io/docs/plugins/#presets). es2015버전을 사용하겠습니다.
+```
+$ npm install --save-dev babel-preset-es2015 babel-preset-stage-2
+```
+3. 그리고 서버 파일인 index.js를 만들어서 밑과 같은 내용의 코드를 입력해본다(테스트 코드입니다.)
+```javascript
+import http from 'http'; 
+// babel 설정이 안되어 있다면 에러가 날 것입니다. 이전에는 const http = require('http'); 이런식으로 작성했을 거에요
+
+http.createServer((req, res) => {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+
+console.log('Server running at http://127.0.0.1:1337/');
+```
+4. 그리고 `package.json`에 들어가 script를 하나 추가해 보겠습니다.
+```json
+  "scripts": {
++   "start": "babel-node index.js --presets es2015,stage-2"
+  }
+```
+5. 그리고 `$npm start`를 한다면 제대로 실행이 될 것입니다!
+
+## 더 나아가서
+1. 매번 노드 파일을 변경하게 되면 서버를 껐다 켜줘야 하는 불편함이 있는데 `nodemon`을 사용한다면 이 불편이 조금은 사라질 겁니다. 설치해보겠습니다.
+```
+$ npm i --save-dev nodemon
+```
+
+2. 그리고 다시 `package.json`에 들어가 start에 해당하는 script를 수정해줍니다.
+```json
+ "scripts": {
+-   "start": "babel-node index.js"
++   "start": "nodemon index.js --exec babel-node --presets es2015,stage-2"
+  }
+```
+3. 그리고 `$npm start`를 한다면 nodemon으로 실행이 되어 변화를 계속해서 감지할 것입니다.
+
+## production 모드 에서는?
+* 그 외의 내용은 실제 글에서 확인해 보시길..(별로 어려운 내용도 아니고 실제 사용해본 적이 없어서 나중에 사용해보고 올리려 한다.)
+
+
+<br/><br/>

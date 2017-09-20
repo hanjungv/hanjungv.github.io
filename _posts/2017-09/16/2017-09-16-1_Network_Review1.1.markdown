@@ -15,7 +15,7 @@ category: Network
 
 ## Chapter 2(The OSI Model and the TCP/IP protocol suite)
 1. TCP/IP protocol suite에 대해 설명해 보자(5 Layer)
-    * 물리(Physical): 기계적 신호로 변환하고 전달하는 곳
+    * 물리(L1, Physical): 기계적 신호로 변환하고 전달하는 곳
     * 데이터링크(L2, Data link): router to router(`hop to hop`)전달이 이뤄짐. 헤더 안 Mac주소(Physical Addr, 제조사가 각 랜카드에 부여하는 번호)를 보고 전달. 
     * 네트워크(L3, Network): IP주소(logical Addr)가 헤더 안으로 들어가 라우팅 경로가 설정된다(`Source to Destination`), router
     * 전송(L4, Transport): port번호를 보고 전달(`Process to Process`)
@@ -138,17 +138,44 @@ category: Network
         - UDP는 TCP와 달리 데이터의 수신에 대한 책임을 지지 않는다.
 
 ## 부수적인 HTTP 공부
+* 참조[https://developer.mozilla.org/ko/docs/Web/HTTP/Overview](https://developer.mozilla.org/ko/docs/Web/HTTP/Overview)
 * HTTP가 뭘까?
-
-* HTTP 헤더에는 어떤 것들이 포함 될 수 있을까?
+    * HTTP(HyperText Transfer Protocol)의 줄임말이다. 클라이언트(사용자)와 서버단의 통신은 HTTP를 통해 request, response가 이루어진다. HTTP는 응용계층에서 사용되는 프로토콜이다.
+* HTTP 메세지에는 어떤 것들이 포함 될 수 있을까?
+    * 참조링크[https://developer.mozilla.org/ko/docs/Web/HTTP/Messages](https://developer.mozilla.org/ko/docs/Web/HTTP/Messages)
+    * HTTP/2 이전에는 모든 메세지는 ASCII로 인코딩 된 정보로 이루어져 있었습니다. HTTP/2 부터는 인간이 읽을 수 있는 메세지로 인코딩 된다고 합니다.
+        * 그럼 이게 왜 성능을 더 올리지?
+    * 헤더를 보면
+    ```
+    HTTP 메서드, URL(request target), HTTP버전
+    (req일 경우)
+    host : 호스트 주소
+    User-Agent: 요청을 보낸 곳의 브라우저 환경, OS같은거..
+    Accept: 받아들일 타입들을 한정 시킬 수 있다. Language, encoding등을 한정 시킬 수 있다.
+    (req일 경우)
+    (res일 경우)
+    Server: 서버이름
+    Set-Cookie: 쿠키설정
+    Access-Control-Allow-origin: 받아들일 곳
+    (res일 경우)
+    Connection: keep-alive
+    Content-Encoding: gzip
+    ...
+    ```
 
 * HTTP Method에 어떤것들이 있는지 설명해 볼 수 있을까?
+    * GET, POST, PUT, DELETE 그리고 멱등성(idempotence)?
+    * POST vs PUT, 그리고 PUT과 PATCH?
+        * [PUT과 PATCH, 참조](http://weblog.rubyonrails.org/2012/2/26/edge-rails-patch-is-the-new-primary-http-method-for-updates/)
+
+    * DELETE는 Body가 없다?
 
 * 세션이랑 쿠키랑 차이점이 뭘까?
-
 * 그럼 세션이랑 쿠키랑 어디에 쓰이는가?
-
-
+* 프록시는 뭘까?
+    * Application 계층에서 HTTP 메세지들과 여러 컴퓨터들을 릴레이 하는 곳을 프록시라고 합니다. 프록시를 통해 여러 요청을 수행할 수 있습니다. 
+        * 캐싱, 로드밸런싱, 보안인증 등등..
+* CDN은 뭐야?
 
 
 ## 마치며
