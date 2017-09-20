@@ -13,9 +13,11 @@ category: JS
 
 ## 시작하기
 1. `babel-cli`설치하기
+
 ```
 $ npm i --save-dev babel-cli
 ``` 
+
 2. 그리고 presets을 깔아준다. 밑에 등장하는 것들을 바벨을 사용하기 위한 기본 디폴트 preset이다.(라고하네요)[http://babeljs.io/docs/plugins/#presets](http://babeljs.io/docs/plugins/#presets). es2015버전을 사용하겠습니다.
 
 ```
@@ -39,8 +41,8 @@ console.log('Server running at http://127.0.0.1:1337/');
 4. 그리고 `package.json`에 들어가 script를 하나 추가해 보겠습니다.
 
 ```json
-  "scripts": {
-+   "start": "babel-node index.js --presets es2015,stage-2"
+  "scripts":{
++   "start":"babel-node index.js --presets es2015,stage-2"
   }
 ```
 
@@ -48,6 +50,7 @@ console.log('Server running at http://127.0.0.1:1337/');
 
 ## 더 나아가서
 1. 매번 노드 파일을 변경하게 되면 서버를 껐다 켜줘야 하는 불편함이 있는데 `nodemon`을 사용한다면 이 불편이 조금은 사라질 겁니다. 설치해보겠습니다.
+
 ```
 $ npm i --save-dev nodemon
 ```
@@ -55,9 +58,9 @@ $ npm i --save-dev nodemon
 2. 그리고 다시 `package.json`에 들어가 start에 해당하는 script를 수정해줍니다.
 
 ```json
- "scripts": {
--   "start": "babel-node index.js"
-+   "start": "nodemon index.js --exec babel-node --presets es2015,stage-2"
+ "scripts":{
+-   "start":"babel-node index.js"
++   "start":"nodemon index.js --exec babel-node --presets es2015,stage-2"
   }
 ```
 
