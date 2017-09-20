@@ -17,10 +17,13 @@ category: JS
 $ npm i --save-dev babel-cli
 ``` 
 2. 그리고 presets을 깔아준다. 밑에 등장하는 것들을 바벨을 사용하기 위한 기본 디폴트 preset이다.(라고하네요)[http://babeljs.io/docs/plugins/#presets](http://babeljs.io/docs/plugins/#presets). es2015버전을 사용하겠습니다.
+
 ```
 $ npm install --save-dev babel-preset-es2015 babel-preset-stage-2
 ```
+
 3. 그리고 서버 파일인 index.js를 만들어서 밑과 같은 내용의 코드를 입력해본다(테스트 코드입니다.)
+
 ```javascript
 import http from 'http'; 
 // babel 설정이 안되어 있다면 에러가 날 것입니다. 이전에는 const http = require('http'); 이런식으로 작성했을 거에요
@@ -32,12 +35,15 @@ http.createServer((req, res) => {
 
 console.log('Server running at http://127.0.0.1:1337/');
 ```
+
 4. 그리고 `package.json`에 들어가 script를 하나 추가해 보겠습니다.
+
 ```json
   "scripts": {
 +   "start": "babel-node index.js --presets es2015,stage-2"
   }
 ```
+
 5. 그리고 `$npm start`를 한다면 제대로 실행이 될 것입니다!
 
 ## 더 나아가서
@@ -47,12 +53,14 @@ $ npm i --save-dev nodemon
 ```
 
 2. 그리고 다시 `package.json`에 들어가 start에 해당하는 script를 수정해줍니다.
+
 ```json
  "scripts": {
 -   "start": "babel-node index.js"
 +   "start": "nodemon index.js --exec babel-node --presets es2015,stage-2"
   }
 ```
+
 3. 그리고 `$npm start`를 한다면 nodemon으로 실행이 되어 변화를 계속해서 감지할 것입니다.
 
 ## production 모드 에서는?
