@@ -1,0 +1,33 @@
+---
+
+layout: post
+title: "(CS) Data Structure 리뷰"
+category: CS
+
+---
+
+# Data Structure 리뷰
+## 시작하면서
+> 자료구조가 얼마나 중요한 지는 아무리 말해도 부족할 것이다. 지금 정리하는 과정에서 잊고있었던 부분들에 대해 생각을 꺼낼 수 있었으면 좋겠다.
+
+## (흠?)은 뭐지
+* 과연 여기까지 나올까 싶은 것들은 흠? 을 앞에 붙여봤다.. 물론 제 주관이니 아무 의미 없는 것이라고 말할 수 있다. 
+
+## 1장(Linked List)
+* Linked List
+    * 장점 : 메모리가 Flexible 하다. insertion 할 때 O(1)이다.
+    * 단점 : Search시 O(n)이다. index 접근이 안된다.
+
+## 2장(Analysis of Algorithm)
+* **Big-Oh Notation(Worst)**
+* big-omega(Best)
+* bit-theta(Avg)
+
+## 3장(Stack)
+* LIFO(Last In First Out)
+
+
+## 마치며
+더 중요하고 외워야 하는 많은 사항들이 있을 것같다. 또 시대가 지남에 따라 많이 변한 내용또한 있을 것 같다. 이러한 부분을 지적해주시면 좋을 것 같다.
+
+<br/><br/>

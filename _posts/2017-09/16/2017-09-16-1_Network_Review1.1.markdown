@@ -1,8 +1,8 @@
 ---
 
 layout: post
-title: "(Network) Network 리뷰"
-category: Network
+title: "(CS) Network 리뷰"
+category: CS
 
 ---
 

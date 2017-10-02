@@ -1,8 +1,8 @@
 ---
 
 layout: post
-title: "(OS) OS 리뷰"
-category: OS
+title: "(CS) OS 리뷰"
+category: CS
 
 ---
 
