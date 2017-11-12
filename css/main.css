@@ -713,7 +713,8 @@ pre code {
     white-space: pre;
 }
 
-pre.highlight,
+
+/* pre.highlight,
 .highlight>pre,
 td.code pre {
     background: #FAFAFA;
@@ -722,7 +723,7 @@ td.code pre {
     background-size: 3em 3em;
     background-position: 0px 10px;
     border-left: 7px solid #444;
-}
+} */
 
 code table,
 code table td,
