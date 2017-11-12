@@ -1,0 +1,172 @@
+---
+
+layout: post
+title: "(JS,C++) const를 대하는 나으의 자세"
+category: JS,C++
+
+---
+
+> const const 많이 들어봤을 것이다. 언제 쓸지 진지하게 생각해 본적이 없어서 한번 정리를 해보려고 한다. C++와 JS(ES6)를 베이스로 작성해보려고 한다. JS에서는 NHN javascript wiki 페이지를 많이 참조하게 되었다.(문제시 삭제하겠습니다.)
+
+## const의 의미
+말그대로 const는 constant의 약자이다. JS에서 primitive type(string, number, boolean, null, undefined)일 때는 상수의 의미로 사용된다. 상수가 일반적으로 의미하는것은 `재할당`이 없는 변수를 의미한다. 
+PS를 자주 하다보면 값이 지속해서 변하는 자료형을 많이 사용하게 되는데 실제 웹이든 프로그램이든 개발을 하다보면 내용이 변하지 않는 자료형에 값을 지정해서 사용하는 경우가 많다. 이럴때 const를 주로 사용하여 값을 할당한다. 간단한 예제를 살펴보자.
+
+## JavaScript에서의 const
+
+### JS에서의 const 선언하기
+1. 주로 const는 대문자로 선언하여 사용합니다. 
+2. 선언과 동시에 값을 할당해야 합니다. 그렇지 않으면 에러가 나게 됩니다.
+3. 객체 또한 const로 선언이 가능합니다. 재할당은 불가능하지만 키값을 기준으로 value를 변경하거나 추가할 수 있습니다.
+4. 배열 또한 const로 선언이 가능합니다. 객체처럼 재할당은 불가능하지만 push, pop또한 가능합니다.
+5. 함수 또한 선언은 가능하지만 재할당은 불가능합니다.
+```js
+/*1번 설명*/
+const READ_ONLY_VAL = 100;
+READ_ONLY_VAL = 200; // ERROR.
+
+/*2번 설명*/
+const NOT_DECLARATION_VAL; // ERROR.
+
+/*3번 설명*/
+const obj = {'key1':'val1'};
+obj = {'newkey':'newval'}; //ERROR.
+obj.key1 = 'val2';
+console.log(obj); // {'key1': 'val2'}
+obj.key2 = 'val3';
+console.log(obj); // {'key1': 'val2', 'key2':'val3'}
+
+/*4번 설명*/
+const arr = [1,2,3];
+arr.push(4);
+arr.push(5);
+arr.pop();
+console.log(arr); //[1,2,3,4]
+arr = [2,3,4]; // ERROR.
+
+/*5번 설명*/
+const func = () => {
+    console.log('const function');
+}
+func(); // const function 출력
+func = () => {
+    console.log('change function');
+} // ERROR.
+```
+
+위 예시들을 보면 공통적으로 알 수 있는 사실들이 있다.
+* 할당은 선언시에
+* READ-ONLY, 재할당은 절대 안된다.
+
+### 그럼 언제 JS에서 const를 사용하게 될까?
+1. 기존 자바스크립트를 해오던 분들은 `var`와 `const, let`의 차이점부터 언급할 수 있습니다. 자바스크립트의 아주 관대한(?) 특성 때문에 `function`범위로 선언 되던 var의 호이스팅 등을 고려하며 변수를 작성하던 것과 달리 const, let은 scope가 `block`영역으로 선언 되어 매우 바람직하고 직관적으로 코딩을 할 수 있게 도와줍니다. [nhn javascript](https://github.com/nhnent/fe.javascript/wiki/%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98) lint를 참조하게 되면 const와 let은 사용 전 선언하고 const를 먼저 묶어서 선언하는 것을 권장합니다.
+
+```js
+// Good 
+function foo() {
+  const len = this._array.length;
+  for (let i = 0; i < len; i += 1) {
+    ...
+  }
+
+  // 사용 시점에 선언 및 할당
+  const len2 = this._array2.length;
+  for (let j = 0; j < len2; j += 1) {
+    const item = this._array2[j];
+    ...
+  }
+}
+// Bad - 블록 스코프 밖에서 변수 선언
+function foo() {
+  const len = this._array.length;
+  let i = 0;
+  let j = 0;
+  let len2, item;
+
+  for (; i < len; i += 1) {
+    ...
+  }
+  
+  len2 = this._array2.length;
+  for (j = 0, len2 = this._array2.length; j < len2; j += 1) {
+    item = this._array2[j];
+    ...
+  }
+}
+```
+
+2. 또한 ES6에서 지원하는 객체에서 복수의 값에 접근하기 위해 Destructuring을 하게 될 때 const를 사용하는 것을 권장합니다.(참조형으로만 사용하기에)
+```js
+// Good
+function getFullName(obj) {
+  const {firstName, lastName} = obj;
+  return `${firstName} ${lastName}`;
+}
+
+// Best
+function getFullName({firstName, lastName}) {
+  return `${firstName} ${lastName}`;
+}
+
+// Bad
+function getFullName(user) {
+  const firstName = user.firstName;
+  const lastName = user.lastName;
+  return `${firstName} ${lastName}`;
+}
+```
+
+3. Complex type(Object, function, array)등은 const로 사용하는 것이 좋다고 합니다. 선언 후 push pop, object 값 할당이 가능하여 사용할 수 있고 같은 이름의 재할당의 문제를 막을 수 있기 때문입니다. 
+
+* React를 하다보면 state를 Immutable 하게 조작하게 되야 하는데 이때는 `spread 연산자`, 객체는 `assign`을 사용하면 된다. 복사해서 조작 후 재 할당을 해버리면 된다.
+```js
+const obj = {'key1': 'key2'};
+const arr = [1,2,3,4];
+
+const copyObj = Object.assign({},obj);
+const copyArr = [...arr];
+
+copyObj.key2 = 'val2';
+copyArr.push(5);
+
+console.log(obj); // {key1: "key2"}
+console.log(arr); // [1, 2, 3, 4]
+console.log(copyObj); // {key1: "key2", key2: "val2"}
+console.log(copyArr); //[1, 2, 3, 4, 5]
+```
+
+### Immutable 하게 객체를 관리하는 이유?
+리액트를 사용하지 않은 사람들은 왜 값들을 Immutable하게 사용하는지 의문이 들 수 있다. [https://blog.coderifleman.com/2015/08/16/react-and-immutable/, 예시를 그대로 가져왔습니다. 이후 문제가 될 경우 삭제하도록 하겠습니다.](https://blog.coderifleman.com/2015/08/16/react-and-immutable/) 이 블로그에서 간단하게 설명이 되어있듯 리액트에는 `shouldComponentUpdate`라는 Life cycle 메서드가 있습니다. 여기서 반환값이 true일 경우 virtual dom을 업데이트 하고 아닐 경우 업데이트를 하지 않아 이 값을 잘 조작한다면 페이지를 다시 그리는 것을 조절할 수 있게 됩니다.
+<br/>
+밑 코드는 Immutable하게 객체를 관리하지 않았을 경우 label이 변경 될 때 업데이트를 하도록 코드를 짠 것입니다.
+```js
+shouldComponentUpdate(nextProps, nextState) {
+  return (
+    nextState.label !== this.state.label
+  );
+}
+```
+이런식으로 코드가 작성된다 해도 업데이트는 이뤄지지 않을 것입니다. 모델 객체에서 관리하는 객체와 prop 속성으로 전달된 객체의 참조가 동일하기 때문에 항상 참이되므로 의도한 결과를 얻을 수 없는 것입니다.
+<br/>
+Immutable하게 객체를 새로 생성하고 state를 반영한다면 객체의 상태가 변경될때 새로운 객체가 생성되므로 참조가 달라집니다. 따라서 단순히 참조만 비교하는 것 만으로도 객체의 상태가 변경됐는지 판단할 수 있습니다.
+<br/>
+여기서 드는 의문은 매번 값을 복사해서 사용하면 메모리도 많이 들고 부하도 크지 않냐는 것인데 
+1. 물론 참조형으로 바라보는 것이 메모리는 적지만 일반적으로 참조하는 불변 객체들의 메모리를 고려할 정도로 많이 들지 않고
+2. 참조를 여러곳에서 하고 있을 경우 한곳에서 값이 변경될 때 발생할 수 있는 문제점들을 고려하는 비용이 더 많이 들 수 있기 때문에 Immutable하게 사용하는 것이 적절하다. 
+3. 또한 React에서 shouldComponentUpdate 메서드를 효과적으로 사용하려면...
+
+라는 것입니다. 간단하게 여기까지 JS에서 const를 어떻게 써볼지 정리해 보았습니다.
+
+----
+
+
+
+
+
+
+### 참조
+* lint참조, [https://github.com/nhnent/fe.javascript/wiki/%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98](https://github.com/nhnent/fe.javascript/wiki/%EC%BD%94%EB%94%A9-%EC%BB%A8%EB%B2%A4%EC%85%98)
+* assign, immutable 설명 참조, [http://blog.nekoromancer.kr/2016/01/26/es6-var-let-%EA%B7%B8%EB%A6%AC%EA%B3%A0-const/](http://blog.nekoromancer.kr/2016/01/26/es6-var-let-%EA%B7%B8%EB%A6%AC%EA%B3%A0-const/)
+* spread 연산자, [https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Spread_operator](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+* immutable하게 하는이유, [https://blog.coderifleman.com/2015/08/16/react-and-immutable/](https://blog.coderifleman.com/2015/08/16/react-and-immutable/)
+<br/><br/>
