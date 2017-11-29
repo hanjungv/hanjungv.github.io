@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(ETC) NAVER HACKDAY WINTER REVIEW"
+title: "(REVIEW) 네이버 캠퍼스 핵데이 리뷰"
 category: ETC
 ---
 
