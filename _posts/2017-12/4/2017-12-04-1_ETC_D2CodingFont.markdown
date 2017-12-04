@@ -36,7 +36,7 @@ category: ETC
 <img src="../../../post_img/201712/04/7.png" /><br/>
 2. Font를 D2Coding으로 바꿔요<br/>
 <img src="../../../post_img/201712/04/8.png" /><br/>
-3. 결과. 음...네!
+3. 결과. 음...네!<br/>
 <img src="../../../post_img/201712/04/9.png" /><br/>
 
 ### VSCode
