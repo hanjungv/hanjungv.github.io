@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(ETC) 준비중..[1/2]"
+title: "(ETC) 면접준비하기..[1/2]"
 category: ETC
 
 ---
