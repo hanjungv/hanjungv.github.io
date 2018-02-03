@@ -28,7 +28,7 @@ category: JS
 
 ## Arrow funciton의 장점은 무엇일까?
 1. 짧은 함수를 작성할 수 있게 됩니다. 밑 예제같은 콜백함수를 작성할 때 간결하겠네요.
-2. 
+
 ```js
 let a = ["a","b","c","d"];
 let b = a.map(function(s){return s.length});
