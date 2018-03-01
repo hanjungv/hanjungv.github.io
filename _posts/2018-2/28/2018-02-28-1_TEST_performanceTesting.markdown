@@ -211,21 +211,98 @@ baseline은
   3. 테스트 중 서버를 오프라인으로 하여 나머지 시스템의 기능, 성능을 테스트 해봅니다.
   4. 성능 테스트 중 백업 등 업데이트를 강제 실행 해 봅니다.
 
-
-
 ### Part 2 를 읽고 성능테스트시 어떤 작업들이 필요한지 정리하시오. (Word 2 page 분량)
+* Chapter 4
+성능 테스팅 핵심 활동 요약
+1. Identify the Test Environment
+  * 핵심 요소는 테스트 환경과 실제 프로덕션 환경간의 유사점, 차이점을 이해하는 것입니다.
+  * 하드웨어(구성), 회로망, 모니터링 도구, 로깅 등을 고려합니다.
+2. Identify Performance Acceptance Criteria
+  * 응답시간 / 처리량(Throughput) / 자원 활용(Resource utilization) 이 특성 클래스에 주로 포함됩니다.
+  * 요구사항, 계약상 의무, 사용자의 기대치 등이 포함됨
+3. Plan and Design Tests
+  * 현실적인 테스트 디자인
+    - 외부 시스템과 상호작용
+    - 이론, 예측이 아니기 때문에 신뢰성이 올라감
+    - 적절한 도구 산정
+4. Configure the Test Environment
+  * 로드 부하 고려
+  * 시스템 동기화 고려
+  * 리소스 사용률 체크
+5. Implement the Test Design
+  * 테스트 데이터가 제대로 구성되어있는지
+  * 트랜잭션의 유효성 검증
+  * 핵심 성과 지표 모니터링
+  * 사업 성과의 지표
+6. Execute the Test
+7. Analyze Results, Report and Retest
+  * 보고서 작성
+    * 기술보고서
+    * 이해관계자 보고서
+    * 직관적으로, 사실 그대로, 올바른 통계를, 바로바로 보고
+
+* Chapter 5
+반복적인 성능 테스트 활동
+1. Understand the Project Vision and Context.  
+  * 프로젝트의 전체적인 이해, 비전, 가치를 결정하는 시기
+  * 일정, 구조, 사용가능한 리소스 파악, 성능 테스트 어떻게 할 지
+  * 팀이 어떻게 의사소통 할 지
+2. Identify Reasons for Testing Performance.  
+  * 성능 테스트를 통해 완화 시킬수 있는 문제가 뭐가 있을까?
+  * 어떤 성능 문제가 이미 존재하는지?
+3. Identify the Value Performance Testing Adds to the Project. 
+  * 1, 2를 통해 얻은 결과로 성능 테스트 전략을 변화, 성립합니다.
+  * 현 시점에서 이런 성능 테스트가 도움이 되는지 등을 파악합니다.
+4. Configure the Test Environment.
+  * 전략을 실행하기 위한 도구, 자원들을 준비하는 단계입니다.
+  * 자원들이 어떤것들이 필요하고 누가 관리하는지 파악합니다.
+5. Identify and Coordinate Tasks. 
+  * 성과 목표가 무엇인지, 마지막 반복 이후 튜닝이 제대로 되었는지
+  * 재검사의 가치가 있는지
+  * 소요시간, 가능시간은 어떻게 되는지
+6. Execute Task(s).  
+  * 1 ~ 2일 단위로 작업을 수행합니다.
+  * 테스트가 예상한 데이터를 제공하는지
+  * 추가로 참여해야 되는 자원, 팀원은 어떤것이 있는지 판단합니다.
+  * 알고리즘의 효율성, 자원 사용 경향, 데이터 수집 등을 알게 됩니다.
+7. Analyze Results and Report.  
+  * 테스트가 예상한 결과를 제공하는지
+  * 그 데이터가 의미가 있는 데이터인지 
+  * 튜닝이 필요한지, 성능 목표를 달성했는지 판단합니다.
+8. Revisit Activities 1-3 and Consider Performance Acceptance Criteria.
+  * 프로젝트 비전의 성과에 영향을 미쳤는지 판단합니다.
+  * 우려되는 부분과 어떤 성능향상 활동이 있어야 하는지 판단합니다.
+9. Reprioritize Tasks. 
+  * 사이클의 성과 목표가 어떤것이 있는지 판단하고 우선순위를 재정의 한 뒤 5번 활동으로 돌아갑니다.
+
+<br/>
+<img src = "../../../post_img/201802/28/1.png"/><br/>
+* 챕터 4에서 나온 성능 테스팅 활동이 어떻게 매핑되는지 보여줍니다.
+
+* Chapter 6
+* Chapter 7
 
 ### Part 3 를 읽고 테스트 환경에 대해 정리하시오. (Word 1 page 분량)
+* Chapter 8
 
 ### Part 4 를 읽고 성능테스트의 목적에 대해 정리하시오. (Word 2 page 분량)
+* Chapter 9
+* Chapter 10
+* Chapter 11
 
 ### Part 5 를 읽고 테스트의 계획과 디자인에 대해 정리하시오.(Word 2 page 이상)
+* Chapter 12
+* Chapter 13
 
 ### Part 6 을 읽고 테스트 실행에 대해 정리하시오.(Word 2 page 이상)
+* Chpater 14
 
 ### Part 7 을 읽고 테스트 결과 분석에 대해 정리하시오.(Word 2 page 이상)
+* Chpater 15
+* Chpater 16
 
 ### Part 8 을 읽고 Load 테스트와 Stress 테스트의 차이를 정리하시오. (Word 1 page)
-
+* Chpater 17
+* Chpater 18
 
 <br/><br/>
