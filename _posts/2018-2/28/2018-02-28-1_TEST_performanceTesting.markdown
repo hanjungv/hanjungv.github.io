@@ -212,29 +212,36 @@ baseline은
   4. 성능 테스트 중 백업 등 업데이트를 강제 실행 해 봅니다.
 
 ### Part 2 를 읽고 성능테스트시 어떤 작업들이 필요한지 정리하시오. (Word 2 page 분량)
-* Chapter 4
-성능 테스팅 핵심 활동 요약
+* Chapter 4<br>
+성능 테스팅 핵심 활동 요약<br>
+
 1. Identify the Test Environment
   * 핵심 요소는 테스트 환경과 실제 프로덕션 환경간의 유사점, 차이점을 이해하는 것입니다.
   * 하드웨어(구성), 회로망, 모니터링 도구, 로깅 등을 고려합니다.
+
 2. Identify Performance Acceptance Criteria
   * 응답시간 / 처리량(Throughput) / 자원 활용(Resource utilization) 이 특성 클래스에 주로 포함됩니다.
   * 요구사항, 계약상 의무, 사용자의 기대치 등이 포함됨
+
 3. Plan and Design Tests
   * 현실적인 테스트 디자인
     - 외부 시스템과 상호작용
     - 이론, 예측이 아니기 때문에 신뢰성이 올라감
     - 적절한 도구 산정
+
 4. Configure the Test Environment
   * 로드 부하 고려
   * 시스템 동기화 고려
   * 리소스 사용률 체크
+
 5. Implement the Test Design
   * 테스트 데이터가 제대로 구성되어있는지
   * 트랜잭션의 유효성 검증
   * 핵심 성과 지표 모니터링
   * 사업 성과의 지표
+
 6. Execute the Test
+
 7. Analyze Results, Report and Retest
   * 보고서 작성
     * 기술보고서
@@ -288,8 +295,115 @@ baseline은
 <img src = "../../../post_img/201802/28/1.png"/><br/>
 * 챕터 4에서 나온 성능 테스팅 활동이 어떻게 매핑되는지 보여줍니다.
 
-* Chapter 6
-* Chapter 7
+* Chapter 6<br>
+Agile 성능 테스트 관리 방법입니다. 총 9 가지 활동을 사용하여 나타낼 수 있습니다.<br>
+
+
+<br/>
+<img src = "../../../post_img/201802/28/2.png"/><br/>
+* 챕터 4에서 나온 성능 테스팅 활동이 어떻게 매핑되는지 보여줍니다.
+
+1. Understand the Project Vision and Context
+  * 위와 같이 이 단계에서 시스템에 대한 최초의 이해 비전을 이해합니다.
+  * 고객의 기대, 예산, 직원 등을 이해합니다.
+  * 시스템, 프로젝트 환경, 일정 등 전반적인 것을 이 단계에서 이해합니다.
+
+2. Identify Reasons for Testing Performance
+  * 효율성, 알고리즘 판단
+  * 성공 기준을 세운다.
+
+3. Identify the Value Performance Testing Adds to the Project
+  * 1번, 2번 과정에서 얻은 정보를 기반으로 테스트 전략을 변경합니다.
+  * 성능테스트의 이유, 외부리소스 파악, 완료, 합격 - 불합격 기준을 세웁니다.
+
+4. Configure the Test Environment
+  * 테스트 환경구성
+
+5. Identify and Coordinate Tasks
+  * 1~2일 마다 성능 테스팅 작업마다 성능 테스트 실행 계획을 세워야함
+  * 작업을 어떻게 할지 , 어떤 데이터가 필요한지, 누가 도움을 주는지 등을 정합니다.
+
+6. Execute Task(s)
+  * 1~2일 단위로 작업을 수행합니다. 결과를 즉시 분석하고 그에 따라 계획을 수정합니다.
+  * 그리고 2일 이내로 성능 테스트 우선 순위를 재검토 합니다.
+  * 전반적인 내용을 팀원들과 이야기 하고 의사소통 합니다.
+
+7. Analyze Results and Report
+  * 결과를 분석하고 결정적이지 않은 경우 재시도를 해야합니다.
+
+8. Revisit Activities 1-3 and Consider Performance Acceptance Criteria
+  * 결과를 바탕으로 새로운 정보와 함께 전략을 수정합니다.
+
+9. Reprioritize Tasks
+  * 우선순위를 재정의 하고 5번 작업으로 다시 돌아가 수행합니다.
+  * 스크럼을 통해 업무를 공유합니다.
+
+
+* Chapter 7<br>
+CCMI 환경에서 성능 테스트 주기 관리하기<br>
+CCMI(Capability Manuarity Model Integration)은 유연한 프로세스 패러다임의 일종입니다.
+
+<br>
+#### CCMI 성능 테스팅 방법입니다.
+1. Understand the Process and Compliance Criteria.  
+  * 프로세스가 어떤식으로 진행되고 성능테스트가 어떻게 진행되는지 결정
+  * 규정 준수 기준 결정
+
+2. Understand the System and the Project Plan.  
+  * 프로젝트 세부사항을 이해
+  * 프로젝트 계획을 검토합니다.
+
+3. Identify Performance Acceptance Criteria.
+  * 성능 특성을 식별하는 단계입니다. 각각 특성을 검증하고 어떻게 기록할 지 파악합니다.
+  * 성능 테스트이 목적을 파악합니다.
+
+4. Plan Performance-Testing Activities.  
+  * 프로젝트 계획에 작업 항목 매핑
+  * 예상기간 파악
+  * 우선순위 지정
+  * 계획 상세정보 추가
+
+5. Design Tests. 
+  * 시나리오 식별(계약상 의무가 되는 사항, 일반적인 업무, 기술관련 등등..)
+  * 주요 시나리오의 경로를 파악
+  * 개별 사용자 데이터 및 분산 결정
+    * 기간별 페이지 뷰
+    * 사용자 세션
+    * 세션기간
+    * 상호작용 속도 등..
+  * 목표로드 식별
+
+6. Configure the Test Environment. 
+  * 테스트 환경 구성
+
+7. Implement the Test Design.  
+  * 디자인한 테스트 구현
+
+8. Execute Work Items.
+  * 작업 수행
+  * 결과를 기록하고 테스트 우선순위를 재검토 합니다.
+
+9. Report Results and Archive Data.
+  * 결과를 통합하고 분석합니다.
+  * 트랜드와 패턴을 알아내는데 시간이 많이 걸릴 수 있습니다.
+
+10. Modify the Plan and Gain Approval for Modifications.
+  * 성능 테스트 계획을 검토하고 예외 사례등을 파악합니다.
+
+11. Return to Activity 5.  
+  * 계획이 업데이트 되면 다시 테스트를 디자인하는 5단계로 넘어감
+
+12. Prepare the Final Report.
+  * 성능 테스트가 완료 된다면 보고서를 만듭니다.
+
+<br/>
+<img src = "../../../post_img/201802/28/4.png"/><br/>
+* CCMI 성능 테스팅 활동 Flow 입니다.<br/>
+
+<br/>
+<img src = "../../../post_img/201802/28/3.png"/><br/>
+* 챕터 4에서 나온 성능 테스팅 활동이 어떻게 매핑되는지 보여줍니다.
+
 
 ### Part 3 를 읽고 테스트 환경에 대해 정리하시오. (Word 1 page 분량)
 * Chapter 8
