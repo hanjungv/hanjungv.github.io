@@ -88,8 +88,30 @@ class MovieList{
 <br>
 DI Container에는 Spring Container(bean Factory), PicoContainer, Guice 등이 있다고 합니다.
 
-### CI(Contiguous Integration, 지속적인 통합)
+### CI(Continuous Integration, 지속적인 통합)
+CI란 개발자가 각각 개발한 소스코드들의 통합 빌드의 과정을 특정 시점이 아니라 주기적으로 수행함으로써 통합에서 발생하는 오류를 사전에 해결하고 시간을 줄이기 위한 기법을 말하게 됩니다.
 
+#### CI 적용을 위한 4가지 영역
+* 형상관리 항목에 대한 선정과 형상관리 구성 방식 결정
+단순히 형상관리 도구(SVN, Git 등등)을 사용한다고 CI의 전제 조건을 만족하는 것이 아닙니다.<br>
+단순히 소스코드, 설정파일 뿐 아니라 빌드, 배포시 포함되어야 하는 항목들도 존재 합니다.<br>
+그리고 이러한 것들이 어떠한 구조로 포함되어야 할 지도 결정해야 합니다.
+
+* 단위테스트 / 통합테스트 방식
+테스트는 SW제품의 품질을 균일하게 유지하려는 목적이 있습니다. 테스트를 통해 기능적인 문제를 제거하고 안정적인 소프트웨어 개발을 할 수 있을 것 입니다. 하지만 테스트가 많아질 수록 CI를 수행하는 시간이 길어질 것이고 배포시간이 길어지는 단점이 있을 수 있습니다.<br>
+
+* 비기능 속성(품질 속성) 관리 방식
+* 빌드/배포 자동화 방식
+
+#### CI 시스템 구축을 위한 핵심 구성요소
+* CI server
+  * Jenkins, Travis CI 등
+* SCM(Source Code Management)
+  * Git, SVN 등
+* Built Tool
+  * Maven, Gradle, Ant 등
+* Test Tool
+  * Junit, Mocha
 
 ### AOP
 
@@ -99,7 +121,7 @@ DI Container에는 Spring Container(bean Factory), PicoContainer, Guice 등이 �
 ### 참조
 * [http://vandbt.tistory.com/43](http://vandbt.tistory.com/43)
 * [http://www.nextree.co.kr/p11247/](http://www.nextree.co.kr/p11247/)
-
-
+* [http://www.nextree.co.kr/p10799/](http://www.nextree.co.kr/p10799/)
+* [http://asfirstalways.tistory.com/303](http://asfirstalways.tistory.com/303)
 
 <br/><br/>
