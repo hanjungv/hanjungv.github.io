@@ -10,7 +10,7 @@ category: SPRING
 
 ### IoC(Inversion of Control, 제어의 역전)/DI(Dependency Injection, 의존성 주입)
 
-1. IoC(Inversion of Control)이란?
+1. IoC(Inversion of Control)이란?<br>
 제어의 역전이란 프레임워크에 제어의 권한을 넘김으로써 클라이언트 코드가 신경써야할 일을 줄이는 전략입니다.
 잘 와닿지 않아 좀 더 검색을 해보니 더 잘 설명해주는 말이 있었습니다.
 
@@ -39,6 +39,7 @@ public class Foo{
 
 * IoC/DI가 적용된 경우
 <br>
+
 ```xml
 <beans>  
     <bean id="bar" class="kr.co.nextree.SubBar">
@@ -47,7 +48,9 @@ public class Foo{
     </bean>
 </beans>  
 ```
+
 <br>
+
 ```java
 public class Foo {  
     private Bar bar;
@@ -57,6 +60,7 @@ public class Foo {
     }
 }
 ```
+
 <br>
 이렇게 작성할 경우 결합도(Coupling)는 낮추면서 유연성, 확장성을 증가 시킬 수 있습니다.
 <br>
@@ -71,6 +75,7 @@ class MovieList{
 ```
 
 * `setter()`메서드를 이용한다(Setter injection)<br>
+
 ```java
 class MovieList{
   private MovieFind find;
