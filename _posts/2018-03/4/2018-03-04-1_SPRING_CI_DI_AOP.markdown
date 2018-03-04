@@ -49,8 +49,6 @@ public class Foo{
 </beans>  
 ```
 
-<br>
-
 ```java
 public class Foo {  
     private Bar bar;
@@ -65,7 +63,8 @@ public class Foo {
 이렇게 작성할 경우 결합도(Coupling)는 낮추면서 유연성, 확장성을 증가 시킬 수 있습니다.
 <br>
 3. DI의 세가지 유형
-* `생성자`를 이용한 의존성 삽입(Constructor Injection)<br>
+
+3-1. `생성자`를 이용한 의존성 삽입(Constructor Injection)<br>
 ```java
 class MovieList{
   public MovieList(MovieFind find){
@@ -74,8 +73,7 @@ class MovieList{
 }
 ```
 
-* `setter()`메서드를 이용한다(Setter injection)<br>
-
+3-2. `setter()`메서드를 이용한다(Setter injection)<br>
 ```java
 class MovieList{
   private MovieFind find;
@@ -85,7 +83,7 @@ class MovieList{
 }
 ```
 
-* 초기화 인터페이스를 통한 의존성 삽입(Interface Injection)<br>
+3-3. 초기화 인터페이스를 통한 의존성 삽입(Interface Injection)<br>
 이 방법은 스프링이 지원하지 않는 DI방식이라고 하여 넘어가도록 하겠습니다. 궁금하신 분은 참조 두번째 블로그에서 확인해보시면 될 것 같습니다.
 <br>
 DI Container에는 Spring Container(bean Factory), PicoContainer, Guice 등이 있다고 합니다.
