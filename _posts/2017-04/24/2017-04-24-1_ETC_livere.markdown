@@ -40,11 +40,11 @@ category: etc
 7. /_layouts/post.html 에 가서 이 부분에 코드를 복사 붙여넣기 한다. 그러면 끝!
 
 ```
- if page.comments
-  <!-- 라이브리 시티 설치 코드 -->
+if page.comments
+<!-- 라이브리 시티 설치 코드 -->
 
-  <!-- 시티 설치 코드 끝 -->
- endif
+<!-- 시티 설치 코드 끝 -->
+endif
 ```
 
 #### 결과물
@@ -54,6 +54,6 @@ category: etc
 <img src = '/post_img/201704/24/res1.png' width = "600"/>
 
 ### 후기
-* 써봐야 알 것 같다.
+* 2018.03 다시 디스커스로 돌아갑니다..
 
 <br/><br/>

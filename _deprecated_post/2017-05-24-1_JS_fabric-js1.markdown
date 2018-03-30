@@ -14,7 +14,4 @@ category: JS
 * 이것저것 많은데 나는 /dist/fabric.min.js 만을 복사해서 써보겠다.
 * 유튜브에 튜토리얼 강의로 좋은 것이 있어서 한번 받아와 봄(https://www.youtube.com/playlist?list=PLbu98QxRH81LlbbwYHMqOFjHwY3D48tEC)
 
-.. 잘 끝났음, 이후 업데이트 필요
-
-
 <br/><br/>

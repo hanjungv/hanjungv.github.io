@@ -1,7 +1,7 @@
 ---
 
 layout: post
-title: "(ETC) 협업툴 두레이(Dooray)를 아시나용?"
+title: "(ETC) 협업툴 두레이(Dooray)를 아시나요?"
 category: ETC 
 
 ---

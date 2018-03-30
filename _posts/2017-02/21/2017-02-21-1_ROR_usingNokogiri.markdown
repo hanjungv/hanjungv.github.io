@@ -33,9 +33,9 @@ $ rails g model result title:string content:text
 class CreateResults < ActiveRecord::Migration
     def change
         create_table :results do |t|
-          t.string :title
-          t.text :content
-          t.timestamps null: false
+            t.string :title
+            t.text :content
+            t.timestamps null: false
         end
     end
 end
@@ -76,6 +76,7 @@ class HomeController < ApplicationController
     end
 end
 ~~~
+
 #### View
 
 ~~~html
@@ -102,7 +103,9 @@ end
 
 
 #### 결과화면
+
 <img src = '/post_img/201702/21/3.png' width='700'/><br/>
+
 * 해당 문서를 잘 파악하고 뽑아낼 위치만 잘 찾아된다면 어렵지 않게 크롤링 할 수 있습니다.
 * 그나저나 Nokogiri는 정말 쉽게 크롤링 할 수 있게 도와주는군요..
 

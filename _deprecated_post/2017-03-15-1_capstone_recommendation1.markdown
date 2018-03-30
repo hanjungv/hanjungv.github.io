@@ -112,13 +112,7 @@ category: CAPSTONE
         3. 만약 Cluster와 Cluster matrix에 빈칸이 아니라면 -> 이 value로 원래 matrix값 예측
         4. 만약 Cluster와 Cluster matrix에 빈칸이라면 -> 비슷한 Cluster를 찾아 채움. 이전과 같다.
 
-#### 9.3.4 Exercises for Section 9.3
-문제풀이는 다음에
-
 ### 9.4 Dimensionality Reduction
-
-
-
 ## Content-based는 추후에(캡스톤과 직접적 관련이 없다 생각하여 잠시 생략)
 ### 9.2 Content-based Recommendations
 #### 9.2.1 Item Profiles

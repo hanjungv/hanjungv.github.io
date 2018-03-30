@@ -25,7 +25,7 @@ category: JS
 * value는 string, 숫자, boolean값, object, array가 올수 있다.
 * string은 ”“안의 문자열이다.
 
-####출처
+#### 출처
 * http://blog.naver.com/musecje?Redirect=Log&logNo=10126963299
 * https://ko.wikipedia.org/wiki/JSON
 * http://json.org/json-ko.html

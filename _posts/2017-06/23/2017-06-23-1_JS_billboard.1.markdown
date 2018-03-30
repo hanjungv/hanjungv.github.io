@@ -81,8 +81,8 @@ let chart = bb.generate({
     bindto: "#chart",
     data: {
         types: {
-          data1: "bar",
-          data2: "spline"
+            data1: "bar",
+            data2: "spline"
         },
         columns: [
             ["data1", 30, 200, 100, 170, 150, 250],
@@ -98,6 +98,16 @@ let chart = bb.generate({
     * 이전에 써봤던 방식은 chartJS를 사용했었다.  [http://www.chartjs.org/](http://www.chartjs.org/)
     * 그래프가 이쁘게 그려지는 건 chartJS 같은데 커스터마이징은 개인이 각자 하는 것이니 D3같은 많은 사람들이 사용하고 여러가지 형태를 가지고 있는 것을 연습하는 것이 좋을 것 같다.
 * 이후 사이트에 그래프를 넣어야 하는 날이 올 수 있으니 여러가지 선택지를 많이 가지고 있는게 좋을 것 같다.
+
+
+## 추가된 내용(2018.03.30)
+* [TUI Chart, https://github.com/nhnent/tui.chart](https://github.com/nhnent/tui.chart) 사이트이다.
+    * NHN Entertainment FE개발랩에서 내놓은 기가 막힌 컴퍼넌트이다. 사실 이전부터 있었다.
+    * **현재 깃헙 스타가 곧 있으면 3000개를 넘고 billboard.js를 앞질렀다!**
+    * 한번 이용해 보는 것을 추천한다. 피드백도 매우 빠르고 크로스 브라우징 또한 뛰어나다.(IE8 이상을 지원한다. 세상에.)
+    * 밑은 tui차트 스크린샷이다.
+<br>
+<img src="../../../post_img/201706/23/9.png"/><br>
 
 
 <br/><br/>
