@@ -20,6 +20,7 @@ title: About me
 
 
 [Github](https://github.com/hanjungv)
-[포폴](http://slides.com/junghan/portfolio/)
-[미디엄](https://medium.com/@junghan_61455)
-[슬라이드](https://slides.com/junghan)
+[회사_Github](https://github.com/junghanNHN)
+~~[포폴](http://slides.com/junghan/portfolio/)~~
+~~[미디엄](https://medium.com/@junghan_61455)~~
+~~[슬라이드](https://slides.com/junghan)~~
