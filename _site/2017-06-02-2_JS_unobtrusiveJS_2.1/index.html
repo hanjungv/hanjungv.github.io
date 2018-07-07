@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="/post_img/201704/24/faviconcon.png">
+  <title>(JS) 겸손한 자바스크립트의 원리를 읽고</title>
+
+  <meta name="author" content="hanjung" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="HANDEVBLOG - Dev_blog_by_hanjung" href="/feed.xml" />
+
+  
+
+  
+    
+      
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+      <link rel="stylesheet" href="/css/timeline.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+
+  
+
+  
+
+    <!-- Facebook OpenGraph tags -->
+  
+
+  
+  <meta property="og:title" content="(JS) 겸손한 자바스크립트의 원리를 읽고" />
+  
+
+   
+  <meta property="og:description" content="http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/ ### 개요 ‘겸손한 자바스크립트의 원리’,http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/를 읽으면서 나의 허접스럽고 더러웠던 코드와 짧았던 생각을 반성해보려한다. 내용을 읽으면서 들었던 생각, 필요한 내용 여기서 가장 먼저 고려하는 점은 불확실성이다. 일부 브라우저는 스크립트를 지원하지 않거나 너무 오래되어 스크립트를 무시 할 수 있다. 스크립트를 지원한다 하더라도 사용자가 스크립트를 꺼두었거나 스크립트 태그를 없애고 있다면 어떻게 할...">
+  
+
+
+  <meta property="og:type" content="website" />
+
+  
+  <meta property="og:url" content="http://localhost:4000/2017-06-02-2_JS_unobtrusiveJS_2.1/" />
+  <link rel="canonical" href="http://localhost:4000/2017-06-02-2_JS_unobtrusiveJS_2.1/" />
+  
+
+  
+  <meta property="og:image" content="http://localhost:4000/img/profile.JPG" />
+  
+
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@yourname" />
+  <meta name="twitter:creator" content="@yourname" />
+
+  
+  <meta name="twitter:title" content="(JS) 겸손한 자바스크립트의 원리를 읽고" />
+  
+
+  
+  <meta name="twitter:description" content="http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/ ### 개요 ‘겸손한 자바스크립트의 원리’,http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/를 읽으면서 나의 허접스럽고 더러웠던 코드와 짧았던 생각을 반성해보려한다. 내용을 읽으면서 들었던 생각, 필요한 내용 여기서 가장 먼저 고려하는 점은 불확실성이다. 일부 브라우저는 스크립트를 지원하지 않거나 너무 오래되어 스크립트를 무시 할 수 있다. 스크립트를 지원한다 하더라도 사용자가 스크립트를 꺼두었거나 스크립트 태그를 없애고 있다면 어떻게 할...">
+  
+
+  
+  <meta name="twitter:image" content="http://localhost:4000/img/profile.JPG" />
+  
+
+</head>
+
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom" style = 'background-color:white; border:none;'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+        <a class="navbar-brand" href="http://localhost:4000">HANDEVBLOG</a>
+      
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/techblog">이웃 블로그</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+    <!--
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://localhost:4000 ">
+	      <img class="avatar-img" src="/img/profile.JPG" />
+		</a>
+	  </div>
+	</div>
+	
+    -->
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+<header class="header-section " style = 'background-color:white; border:none;'>
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>(JS) 겸손한 자바스크립트의 원리를 읽고</h1>
+          
+            <h2 class="post-subheading"></h2>
+          
+		      
+		        <span class="post-meta">Posted on June 2, 2017</span>
+          
+
+          <!-- STEPS -->
+          <section id="Steps" class="steps-section">
+            <div class="steps-timeline">
+              <div class="steps-one">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Transfer to Inha.Univ
+                </h3>
+                <p class="steps-description">
+                  2013.02
+                </p>
+              </div>
+              <div class="steps-two">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Network lab Intern.
+                </h3>
+                <p class="steps-description">
+                  2016.01 ~ 2016.07
+                </p>
+              </div>
+
+              <div class="steps-three">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Getcha FE development
+                </h3>
+                <p class="steps-description">
+                  2016.09 ~ 2017.02
+                </p>
+              </div>
+              <div class="steps-four">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  TMON FE Intern.
+                </h3>
+                <p class="steps-description">
+                  2017.06 ~ 2017.08
+                </p>
+              </div>
+              <div class="steps-five">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  NHN Ent.<br/> FE Dev Lab
+                </h3>
+                <p class="steps-description">
+                  2018.01
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <p>http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/
+### 개요
+<a href="http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/">‘겸손한 자바스크립트의 원리’,http://www.clearboth.org/43_the_principles_of_unobtrusive_javascript/</a>를 읽으면서 나의 허접스럽고 더러웠던 코드와 짧았던 생각을 반성해보려한다.</p>
+
+<h3 id="section">내용을 읽으면서 들었던 생각, 필요한 내용</h3>
+<ol>
+  <li>여기서 가장 먼저 고려하는 점은 불확실성이다.
+    <ul>
+      <li>일부 브라우저는 스크립트를 지원하지 않거나 너무 오래되어 스크립트를 무시 할 수 있다.</li>
+      <li>스크립트를 지원한다 하더라도 사용자가 스크립트를 꺼두었거나 스크립트 태그를 없애고 있다면 어떻게 할 것인가</li>
+      <li>스크립트가 해석이 된다하더라도 굉장히 복잡한 HTML에 기반해 있으며 HTML은 (스크립트 제작자가) 예측하지 못한 방법으로 바뀔 수 있다.</li>
+      <li>마우스로 페이지를 브라우징 할 지 키보드로 할 지 당신은 모른다(장애를 가진 사람들 중 상당수는 마우스를 사용할 수 없으며, 어떤 사람들은 키보드를 더 선호한다)</li>
+      <li>잘 작동한다 하더라도 다른 프로그래머들이 그 코드를 이해 못할 수도 있다.</li>
+    </ul>
+  </li>
+  <li>
+    <p>“겸손한, unobtrusive” 자바스크립트는 사이트를 방문한 사람들이 위에 열거한 이유 때문에 발을 돌리게 되는 상황을 막을 수 있게끔 프로그래밍하는 것이다.</p>
+  </li>
+  <li>그럼 어떻게 겸손한 자바스크립트를 구현할 것인가?
+    <ol>
+      <li>구조와 행동의 분리 : CSS는 CSS파일에, HTML코드는 HTML파일에, script는 js파일에 넣자
+        <ul>
+          <li>인라인 이벤트 핸들러 같은 것들이 큰 문제인데(현재는 많이 쓰지 않지만) 이러한 방식을 고려한다면 유용성과 유지보수성을 향상시킨다.</li>
+        </ul>
+
+        <p>```
+ &lt;a href=“somewhere.html” onmouseover=“hideAll()”&gt; 
+ //이런 코드를 이런식으로 하게 되면 온전한 분리가 된다.
+ <a href="somewhere.html" id="somewhereLink"></a></p>
+
+        <p>var x = document.getElementById(‘somewhereLink’);
+ if (x) {
+ x.onmouseover = hideAll;
+ }
+ ```</p>
+
+        <ul>
+          <li>여기서 마우스오버와 focus이벤트를 섞어서 키보드와 마우스 모두에게 작동하게 할 수 있다</li>
+        </ul>
+
+        <p><code class="highlighter-rouge">javascript
+ if (x) {
+   x.onmouseover = x.onfocus = hideAll;
+ }
+</code></p>
+      </li>
+      <li>사용성 레이어 추가하기
+        <ul>
+          <li>여기서 보는 자바스크립트의 목적은 사이트에 사용성을 배려하는 도구 하나를 추가하는 것이다. 추가 라는 것은 스크립트가 없을 때 사용할 수 없다면 그 코드는 겸손하지 않은 코드인 것이다.</li>
+          <li>예제를 들어보면 회원가입 같은 입력양식의 validation체크를 들 수 있다. 여기서 validation을 체크할 때 매번 서버에서 체크를 한다면 시간은 매우 지연될 것이다. 하지만 자바스크립트에서 미리 체크를 해준다면 서버에서 확인하는 시간을 줄일 수 있을 것이다! 자바스크립트를 사용하기에 <strong>편의</strong>를 제공하는 것이다.
+            <ul>
+              <li>이 에제에서는 3가지 중요한 원칙을 나타내준다.
+                <ol>
+                  <li>사이트는 JS없이 작동할 수 있어야한다.</li>
+                  <li>JS를 사용한다면 사용자들에게 추가적인 사용성을 선사할 수 있다.</li>
+                  <li>JS는 안전하지 않다. 자바스크립트만으로 validation을 체크한다면 스크립트를 끄는 것 만으로 방어벽을 우회할 수 있게 된다.</li>
+                </ol>
+              </li>
+            </ul>
+          </li>
+          <li>다른 예시로 Ajax웹을 개발한다고 쳐보자. 이러한 개발을 할 때 계층적으로 생각하자. 이러한 기능은 스크립트의 여부에 관계없이 작동해야한다. 만약 사이트가
+            <ol>
+              <li>검색을 해 검색조건에 맞는 내용을 가져오고</li>
+              <li>이 목록을 타입에 맞춰 소팅해주는 기능을 만들어야 한다면</li>
+            </ol>
+          </li>
+          <li>이러한 기능을 하는 페이지를 먼저 만든다. 이렇게 되면 스크립트가 없어도 페이지를 만들어 낼 수 있는 가장 기본적인 계층을 만드는 것이다.</li>
+          <li>이것을 한 후에 Ajax를 얹어 작동을 할 수 있게 할 수 있게 된다.</li>
+        </ul>
+      </li>
+      <li>의미있는 HTML 만들기
+        <ul>
+          <li>class이름 , h tag등 페이지를 마크업 할 때 그 본연에 의미를 맞춰 마크업한다면 스크립트를 쉽게 작성할 수 있을 것이다.</li>
+        </ul>
+      </li>
+      <li>브라우저 호환성
+        <ul>
+          <li>IE를 받아들이고 이해하자<br />
+ <img src="/post_img/201706/02/no.jpeg" /><br /></li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p><br /><br /></p>
+
+      </article>
+
+      
+
+      
+        <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+
+  <!--- Share on Twitter -->
+  
+    <a href="https://twitter.com/intent/tweet?text=%28JS%29+%EA%B2%B8%EC%86%90%ED%95%9C+%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EC%9D%98+%EC%9B%90%EB%A6%AC%EB%A5%BC+%EC%9D%BD%EA%B3%A0+http://localhost:4000/2017-06-02-2_JS_unobtrusiveJS_2.1/"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+    </a>
+  
+
+  <!--- Share on Facebook -->
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2017-06-02-2_JS_unobtrusiveJS_2.1/"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+    </a>
+  
+
+  <!--- Share on Google Plus -->
+  
+
+  <!--- Share on LinkedIn -->
+  
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/2017-06-02-2_JS_unobtrusiveJS_2.1/"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+    </a>
+  
+
+</section>
+
+
+
+      
+
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/2017-06-02-1_ETC_gitignore_1.1/" data-toggle="tooltip" data-placement="top" title="(ETC) gitignore.io">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/2017-06-23-1_JS_billboard.1/" data-toggle="tooltip" data-placement="top" title="(JS) Billboard.js 사용해보기">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'hanjungv';
+	    /* ensure that pages with query string get the same discussion */
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+    <footer style = 'background-color:white; border:none;'>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100005573837145" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/hanjungv" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+	  
+      
+		  
+		  
+		  
+		  
+      
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  hanjung
+		  &nbsp;&bull;&nbsp;
+		  2018
+
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://localhost:4000">Home</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91279503-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+<script>
+  window.channelPluginSettings = {
+    "plugin_id": "981c417d-6b26-42d6-a2d4-459980c16cfe"
+  };
+  (function() {
+    var node = document.createElement('div');
+    node.id = 'ch-plugin';
+    document.body.appendChild(node);
+    var async_load = function() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = '//cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    };
+    if (window.attachEvent) {
+      window.attachEvent('onload', async_load);
+    } else {
+      window.addEventListener('load', async_load, false);
+    }
+  })();
+</script>
+
+
+
+  </body>
+</html>

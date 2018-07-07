@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <!-- Beautiful Jekyll | MIT license | Copyright Dean Attali 2016 -->
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <link rel="icon" type="image/png" href="/post_img/201704/24/faviconcon.png">
+  <title>(ETC) gitignore.io</title>
+
+  <meta name="author" content="hanjung" />
+
+  
+
+  <link rel="alternate" type="application/rss+xml" title="HANDEVBLOG - Dev_blog_by_hanjung" href="/feed.xml" />
+
+  
+
+  
+    
+      
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css" />
+
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+      <link rel="stylesheet" href="/css/bootstrap-social.css" />
+    
+      <link rel="stylesheet" href="/css/main.css" />
+    
+      <link rel="stylesheet" href="/css/timeline.css" />
+    
+  
+
+  
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+    
+      <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+    
+  
+
+  
+
+  
+
+  
+
+    <!-- Facebook OpenGraph tags -->
+  
+
+  
+  <meta property="og:title" content="(ETC) gitignore.io" />
+  
+
+   
+  <meta property="og:description" content="개요 김태곤님의 블로그 글 중 신입 프론트엔드 개발자를 위한 면접 조언을 보다보면 그런 말이 나온다. &amp;gt; .gitignore 파일에 .idea 폴더나 npm-debug.log 같은 불필요한 파일은 포함되지 않게 설정해두자. 코딩 능력과 상관없는 거지만 기본적인 사용법을 모르는 것처럼 보일 수 있다. 사실 핑계일지 모르지만 .gitignore을 개인 프로젝트 할 떄 신경을 덜 썼던건 사실이다..idea같은...">
+  
+
+
+  <meta property="og:type" content="website" />
+
+  
+  <meta property="og:url" content="http://localhost:4000/2017-06-02-1_ETC_gitignore_1.1/" />
+  <link rel="canonical" href="http://localhost:4000/2017-06-02-1_ETC_gitignore_1.1/" />
+  
+
+  
+  <meta property="og:image" content="http://localhost:4000/img/profile.JPG" />
+  
+
+
+  <!-- Twitter summary cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@yourname" />
+  <meta name="twitter:creator" content="@yourname" />
+
+  
+  <meta name="twitter:title" content="(ETC) gitignore.io" />
+  
+
+  
+  <meta name="twitter:description" content="개요 김태곤님의 블로그 글 중 신입 프론트엔드 개발자를 위한 면접 조언을 보다보면 그런 말이 나온다. &amp;gt; .gitignore 파일에 .idea 폴더나 npm-debug.log 같은 불필요한 파일은 포함되지 않게 설정해두자. 코딩 능력과 상관없는 거지만 기본적인 사용법을 모르는 것처럼 보일 수 있다. 사실 핑계일지 모르지만 .gitignore을 개인 프로젝트 할 떄 신경을 덜 썼던건 사실이다..idea같은...">
+  
+
+  
+  <meta name="twitter:image" content="http://localhost:4000/img/profile.JPG" />
+  
+
+</head>
+
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom" style = 'background-color:white; border:none;'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+        <a class="navbar-brand" href="http://localhost:4000">HANDEVBLOG</a>
+      
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/aboutme">About Me</a>
+
+          </li>
+        
+        
+        
+          <li>
+            
+            
+
+
+
+
+
+<a href="/techblog">이웃 블로그</a>
+
+          </li>
+        
+        
+      </ul>
+    </div>
+    <!--
+	
+	<div class="avatar-container">
+	  <div class="avatar-img-border">
+	    <a href="http://localhost:4000 ">
+	      <img class="avatar-img" src="/img/profile.JPG" />
+		</a>
+	  </div>
+	</div>
+	
+    -->
+  </div>
+</nav>
+
+
+    <!-- TODO this file has become a mess, refactor it -->
+
+
+
+<header class="header-section " style = 'background-color:white; border:none;'>
+<div class="intro-header no-img">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1>(ETC) gitignore.io</h1>
+          
+            <h2 class="post-subheading"></h2>
+          
+		      
+		        <span class="post-meta">Posted on June 2, 2017</span>
+          
+
+          <!-- STEPS -->
+          <section id="Steps" class="steps-section">
+            <div class="steps-timeline">
+              <div class="steps-one">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Transfer to Inha.Univ
+                </h3>
+                <p class="steps-description">
+                  2013.02
+                </p>
+              </div>
+              <div class="steps-two">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Network lab Intern.
+                </h3>
+                <p class="steps-description">
+                  2016.01 ~ 2016.07
+                </p>
+              </div>
+
+              <div class="steps-three">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  Getcha FE development
+                </h3>
+                <p class="steps-description">
+                  2016.09 ~ 2017.02
+                </p>
+              </div>
+              <div class="steps-four">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  TMON FE Intern.
+                </h3>
+                <p class="steps-description">
+                  2017.06 ~ 2017.08
+                </p>
+              </div>
+              <div class="steps-five">
+                <img class="steps-img" alt="" />
+                <h3 class="steps-name">
+                  NHN Ent.<br/> FE Dev Lab
+                </h3>
+                <p class="steps-description">
+                  2018.01
+                </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+      <article role="main" class="blog-post">
+        <h3 id="section">개요</h3>
+<p><a href="https://taegon.kim/archives/5770">김태곤님의 블로그 글 중 신입 프론트엔드 개발자를 위한 면접 조언</a>을 보다보면 그런 말이 나온다.
+&gt; .gitignore 파일에 .idea 폴더나 npm-debug.log 같은 불필요한 파일은 포함되지 않게 설정해두자. 코딩 능력과 상관없는 거지만 기본적인 사용법을 모르는 것처럼 보일 수 있다.</p>
+
+<p>사실 핑계일지 모르지만 .gitignore을 개인 프로젝트 할 떄 신경을 덜 썼던건 사실이다..idea같은 폴더는 인텔리제이나 파이참 등에서 IDE를 쓸 때 환경 설정등이 들어가는 폴더라고 하는데 굳이 깃에는 올라갈 필요가 없는 폴더이기도 하다.</p>
+
+<h3 id="section-1">그럼?</h3>
+<p>그럼 어떤 파일은 gitignore를 하고 어떤 파일은 ignore할까? 이런 결정은 주로 내가 직접적으로 결정하는 파일이 아니면 대부분 동일한 것 같다.(이런 사이트가 있는 것을 보니)
+<br /></p>
+
+<p><a href="https://www.gitignore.io/">이런 사이트가 있다,https://www.gitignore.io/</a>. 우선 이 사이트는 원두님이 추천해 준 사이트이다. 이곳에는 사용하는 IDE, OS, Language를 입력하면 gitignore을 입력해준다. 지금 사용하고 있는 OS가 맥이고 python코딩을 pycharm에서 하고 있다고 가정하면!<br /><img src="/post_img/201706/02/1.png" /></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># Created by https://www.gitignore.io/api/macos,python,pycharm
+
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### PyCharm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/dictionaries
+
+# Sensitive or high-churn files:
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+
+# Gradle:
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# CMake
+cmake-build-debug/
+
+# Mongo Explorer plugin:
+.idea/**/mongoSettings.xml
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+### PyCharm Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+.idea/sonarlint
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*,cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# End of https://www.gitignore.io/api/macos,python,pycharm
+</code></pre>
+</div>
+<p>이런 긴 ignore코드가 탄생한다. 이걸 .gitignore에 넣고 push!를 해주면 될 것 같다~</p>
+
+<p><br /><br /></p>
+
+      </article>
+
+      
+
+      
+        <!-- Check if any share-links are active -->
+
+
+
+
+<section id = "social-share-section">
+
+  <!--- Share on Twitter -->
+  
+    <a href="https://twitter.com/intent/tweet?text=%28ETC%29+gitignore.io+http://localhost:4000/2017-06-02-1_ETC_gitignore_1.1/"
+      class="btn btn-social-icon btn-twitter" title="Share on Twitter">
+      <span class="fa fa-fw fa-twitter" aria-hidden="true"></span>
+    </a>
+  
+
+  <!--- Share on Facebook -->
+  
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/2017-06-02-1_ETC_gitignore_1.1/"
+      class="btn btn-social-icon btn-facebook" title="Share on Facebook">
+      <span class="fa fa-fw fa-facebook" aria-hidden="true"></span>
+    </a>
+  
+
+  <!--- Share on Google Plus -->
+  
+
+  <!--- Share on LinkedIn -->
+  
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/2017-06-02-1_ETC_gitignore_1.1/"
+      class="btn btn-social-icon btn-linkedin" title="Share on LinkedIn">
+      <span class="fa fa-fw fa-linkedin" aria-hidden="true"></span>
+    </a>
+  
+
+</section>
+
+
+
+      
+
+      <ul class="pager blog-pager">
+        
+        <li class="previous">
+          <a href="/2017-05-18-2_ETC_Channelio2/" data-toggle="tooltip" data-placement="top" title="지킬에 channel.io 달기[2/2]">&larr; Previous Post</a>
+        </li>
+        
+        
+        <li class="next">
+          <a href="/2017-06-02-2_JS_unobtrusiveJS_2.1/" data-toggle="tooltip" data-placement="top" title="(JS) 겸손한 자바스크립트의 원리를 읽고">Next Post &rarr;</a>
+        </li>
+        
+      </ul>
+
+      
+        <div class="disqus-comments">
+          
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'hanjungv';
+	    /* ensure that pages with query string get the same discussion */
+            var url_parts = window.location.href.split("?");
+            var disqus_url = url_parts[0];	    
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+    <footer style = 'background-color:white; border:none;'>
+  <div class="container beautiful-jekyll-footer">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+          <li>
+            <a href="https://www.facebook.com/profile.php?id=100005573837145" title="Facebook">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="https://github.com/hanjungv" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+		  
+	  
+      
+		  
+		  
+		  
+		  
+      
+      
+      
+      
+      
+		  
+        </ul>
+        <p class="copyright text-muted">
+		  hanjung
+		  &nbsp;&bull;&nbsp;
+		  2018
+
+		  
+		  &nbsp;&bull;&nbsp;
+		  <a href="http://localhost:4000">Home</a>
+		  
+	    </p>
+	        <!-- Please don't remove this, keep my open source work credited :) -->
+		<p class="theme-by text-muted">
+		  Theme by
+		  <a href="http://deanattali.com/beautiful-jekyll/">beautiful-jekyll</a>
+		</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    
+
+
+
+
+
+
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+      <script>
+      	if (typeof jQuery == 'undefined') {
+      	  document.write('<script src="/js/jquery-1.11.2.min.js"></scr' + 'ipt>');
+      	}
+      </script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/bootstrap.min.js"></script>
+    
+  
+    <!-- doing something a bit funky here because I want to be careful not to include JQuery twice! -->
+    
+	<script src="/js/main.js"></script>
+    
+  
+
+
+
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		ga('create', 'UA-91279503-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<!-- End Google Analytics -->
+
+
+<script>
+  window.channelPluginSettings = {
+    "plugin_id": "981c417d-6b26-42d6-a2d4-459980c16cfe"
+  };
+  (function() {
+    var node = document.createElement('div');
+    node.id = 'ch-plugin';
+    document.body.appendChild(node);
+    var async_load = function() {
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = '//cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    };
+    if (window.attachEvent) {
+      window.attachEvent('onload', async_load);
+    } else {
+      window.addEventListener('load', async_load, false);
+    }
+  })();
+</script>
+
+
+
+  </body>
+</html>
