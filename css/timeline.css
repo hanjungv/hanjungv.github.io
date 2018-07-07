@@ -18,13 +18,13 @@ html {
 }
 @media screen and (max-width: 500px) {
   .steps-timeline {
-    border-left: 2px solid #3498db;
+    border-left: 2px solid #674172;
     margin-left: 25px;
   }
 }
 @media screen and (min-width: 500px) {
   .steps-timeline {
-    border-top: 2px solid #3498db;
+    border-top: 2px solid #674172;
     padding-top: 40px;
     margin-top: 45px;
     margin-left: 10%;
@@ -44,7 +44,7 @@ html {
     margin-bottom: -100%;
   }
   .steps-one, .steps-two, .steps-three, .steps-four, .steps-five {
-    margin-left: -25px;
+    margin-left: -8px;
   }
 }
 @media screen and (min-width: 500px) {
@@ -59,7 +59,7 @@ html {
   .steps-one, .steps-two, .steps-three, .steps-four, .steps-five {
     float: left;
     width: 23%;
-    margin-top: -50px;
+    margin-top: -48px;
   }
   .steps-one, .steps-two, .steps-three, .steps-four {
     padding-bottom: 40px;
@@ -71,17 +71,31 @@ html {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background: #446CB3;
-  border: 7px solid #446CB3;
+  background: white;
+  border: 1px solid #674172;
 }
+
+.steps-name, .steps-description {
+  margin: 0;
+}
+
 @media screen and (max-width: 500px) {
   .steps-img {
     float: left;
     margin-right: 20px;
   }
-}
-.steps-name, .steps-description {
-  margin: 0;
+  .steps-name {
+    text-align: left;
+    margin-left: 10px;
+  }
+  .steps-description {
+    text-align: left;
+    margin-left: 36px;
+  }
+
+  .portfolio-div {
+    margin-top: 40px;
+  }
 }
 @media screen and (min-width: 500px) {
   .steps-name {
@@ -98,3 +112,5 @@ html {
     text-align: center;
   }
 }
+
+
